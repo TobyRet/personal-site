@@ -57,11 +57,26 @@ tests/e2e/              Playwright tests.
 docs/decisions.md       Key decisions and why we made them.
 ```
 
+## Editing content
+
+You can change all copy without touching components.
+
+- **Page copy:** `src/content/pages/*.md`. The frontmatter holds the title, subtitle and meta description. The body is Markdown.
+- **Case studies:** `src/content/work/*.md`, one file each. The file name is the URL, for example `amador.md` becomes `/work/amador/`. The frontmatter is checked against the schema in `src/content.config.ts`. Each body uses six sections: The situation, The constraints, What I did, The result, Stack, What I would do differently.
+- **Show a case study on the home page:** set `featured: true`. Change the order with `order`.
+- **CV entries:** `src/content/cv.json`.
+- **Availability, links and the CV PDF:** `src/site.config.ts`.
+- **Placeholders:** search for `TODO`. `bun run lint` prints how many are left.
+
+Copy rules: Simple Technical English, no em dashes, and none of the banned words in `CLAUDE.md`. `bun run lint` checks the last two.
+
+Personal data: this repo is public. Keep the CV, testimonials and anything private in `private/`, which git ignores. `bun run check:pii` checks the repo.
+
 ## Design system
 
 - Tokens: `src/styles/tokens.css`. Change a colour, size or space here and it changes everywhere.
 - Styleguide: run `bun run dev` and open http://localhost:4321/styleguide/ to see every token and component.
-- Components use token classes only. `bun run lint` fails on Tailwind arbitrary values (`p-[13px]`) and inline `style` attributes.
+- Components use token classes only. `bun run lint` fails on Tailwind arbitrary values (`p-[13px]`), spacing classes with no token (`w-40`) and inline `style` attributes.
 - Site-wide settings (name, links, availability, analytics): `src/site.config.ts`.
 - Light and dark themes and the reader's Aa settings are handled in `tokens.css`. Components never pick colours for a theme themselves.
 

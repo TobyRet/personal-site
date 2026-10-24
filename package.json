@@ -12,7 +12,7 @@
     "build": "astro build",
     "preview": "astro build && wrangler dev",
     "check": "astro check",
-    "lint": "eslint . && prettier --check . && node scripts/check-design.mjs",
+    "lint": "eslint . && prettier --check . && node scripts/check-design.mjs && node scripts/check-copy.mjs",
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",

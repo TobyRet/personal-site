@@ -20,12 +20,37 @@ async function* walk(dir) {
   }
 }
 
+// Spacing keys that exist in tokens.css. Tailwind silently ignores any other
+// number, for example w-40, so the class does nothing and nobody notices.
+const SPACING_KEYS = new Set([
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '6',
+  '8',
+  '12',
+  '16',
+  '24',
+  '32',
+]);
+const SPACING_CLASS =
+  /(?<![\w-])-?(?:w|h|size|min-w|max-w|min-h|max-h|gap|gap-x|gap-y|p|px|py|pt|pr|pb|pl|m|mx|my|mt|mr|mb|ml|top|right|bottom|left|inset|space-x|space-y)-(\d+)(?![\w-])/g;
+
 const problems = [];
 
 for (const root of ROOTS) {
   for await (const file of walk(root)) {
     const lines = (await readFile(file, 'utf8')).split('\n');
     lines.forEach((line, index) => {
+      for (const match of line.matchAll(SPACING_CLASS)) {
+        if (!SPACING_KEYS.has(match[1] ?? '')) {
+          problems.push(
+            `${file}:${index + 1}  spacing value with no token: ${match[0].trim()}`,
+          );
+        }
+      }
       for (const rule of RULES) {
         for (const match of line.matchAll(rule.pattern)) {
           problems.push(

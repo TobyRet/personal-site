@@ -1,7 +1,21 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-const pages = ['/', '/styleguide/'];
+const pages = [
+  '/',
+  '/work/',
+  '/work/amador/',
+  '/work/student-housing-platform-stabilisation/',
+  '/work/super-fund-member-portal/',
+  '/work/abcam-ecommerce-rebuild/',
+  '/work/airline-flight-scheduling/',
+  '/how-i-work/',
+  '/about/',
+  '/cv/',
+  '/contact/',
+  '/privacy/',
+  '/styleguide/',
+];
 const schemes = ['light', 'dark'] as const;
 
 for (const path of pages) {
@@ -20,6 +34,38 @@ for (const path of pages) {
     });
   }
 }
+
+test('a visitor can open a case study from the home page', async ({ page }) => {
+  await page.goto('/');
+  await page
+    .getByRole('region', { name: 'Selected work' })
+    .getByRole('link', { name: /Amador/ })
+    .click();
+  await expect(page).toHaveURL(/\/work\/amador\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Amador');
+  for (const section of [
+    'The situation',
+    'The constraints',
+    'What I did',
+    'The result',
+    'Stack',
+    'What I would do differently',
+  ]) {
+    await expect(
+      page.getByRole('heading', { level: 2, name: section }),
+    ).toBeVisible();
+  }
+  await page.getByRole('link', { name: /Next/ }).click();
+  await expect(page).toHaveURL(/student-housing-platform-stabilisation/);
+});
+
+test('unknown pages return the 404 page', async ({ page }) => {
+  const response = await page.goto('/no-such-page/');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Page not found',
+  );
+});
 
 test('skip link is the first focusable element and targets main', async ({
   page,
