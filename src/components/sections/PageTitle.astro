@@ -1,0 +1,19 @@
+---
+/** The page's h1 and optional italic subtitle. Use it in the Handout title slot. */
+import Heading from '@/components/ui/Heading.astro';
+import Text from '@/components/ui/Text.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string | undefined;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<Heading level={1}>{title}</Heading>
+{subtitle && (
+  <Text italic tone="secondary" class="mt-3">
+    {subtitle}
+  </Text>
+)}

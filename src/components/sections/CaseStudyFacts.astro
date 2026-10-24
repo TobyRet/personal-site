@@ -9,10 +9,11 @@ interface Props {
   position: string;
   /** Display dates, for example "Sep 2025 to Apr 2026". */
   dates: string;
-  stack: string[];
+  /** The consultancy or agency the work came through, if any. */
+  through?: string | undefined;
 }
 
-const { client, sector, position, dates, stack } = Astro.props;
+const { client, sector, position, dates, through } = Astro.props;
 ---
 
 <MarginNote label="Client">
@@ -27,6 +28,8 @@ const { client, sector, position, dates, stack } = Astro.props;
 <MarginNote label="Dates">
   <p>{dates}</p>
 </MarginNote>
-<MarginNote label="Stack">
-  <p>{stack.join(', ')}</p>
-</MarginNote>
+{through && (
+  <MarginNote label="Through">
+    <p>{through}</p>
+  </MarginNote>
+)}

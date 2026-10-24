@@ -19,7 +19,6 @@ const baseProps = Astro.props;
 <BaseLayout {...baseProps}>
   <SkipLink />
   <Header currentPath={Astro.url.pathname} />
-  <slot name="before-main" />
   <Container as="main" class="flex-1" id="main" tabindex="-1">
     <slot />
   </Container>

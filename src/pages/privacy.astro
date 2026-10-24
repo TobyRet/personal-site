@@ -1,0 +1,24 @@
+---
+import { render } from 'astro:content';
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { getPage } from '@/lib/content';
+
+const page = await getPage('privacy');
+const { Content } = await render(page);
+---
+
+<Page title={page.data.title} description={page.data.description}>
+  <Handout>
+    <PageTitle
+      slot="title"
+      title={page.data.title}
+      subtitle={page.data.subtitle}
+    />
+    <Prose>
+      <Content />
+    </Prose>
+  </Handout>
+</Page>

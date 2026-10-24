@@ -7,8 +7,8 @@ interface PageLink {
 }
 
 interface Props {
-  previous?: PageLink;
-  next?: PageLink;
+  previous?: PageLink | undefined;
+  next?: PageLink | undefined;
   /** Names the navigation landmark, for example "Case studies". */
   label: string;
 }

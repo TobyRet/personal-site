@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content';
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
+import ContactNote from '@/components/sections/ContactNote.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Link from '@/components/ui/Link.astro';
+import MarginNote from '@/components/ui/MarginNote.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { getCvEntries, getPage } from '@/lib/content';
+import { formatRange } from '@/lib/dates';
+import { site } from '@/site.config';
+
+const page = await getPage('cv');
+const { Content } = await render(page);
+const experience = await getCvEntries();
+---
+
+<Page title={page.data.title} description={page.data.description}>
+  <Handout>
+    <PageTitle slot="title" title={site.name} subtitle={page.data.subtitle} />
+    <Fragment slot="notes">
+      <MarginNote label="Download">
+        {site.cvPdf ? (
+          <p>
+            <Link href={site.cvPdf} download>
+              CV as a PDF
+            </Link>
+          </p>
+        ) : (
+          <p>The PDF is coming soon.</p>
+        )}
+      </MarginNote>
+      <AvailabilityNote />
+      <ContactNote />
+    </Fragment>
+
+    <Prose>
+      <Content />
+    </Prose>
+
+    <section aria-labelledby="experience" class="mt-12">
+      <Heading level={2} id="experience" class="mb-2">
+        Experience
+      </Heading>
+      <ol>
+        {experience.map(({ data }) => (
+          <li class="flex flex-col gap-1 border-t border-rule py-6">
+            <Heading level={3}>
+              {data.role}, {data.organisation}
+            </Heading>
+            <p class="font-ui text-ui text-text-secondary">
+              {formatRange(data.start, data.end)}
+              <span aria-hidden="true"> · </span>
+              <span class="sr-only">, </span>
+              {data.location}
+            </p>
+            <p>{data.summary}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="border-t border-rule pt-6">
+        Before 2014 I worked in marketing, communications and digital product.{' '}
+        <Link href="/about/">Read more about my background</Link>.
+      </p>
+    </section>
+  </Handout>
+</Page>

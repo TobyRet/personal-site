@@ -1,0 +1,45 @@
+---
+import { render } from 'astro:content';
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
+import ContactNote from '@/components/sections/ContactNote.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Link from '@/components/ui/Link.astro';
+import MarginNote from '@/components/ui/MarginNote.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { getPage } from '@/lib/content';
+
+const page = await getPage('how-i-work');
+const { Content, headings } = await render(page);
+const sections = headings.filter((heading) => heading.depth === 2);
+---
+
+<Page title={page.data.title} description={page.data.description}>
+  <Handout>
+    <PageTitle
+      slot="title"
+      title={page.data.title}
+      subtitle={page.data.subtitle}
+    />
+    <Fragment slot="notes">
+      <MarginNote label="On this page">
+        <nav aria-label="On this page">
+          <ul class="flex flex-col gap-1">
+            {sections.map((heading) => (
+              <li>
+                <Link href={`#${heading.slug}`}>{heading.text}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </MarginNote>
+      <AvailabilityNote />
+      <ContactNote />
+    </Fragment>
+
+    <Prose>
+      <Content />
+    </Prose>
+  </Handout>
+</Page>

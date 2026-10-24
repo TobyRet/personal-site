@@ -1,0 +1,84 @@
+---
+import { render } from 'astro:content';
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import Breadcrumbs from '@/components/nav/Breadcrumbs.astro';
+import CaseStudyFacts from '@/components/sections/CaseStudyFacts.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Button from '@/components/ui/Button.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Pagination from '@/components/ui/Pagination.astro';
+import Prose from '@/components/ui/Prose.astro';
+import Text from '@/components/ui/Text.astro';
+import { type CaseStudy, caseStudyHref, getCaseStudies } from '@/lib/content';
+import { formatRange } from '@/lib/dates';
+
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
+  return caseStudies.map((entry, index) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      previous: caseStudies[index - 1],
+      next: caseStudies[index + 1],
+    },
+  }));
+}
+
+interface Props {
+  entry: CaseStudy;
+  previous?: CaseStudy | undefined;
+  next?: CaseStudy | undefined;
+}
+
+const { entry, previous, next } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+
+const toLink = (item: CaseStudy | undefined) =>
+  item ? { label: item.data.title, href: caseStudyHref(item) } : undefined;
+---
+
+<Page title={data.title} description={data.summary}>
+  <Breadcrumbs
+    items={[
+      { label: 'Home', href: '/' },
+      { label: 'Work', href: '/work/' },
+      { label: data.title },
+    ]}
+  />
+  <Handout tight>
+    <PageTitle slot="title" title={data.title} subtitle={data.subtitle} />
+    <CaseStudyFacts
+      slot="notes"
+      client={data.client}
+      sector={data.sector}
+      position={data.role}
+      dates={formatRange(data.start, data.end)}
+      through={data.through}
+    />
+
+    <Prose>
+      <Content />
+    </Prose>
+
+    <section
+      aria-labelledby="work-with-me"
+      class="mt-16 flex flex-col gap-4 border-t border-rule pt-8"
+    >
+      <Heading level={2} id="work-with-me">
+        Need something similar?
+      </Heading>
+      <Text>Tell me about your project and when you need someone.</Text>
+      <div>
+        <Button href="/contact/">Get in touch</Button>
+      </div>
+    </section>
+  </Handout>
+
+  <Pagination
+    label="More case studies"
+    previous={toLink(previous)}
+    next={toLink(next)}
+  />
+</Page>

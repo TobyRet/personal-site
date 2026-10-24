@@ -1,0 +1,26 @@
+---
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Link from '@/components/ui/Link.astro';
+import Text from '@/components/ui/Text.astro';
+---
+
+<Page
+  title="Page not found"
+  description="The page you were looking for does not exist."
+  noindex
+>
+  <Handout>
+    <PageTitle
+      slot="title"
+      title="Page not found"
+      subtitle="The link may be old, or the address may have a typo."
+    />
+    <Text>
+      Go to the <Link href="/">home page</Link>, see my
+      <Link href="/work/">case studies</Link>, or
+      <Link href="/contact/">get in touch</Link>.
+    </Text>
+  </Handout>
+</Page>

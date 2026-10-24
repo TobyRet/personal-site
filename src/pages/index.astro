@@ -1,29 +1,79 @@
 ---
+import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
+import Stack from '@/components/layout/Stack.astro';
 import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
+import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
+import ContactNote from '@/components/sections/ContactNote.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
+import Link from '@/components/ui/Link.astro';
 import MarginNote from '@/components/ui/MarginNote.astro';
+import Prose from '@/components/ui/Prose.astro';
 import Text from '@/components/ui/Text.astro';
+import { caseStudyHref, getFeaturedCaseStudies, getPage } from '@/lib/content';
+import { formatYears } from '@/lib/dates';
 import { site } from '@/site.config';
+
+const page = await getPage('home');
+const { Content } = await render(page);
+const featured = await getFeaturedCaseStudies();
 ---
 
-<Page title={site.name} description={`${site.name}, ${site.jobTitle}.`}>
-  <!-- TODO: replace with the real home page in phase 3. -->
+<Page title={site.name} description={page.data.description}>
   <Handout>
-    <Fragment slot="title">
-      <Heading level={1}>{site.name}</Heading>
-      <Text italic tone="secondary" class="mt-2">
-        {site.jobTitle}
-      </Text>
-    </Fragment>
+    <PageTitle
+      slot="title"
+      title={page.data.title}
+      subtitle={page.data.subtitle}
+    />
     <Fragment slot="notes">
       <AvailabilityNote />
       <MarginNote label="Based in">
         <p>{site.location}</p>
         <p>{site.workingPattern}</p>
       </MarginNote>
+      <ContactNote />
     </Fragment>
-    <Text>Site setup in progress.</Text>
+
+    <Stack gap={12}>
+      <Prose>
+        <Content />
+      </Prose>
+
+      <section aria-labelledby="selected-work">
+        <Heading level={2} id="selected-work" class="mb-2">
+          Selected work
+        </Heading>
+        {featured.map((entry) => (
+          <CaseStudyCard
+            title={entry.data.title}
+            href={caseStudyHref(entry)}
+            summary={entry.data.summary}
+            sector={entry.data.sector}
+            position={entry.data.role}
+            dates={formatYears(entry.data.start, entry.data.end)}
+          />
+        ))}
+        <p class="border-t border-rule pt-6 font-ui text-ui">
+          <Link href="/work/">All case studies</Link>
+        </p>
+      </section>
+
+      <section aria-labelledby="work-with-me" class="flex flex-col gap-4">
+        <Heading level={2} id="work-with-me">
+          Work with me
+        </Heading>
+        <Text>
+          Tell me about your project and when you need someone. I take on
+          hands-on lead, senior engineer and cover roles.
+        </Text>
+        <div>
+          <Button href="/contact/">Get in touch</Button>
+        </div>
+      </section>
+    </Stack>
   </Handout>
 </Page>

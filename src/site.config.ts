@@ -21,6 +21,8 @@ export interface SiteConfig {
   linkedIn: string;
   github: string;
   company: string;
+  /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
+  cvPdf: string;
   availability: Availability;
   nav: NavItem[];
   analytics: {
@@ -39,6 +41,7 @@ export const site: SiteConfig = {
   linkedIn: 'https://www.linkedin.com/in/tobyret',
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
+  cvPdf: '', // TODO: add a CV PDF without a phone number to public/cv/ and set the path.
   availability: {
     status: 'available',
     from: 'November 2026',

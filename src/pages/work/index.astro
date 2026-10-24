@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import Handout from '@/components/layout/Handout.astro';
+import Page from '@/components/layout/Page.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
+import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
+import ContactNote from '@/components/sections/ContactNote.astro';
+import PageTitle from '@/components/sections/PageTitle.astro';
+import Prose from '@/components/ui/Prose.astro';
+import { caseStudyHref, getCaseStudies, getPage } from '@/lib/content';
+import { formatYears } from '@/lib/dates';
+
+const page = await getPage('work');
+const { Content } = await render(page);
+const caseStudies = await getCaseStudies();
+---
+
+<Page title={page.data.title} description={page.data.description}>
+  <Handout>
+    <PageTitle
+      slot="title"
+      title={page.data.title}
+      subtitle={page.data.subtitle}
+    />
+    <Fragment slot="notes">
+      <AvailabilityNote />
+      <ContactNote />
+    </Fragment>
+
+    <Prose>
+      <Content />
+    </Prose>
+    <div class="mt-8">
+      {caseStudies.map((entry) => (
+        <CaseStudyCard
+          title={entry.data.title}
+          href={caseStudyHref(entry)}
+          summary={entry.data.summary}
+          sector={entry.data.sector}
+          position={entry.data.role}
+          dates={formatYears(entry.data.start, entry.data.end)}
+          headingLevel={2}
+        />
+      ))}
+    </div>
+  </Handout>
+</Page>
