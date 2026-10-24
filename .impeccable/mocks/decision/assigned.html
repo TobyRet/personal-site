@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Letter of introduction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #ffffff;
+        --ink: #1b1b1b;
+        --ink-2: #5c5c5c;
+        --blue: #1d3557;
+        --rule: #d9d9d6;
+        --edge: 248px;
+        --measure: 640px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 1440px;
+        height: 900px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Literata, Georgia, serif;
+      }
+      .letterhead {
+        margin-left: var(--edge);
+        width: 944px;
+        padding-top: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .name {
+        font-variant: small-caps;
+        letter-spacing: 0.12em;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .role {
+        font-size: 15px;
+        color: var(--ink-2);
+        margin-top: 6px;
+        font-style: italic;
+      }
+      .address {
+        text-align: right;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--ink-2);
+      }
+      .address .avail {
+        color: var(--blue);
+      }
+      .avail::before {
+        content: '\2022\00a0';
+      }
+      .rule {
+        margin-left: var(--edge);
+        width: 944px;
+        border-top: 1px solid var(--ink);
+        margin-top: 20px;
+      }
+      .rule + .rule {
+        border-top: 1px solid var(--rule);
+        margin-top: 3px;
+      }
+      nav {
+        margin-left: var(--edge);
+        margin-top: 18px;
+        font-size: 15px;
+        display: flex;
+        gap: 28px;
+        color: var(--ink-2);
+      }
+      nav a {
+        color: inherit;
+        text-decoration: none;
+      }
+      nav a.here {
+        color: var(--ink);
+      }
+      nav a.here::before {
+        content: '\2014\00a0';
+        color: var(--blue);
+      }
+      main {
+        margin-left: var(--edge);
+        width: var(--measure);
+        margin-top: 72px;
+      }
+      .date {
+        font-size: 15px;
+        color: var(--ink-2);
+        margin-bottom: 28px;
+        font-variant-numeric: oldstyle-nums;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.25;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+        margin-bottom: 24px;
+      }
+      p {
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .enclosed {
+        margin-top: 36px;
+        font-variant: small-caps;
+        letter-spacing: 0.1em;
+        font-size: 15px;
+        color: var(--ink-2);
+      }
+      ol {
+        list-style: none;
+        margin-top: 12px;
+        border-top: 1px solid var(--rule);
+      }
+      li {
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--rule);
+        font-size: 18px;
+        align-items: baseline;
+      }
+      li .n {
+        color: var(--blue);
+        font-variant-numeric: oldstyle-nums;
+      }
+      li a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+        text-decoration-color: var(--rule);
+      }
+      li .meta {
+        font-size: 14px;
+        color: var(--ink-2);
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="letterhead">
+      <div>
+        <div class="name">Toby Retallick</div>
+        <div class="role">Technical lead and senior full-stack engineer</div>
+      </div>
+      <div class="address">
+        Greater Brisbane, Queensland<br />
+        hello@example.com<br />
+        <span class="avail">Available from November 2026</span>
+      </div>
+    </header>
+    <div class="rule"></div>
+    <div class="rule"></div>
+    <nav>
+      <a class="here" href="#">Introduction</a><a href="#">Work</a
+      ><a href="#">How I work</a><a href="#">About</a><a href="#">CV</a
+      ><a href="#">Contact</a>
+    </nav>
+    <main>
+      <div class="date">Brisbane, 24 October 2026</div>
+      <h1>I lead engineering teams and still write the code.</h1>
+      <p>
+        I am a technical lead and senior full-stack engineer with 12 years of
+        consulting and contract work in the UK and Australia. Clients bring me
+        in to steady legacy platforms, lead new builds and meet fixed deadlines.
+      </p>
+      <div class="enclosed">Enclosed: five case studies</div>
+      <ol>
+        <li>
+          <span class="n">1</span
+          ><a href="#">Amador: prototype to live marketplace</a
+          ><span class="meta">Startup, 2025</span>
+        </li>
+        <li>
+          <span class="n">2</span
+          ><a href="#">Steadying a global student housing platform</a
+          ><span class="meta">Property, 2025</span>
+        </li>
+        <li>
+          <span class="n">3</span
+          ><a href="#">Covering a super fund's member portal</a
+          ><span class="meta">Finance, 2026</span>
+        </li>
+      </ol>
+    </main>
+  </body>
+</html>

@@ -7,20 +7,22 @@ related_targets: []
 
 # Site shell and home
 
-Scope: every route shares this world. Home is Persuade. Case studies, How I work, About and CV are Read. Contact is Operate.
+Scope: every route shares this world. Home is Persuade. Case studies, How I work, About and CV are Read. Contact is Operate. The site is read first: the brief asks for an e-reader level of reading comfort on desktop and mobile.
 
-Audience: hiring managers, engineering leads, recruiters and consultancies, often on a phone. Job: decide in 10 seconds whether to get in touch.
+Audience: hiring managers, engineering leads, recruiters and consultancies, often on a phone. Job: decide in 10 seconds whether to get in touch, then read a case study that matches their situation.
+
+Revision: replaces the first GOV.UK-patterned build. The owner said it was too close to a copy of GOV.UK. Keep GOV.UK's plainness and respect for the reader. Use none of its look.
 
 ## Direction contract
 
-THESIS: Government-grade clarity with a personal voice. The page is a well-set public-service document about one engineer. It refuses the portfolio defaults: a centred hero, a grid of image cards and a "selected work" carousel.
+THESIS: Every page is a well-set handout. A calm serif reading column carries the story, and the facts sit beside it in a wide margin. It refuses the portfolio defaults: a hero banner, a grid of project cards, and badges.
 
-OWN-WORLD: White ground and near-black ink (#0f1111). One accent, signal yellow (#ffd60a), used only for focus, the availability marker and selected text. Atkinson Hyperlegible Next for all text. Atkinson Hyperlegible Mono only for data: dates, sector, stack. Square corners, no shadows. A 4px ink rule opens each major section. Links are ink with a thick underline.
+OWN-WORLD: White paper and near-black ink. One accent, blue-black ink, for links, note markers and availability. Literata for the reading column and headings. Atkinson Hyperlegible Next for the interface and margin notes. Hairline rules, no boxes, no shadows, square corners. A true night page in dark mode. An "Aa" reading-settings control for size, font and theme.
 
-STORY: The visitor learns who this is, that they are available from November 2026, and what they do. Featured case studies show proof, with real facts from the CV. One clear route goes to contact.
+STORY: The visitor reads one sentence on who this is, sees availability in the margin, and reads three case studies whose facts sit beside them. Contact is always one link away.
 
-FIRST VIEWPORT: Header with the name on the left and nav on the right. On mobile the five nav links wrap below the name, with no menu button and no JavaScript. Below it, the availability strip with a yellow marker. Then a left-aligned display-size positioning line across about two-thirds of the width, a one-paragraph lead, and two actions: a black "Get in touch" button and a "Read case studies" link. On desktop the right third holds a summary list: based in, works, sectors.
+FIRST VIEWPORT: A plain top line: the name on the left, nav and Aa on the right. A large serif title states the positioning, with an italic subtitle under it. A reading column of about 34em sits on the left. The right margin holds the notes: available from November 2026, based in Brisbane, works remotely, how to contact. On phones the notes fold into the column under the title.
 
-FORM: GOV.UK-style service document: summary lists, an inset callout and an error summary. It is ranked first because the brief pins it. seed: none (unavailable; direction pinned by the brief, concept-seed not run).
+FORM: Margin-note handout (scholarly handout with sidenotes), number 1 on the ordered list. The user chose it over the rolled assignment after hearing about the roll. seed:e7a23a47b5d8a593
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

@@ -1,0 +1,166 @@
+{
+  "title": "Choose the visual world",
+  "question": "A calm, beautiful reading site, inspired by GOV.UK's plainness but not a copy. Keep the assigned direction, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Letter of introduction",
+      "kicker": "THE ROLL",
+      "lineage": "a personal letter on engraved letterhead, with enclosures",
+      "thesis": "The site is a letter of introduction, and each case study is an enclosure.",
+      "palette": ["#ffffff", "#1b1b1b", "#1d3557", "#d9d9d6"],
+      "materials": [
+        "engraved letterhead",
+        "blue-black fountain-pen ink",
+        "laid writing paper"
+      ],
+      "viewport": "Letterhead with your name in small caps and an address block (Brisbane, availability, email), a hairline rule, then one calm serif paragraph and a numbered list of enclosures.",
+      "risk": "It can read quaint if the letter idea leaks into the copy. The idea stays in the frame. The words stay plain.",
+      "raised": [
+        {
+          "from": "challenger-cape",
+          "raise": "One measure rules every alignment: letterhead, column, enclosures and footer all hang from the same left edge."
+        },
+        {
+          "from": "challenger-pc98",
+          "raise": "Fixed regions: the letterhead and column never move between pages. Only the body changes."
+        },
+        {
+          "from": "challenger-folio",
+          "raise": "Every enclosure is the same plate: identical fact block, identical six sections, the same place every time."
+        },
+        {
+          "from": "challenger-depot",
+          "raise": "Three type sizes only. Rank comes from position, weight and small caps, not from a ladder of sizes."
+        },
+        {
+          "from": "challenger-bench",
+          "raise": "State is a mark, not a colour: the current page and availability are shown with typographic marks and words."
+        },
+        {
+          "from": "challenger-cyclorama",
+          "raise": "A true night page: dark mode follows the reader's system setting, set for reading rather than inverted."
+        }
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "Margin-note handout",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "scholarly handouts with sidenotes in a wide margin",
+      "thesis": "Every page is a well-set handout, with the facts in the margin beside the story.",
+      "palette": ["#ffffff", "#151515", "#8a1c1c", "#6b6b6b"],
+      "materials": ["book serif", "sidenotes", "wide outer margin"],
+      "viewport": "A large serif title and italic subtitle, a reading column on the left, and a wide right margin holding sector, role, dates and stack as sidenotes.",
+      "risk": "Familiar: many engineers already use this look for notes and blogs. On phones the margin folds into the column.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-cyclorama",
+      "kind": "challenger",
+      "catalogId": "stagecraft-theater-lighting-cyclorama-dawn",
+      "label": "Cyclorama dawn",
+      "verdict": "declined",
+      "lineage": "theatre lighting on a curved backdrop",
+      "thesis": "Pages pass from night to day as the visitor reads.",
+      "palette": ["#050608", "#1f3fa8", "#d77a8f", "#ffffff"],
+      "materials": ["stage light", "horizon bands"],
+      "viewport": "A black stage with a cobalt band rising behind the name.",
+      "case": "Fuses poorly: dark, theatrical bands fight a calm reading column, and hiring managers do not see themselves in a theatre.",
+      "risk": "Performs behind the text.",
+      "kept": "A true night page for readers who choose dark mode."
+    },
+    {
+      "id": "challenger-cape",
+      "kind": "challenger",
+      "catalogId": "textiles-weave-drape-fashion-drawcord-transforming-cape",
+      "label": "Drawcord cape",
+      "verdict": "declined",
+      "lineage": "fashion construction",
+      "thesis": "One pull turns a flat plane into structure.",
+      "palette": ["#0b0b0b", "#c9a227", "#4a4a4a", "#6d7680"],
+      "materials": ["matte silk", "gold cord"],
+      "viewport": "A black semicircle with one gold cord.",
+      "case": "Fuses poorly: no link to engineering or reading, and gold on black is not a reading ground.",
+      "risk": "Costume.",
+      "kept": "One measure rules every alignment."
+    },
+    {
+      "id": "challenger-pc98",
+      "kind": "challenger",
+      "catalogId": "digital-design-canon-pc98-sixteen-color-field",
+      "label": "Sixteen-colour screen",
+      "verdict": "declined",
+      "lineage": "1980s Japanese home computers",
+      "thesis": "Fixed screen regions with a docked text window.",
+      "palette": ["#000000", "#5555ff", "#ff55ff", "#ffffff"],
+      "materials": ["dithered pixels", "bitmap type"],
+      "viewport": "A pixel portrait with a bordered text window below.",
+      "case": "Fuses poorly: a bitmap face and dithering ruin long reading.",
+      "risk": "Retro novelty.",
+      "kept": "Fixed regions: the frame never moves, only content changes."
+    },
+    {
+      "id": "challenger-folio",
+      "kind": "challenger",
+      "catalogId": "editorial-sequence-montage-botanical-folio-season",
+      "label": "Botanical folio",
+      "verdict": "declined",
+      "lineage": "botanical plates at fixed scale",
+      "thesis": "Each case study as a plate at the same scale.",
+      "palette": ["#f4efe2", "#2f5d3a", "#b3261e", "#8c8c8c"],
+      "materials": ["engraved plates", "sepia hairlines"],
+      "viewport": "Five plates on one baseline.",
+      "case": "Fuses partly: consistent plates help comparison, but the botanical world means nothing to this audience.",
+      "risk": "Cream and sepia is the default rut.",
+      "kept": "Every enclosure is the same plate."
+    },
+    {
+      "id": "challenger-depot",
+      "kind": "challenger",
+      "catalogId": "operate-c-depot-blind-courses",
+      "label": "Destination blind",
+      "verdict": "declined",
+      "lineage": "bus destination blinds",
+      "thesis": "Content rides a roll of cloth courses under one window.",
+      "palette": ["#1f4d33", "#f2c230", "#efeadf"],
+      "materials": ["dyed duck cloth", "condensed caps"],
+      "viewport": "Green cloth with yellow condensed legends.",
+      "case": "Fuses poorly: an operations-board idea, wrong for a reading site.",
+      "risk": "Caps-only type tires readers.",
+      "kept": "Few type sizes; rank by position and weight."
+    },
+    {
+      "id": "challenger-bench",
+      "kind": "challenger",
+      "catalogId": "operate-a-cutting-bench-select-rail",
+      "label": "Cutting bench",
+      "verdict": "declined",
+      "lineage": "film editing benches",
+      "thesis": "Sections strung on a perforated rail.",
+      "palette": ["#000000", "#e8682a", "#ffffff"],
+      "materials": ["film grain", "tape flags"],
+      "viewport": "An orange rail across black.",
+      "case": "Fuses poorly: orange on black owns a third of the screen and drowns the text.",
+      "risk": "Loud.",
+      "kept": "State is a mark, not a colour."
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code" },
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "The category standard",
+    "thesis": "A clean developer portfolio, executed with care.",
+    "palette": ["#ffffff", "#111827", "#2563eb"],
+    "materials": ["clean sans grid", "project cards"],
+    "viewport": "A big headline about you, two buttons, and a row of project cards.",
+    "risk": "Looks like every other contractor's site, by design.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

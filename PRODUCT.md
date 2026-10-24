@@ -48,7 +48,8 @@ Visitors scan and compare. They read a case study to check fit with their own si
 
 ## Brand Commitments
 
-- Influenced by GOV.UK: simple, text-led, readable. Must not use the GOV.UK Transport font, the crown or any government branding.
+- Inspired by GOV.UK's plainness, clarity and respect for the reader, but never a copy of it: no GOV.UK patterns used as a look (yellow-and-black focus bar, black service strip, crown, Transport font or government branding). Revised by the owner on 24 October 2026 after the first build looked too close to GOV.UK.
+- The goal is a simple, beautiful site that is a pleasure to read on desktop and mobile, like reading on an e-reader: a calm reading column, a real reading face, generous margins and nothing competing with the text.
 - Black and white with at most one accent colour. Open-licence, self-hosted, highly readable font that is not Inter.
 - Left-aligned, text-led layouts. No gradients, glassmorphism, drop-shadow cards, emoji icons, stock illustrations, animated blobs or centred heroes.
 - Voice: Simple Technical English. Short sentences, active voice, plain words, one idea per sentence. No em dashes, no three-part slogans, and never "elevate", "empower", "seamless", "unlock" or "leverage".

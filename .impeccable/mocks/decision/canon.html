@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Category standard</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #111827;
+        --ink-2: #4b5563;
+        --blue: #2563eb;
+        --line: #e5e7eb;
+        --soft: #f9fafb;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 1440px;
+        height: 900px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+      }
+      header {
+        padding: 28px 120px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+      }
+      header .name {
+        font-weight: 700;
+        font-size: 18px;
+      }
+      header nav {
+        display: flex;
+        gap: 32px;
+        font-size: 15px;
+        color: var(--ink-2);
+      }
+      .hero {
+        padding: 96px 120px 64px;
+        max-width: 1040px;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 14px;
+        color: var(--ink-2);
+        margin-bottom: 20px;
+      }
+      .badge::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: #16a34a;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      h1 {
+        font-size: 56px;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      .lead {
+        font-size: 20px;
+        line-height: 1.55;
+        color: var(--ink-2);
+        max-width: 720px;
+        margin-bottom: 32px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+      }
+      .btn {
+        padding: 14px 22px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn.secondary {
+        border: 1px solid var(--line);
+      }
+      .work {
+        padding: 0 120px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        background: var(--soft);
+      }
+      .card .sector {
+        font-size: 13px;
+        color: var(--blue);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .card h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 15px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="name">Toby Retallick</span>
+      <nav>
+        <span>Work</span><span>How I work</span><span>About</span><span>CV</span
+        ><span>Contact</span>
+      </nav>
+    </header>
+    <section class="hero">
+      <div class="badge">Available from November 2026</div>
+      <h1>Technical lead and senior full-stack engineer</h1>
+      <p class="lead">
+        12 years of consulting and contract work in the UK and Australia. I
+        steady legacy platforms, lead new builds and meet fixed deadlines.
+      </p>
+      <div class="actions">
+        <span class="btn primary">Get in touch</span
+        ><span class="btn secondary">See my work</span>
+      </div>
+    </section>
+    <section class="work">
+      <div class="card">
+        <div class="sector">Startup</div>
+        <h3>Amador</h3>
+        <p>
+          Took an inherited prototype to a live marketplace in about four
+          months.
+        </p>
+      </div>
+      <div class="card">
+        <div class="sector">Property</div>
+        <h3>Student housing platform</h3>
+        <p>
+          Added the first monitoring and tests to an unstable legacy platform.
+        </p>
+      </div>
+      <div class="card">
+        <div class="sector">Finance</div>
+        <h3>Super fund member portal</h3>
+        <p>One month of cover became five. Two journeys released.</p>
+      </div>
+    </section>
+  </body>
+</html>
