@@ -6,6 +6,15 @@
 - Make small, clear commits. Commit after each phase.
 - Ask before creating or pushing to a GitHub repo.
 
+## Personal data (this repo is public)
+
+- Never commit personal data that is not meant for the public website: phone numbers, home address, citizenship or visa details, local file paths, private notes, or third parties' names, posts or contact details.
+- Keep private source material (CV, testimonials, client notes) in `private/`, which git ignores.
+- Only quote a third party on the site after they agree. Keep their source text in `private/` until then.
+- The CV PDF in `public/` must be a version without a phone number.
+- Commit with the GitHub noreply email, not a personal address.
+- Before pushing, run `bun run check:pii`.
+
 ## Tooling
 
 - Use bun for everything: `bun install`, `bun run <script>`, `bunx <tool>`. Do not use npm or pnpm.

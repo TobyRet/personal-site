@@ -56,7 +56,7 @@ Visitors scan and compare. They read a case study to check fit with their own si
 
 ## Evidence on Hand
 
-- CV PDF: kept in `private/cv/` (gitignored) (4 pages, dated 22 October 2026). It is the source of truth for roles, dates, stacks and outcomes. It will be copied into `public/` for download.
+- CV PDF: kept in `private/cv/` (gitignored) (4 pages, dated 22 October 2026). It is the source of truth for roles, dates, stacks and outcomes. The public download must be a separate version without the phone number.
 - The CV backs real facts for every planned case study: Amador (inherited prototype to live in about four months, more than 140 brands and creators, Antler pre-seed residency); the student housing platform (3 million residents in 25 countries, first monitoring, tests and a strangler-pattern plan); the super fund (one month of cover extended to five, two member journeys released, first automated deployment pipeline, no unplanned outages); Abcam (global e-commerce rebuild, launched in the US, Europe, China and Japan); the airline (12-month schedule checker, Gantt chart across about 170 ports).
 - Government background: GDS (data.gov.uk), Department for Education, Ministry of Justice. The GOV.UK influence is earned, not borrowed. It is still not a licence to use government branding.
 - Marketing background: marketing, communications and digital product roles from 2004 to 2014, a Bachelor of Commerce in Marketing, and the Makers software engineering course in 2014.

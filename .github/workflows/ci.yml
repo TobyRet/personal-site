@@ -18,6 +18,7 @@ jobs:
         with:
           bun-version-file: package.json
       - run: bun install --frozen-lockfile
+      - run: bun run check:pii
       - run: bun run lint
       - run: bun run check
       - run: bun run test

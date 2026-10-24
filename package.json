@@ -19,7 +19,8 @@
     "e2e": "playwright test",
     "cf-typegen": "wrangler types",
     "deploy": "astro build && wrangler deploy",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check:pii": "node scripts/check-pii.mjs"
   },
   "lint-staged": {
     "*.{js,mjs,ts,tsx,astro}": [

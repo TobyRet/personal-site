@@ -6,6 +6,10 @@ dist/
 .astro/
 .wrangler/
 
+# Private source material: CV, testimonials, anything with personal data.
+# This repo is public. See CLAUDE.md.
+private/
+
 # Secrets (see .dev.vars.example)
 .dev.vars
 .dev.vars.*
