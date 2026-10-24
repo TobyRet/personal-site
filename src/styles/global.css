@@ -1,6 +1,105 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/atkinson-hyperlegible-next/wght.css';
+@import '@fontsource-variable/atkinson-hyperlegible-mono/wght.css';
+@import './tokens.css';
 
 /*
- * Design tokens arrive in phase 2 (src/styles/tokens.css).
- * They will reset Tailwind's defaults with `--*: initial` so only our tokens exist.
+ * Base styles. Only element defaults and browser surfaces live here.
+ * Component styling lives in the components, using token utilities.
  */
+@layer base {
+  html {
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-family: var(--font-sans);
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--color-border-strong) var(--color-bg);
+  }
+
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-weight: var(--font-weight-regular);
+    caret-color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-focus-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  /* Tabular figures keep dates and numbers aligned. */
+  time,
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/*
+ * Focus styles sit outside any layer on purpose. Unlayered CSS beats every
+ * Tailwind layer, so a utility colour on a link or button can never hide focus.
+ *
+ * The accent fills the element, and a 4px ink bar sits beneath it.
+ * It reads on any background. The transparent outline keeps a visible
+ * ring in Windows high contrast (forced colours) mode.
+ */
+:focus-visible {
+  outline: var(--focus-ring) solid transparent;
+  outline-offset: 0;
+  background-color: var(--color-focus);
+  color: var(--color-focus-text);
+  box-shadow:
+    0 calc(var(--border-medium) * -1) var(--color-focus),
+    0 var(--focus-bar) var(--color-focus-text);
+  text-decoration: none;
+}
+
+/* Controls keep their own background. They get an accent ring and an ink inset instead. */
+:is(input, textarea, select):focus-visible {
+  outline: var(--focus-ring) solid var(--color-focus);
+  outline-offset: 0;
+  background-color: inherit;
+  color: inherit;
+  box-shadow: inset 0 0 0 var(--border-medium) var(--color-focus-text);
+}
+
+:is(input, textarea, select):focus {
+  outline: var(--focus-ring) solid var(--color-focus);
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 var(--border-medium) var(--color-focus-text);
+}
+
+/* Regions focused by script or the skip link (main, the error summary) need no focus style. */
+[tabindex='-1']:focus {
+  outline: none;
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

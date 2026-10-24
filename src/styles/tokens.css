@@ -1,0 +1,155 @@
+/*
+ * Design tokens. The single source of truth for colour, type, spacing,
+ * layout, borders and motion.
+ *
+ * 1. :root holds raw values. Sizes that change with the viewport are
+ *    redefined in the media query below.
+ * 2. @theme exposes them to Tailwind. `static` emits every token as a CSS
+ *    variable, even when no utility uses it. `--*: initial` removes every Tailwind
+ *    default first, so only these tokens exist as utilities.
+ */
+
+:root {
+  /* Colour: palette */
+  --palette-ink: #0f1111;
+  --palette-white: #ffffff;
+  --palette-grey-700: #4d5557;
+  --palette-grey-500: #80878a;
+  --palette-grey-200: #d6d9da;
+  --palette-grey-50: #f4f5f5;
+  --palette-yellow: #ffd60a;
+  --palette-green: #0b7a4b;
+  --palette-red: #c42b2b;
+
+  /* Type: sizes on small screens */
+  --size-display: 2.25rem;
+  --size-xl: 2rem;
+  --size-l: 1.5rem;
+  --size-m: 1.25rem;
+  --size-lead: 1.1875rem;
+  --size-body: 1rem;
+  --size-small: 0.875rem;
+
+  /* Layout */
+  --gutter: 1rem;
+
+  /* Borders, underlines and focus. Used by CSS outside utilities. */
+  --border-thin: 1px;
+  --border-medium: 2px;
+  --border-thick: 4px;
+  --underline-offset: 4px;
+  --focus-ring: 3px;
+  --focus-bar: 4px;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    /* Type: sizes from 768px up */
+    --size-display: 3.5rem;
+    --size-xl: 3rem;
+    --size-l: 2.25rem;
+    --size-m: 1.5rem;
+    --size-lead: 1.375rem;
+    --size-body: 1.1875rem;
+    --size-small: 1rem;
+
+    --gutter: 2rem;
+  }
+}
+
+@theme static {
+  --*: initial;
+
+  /* Colour: palette */
+  --color-ink: var(--palette-ink);
+  --color-white: var(--palette-white);
+  --color-grey-700: var(--palette-grey-700);
+  --color-grey-500: var(--palette-grey-500);
+  --color-grey-200: var(--palette-grey-200);
+  --color-grey-50: var(--palette-grey-50);
+  --color-accent: var(--palette-yellow);
+
+  /* Colour: semantic. Components use these. */
+  --color-text: var(--palette-ink);
+  --color-text-secondary: var(--palette-grey-700);
+  --color-bg: var(--palette-white);
+  --color-bg-subtle: var(--palette-grey-50);
+  --color-border: var(--palette-grey-200);
+  --color-border-strong: var(--palette-grey-500);
+  --color-rule: var(--palette-ink);
+  --color-link: var(--palette-ink);
+  --color-focus: var(--palette-yellow);
+  --color-focus-text: var(--palette-ink);
+  --color-success: var(--palette-green);
+  --color-error: var(--palette-red);
+
+  /* Type: families */
+  --font-sans:
+    'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next',
+    system-ui, sans-serif;
+  --font-mono:
+    'Atkinson Hyperlegible Mono Variable', 'Atkinson Hyperlegible Mono',
+    ui-monospace, monospace;
+
+  /* Type: weights */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Type: role scale. Each size carries its own line height. */
+  --text-display: var(--size-display);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+  --text-xl: var(--size-xl);
+  --text-xl--line-height: 1.15;
+  --text-xl--letter-spacing: -0.015em;
+  --text-l: var(--size-l);
+  --text-l--line-height: 1.2;
+  --text-m: var(--size-m);
+  --text-m--line-height: 1.25;
+  --text-lead: var(--size-lead);
+  --text-lead--line-height: 1.45;
+  --text-body: var(--size-body);
+  --text-body--line-height: 1.5;
+  --text-small: var(--size-small);
+  --text-small--line-height: 1.45;
+
+  /* Type: line heights, for overrides */
+  --leading-tight: 1.1;
+  --leading-heading: 1.2;
+  --leading-body: 1.5;
+
+  /* Spacing: 4px base. Keys match Tailwind's convention (key x 4px). */
+  --spacing-0: 0;
+  --spacing-px: 1px;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+  --spacing-gutter: var(--gutter);
+
+  /* Layout widths */
+  --container-page: 72rem;
+  --container-prose: 65ch;
+  --container-narrow: 40rem;
+
+  /* Breakpoints */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  /* Motion */
+  --default-transition-duration: 120ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Borders and radius: square corners only, so no radius tokens.
+     Border widths come from Tailwind's bare values: border (1px), border-2, border-4.
+     Shadows: none. There are no shadow tokens. */
+}
