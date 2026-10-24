@@ -1,0 +1,7 @@
+dist/
+.astro/
+.wrangler/
+playwright-report/
+test-results/
+bun.lock
+worker-configuration.d.ts

@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens arrive in phase 2 (src/styles/tokens.css).
+ * They will reset Tailwind's defaults with `--*: initial` so only our tokens exist.
+ */
