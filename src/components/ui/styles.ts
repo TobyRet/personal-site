@@ -5,32 +5,29 @@
  */
 
 export const linkClasses = {
+  /** Links in running text: accent ink, always underlined. */
   default:
     'text-link underline decoration-1 underline-offset-4 hover:decoration-2',
+  /** Navigation: plain ink, underline on hover or when current. */
   quiet:
-    'text-link no-underline underline-offset-4 hover:underline hover:decoration-2',
-  /** For links on an ink background. */
-  inverse:
-    'text-white underline decoration-1 underline-offset-4 hover:decoration-2',
+    'text-text no-underline underline-offset-4 hover:underline hover:decoration-1',
 } as const;
 
 export const buttonClasses = {
-  base: 'inline-flex items-center justify-center gap-2 border-2 px-6 py-3 font-bold text-body no-underline transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
-  primary:
-    'border-ink bg-ink text-white hover:bg-grey-700 hover:border-grey-700',
-  secondary: 'border-ink bg-white text-ink hover:bg-grey-50',
+  base: 'inline-flex items-center justify-center gap-2 border px-6 py-3 font-ui text-ui font-semibold no-underline transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
+  primary: 'border-text bg-text text-bg hover:bg-accent hover:border-accent',
+  secondary: 'border-control bg-bg text-text hover:border-text',
 } as const;
 
 export const fieldClasses = {
-  group: 'flex flex-col gap-2',
-  groupError: 'border-l-4 border-error pl-4',
-  label: 'block font-bold text-body',
-  hint: 'block text-body text-text-secondary',
-  error: 'block font-bold text-body text-error',
+  group: 'flex flex-col gap-2 font-ui',
+  label: 'block font-semibold text-ui text-text',
+  hint: 'block text-ui text-text-secondary',
+  error: 'block font-semibold text-ui text-error',
   control:
-    'block w-full border-2 border-ink bg-white px-3 py-2 text-body text-text placeholder:text-text-secondary',
-  controlError: 'border-error',
+    'block w-full border border-control bg-bg px-3 py-2 font-ui text-ui text-text placeholder:text-text-secondary',
+  controlError: 'border-2 border-error',
 } as const;
 
 export const tagClasses =
-  'inline-block border border-border bg-bg-subtle px-2 py-1 font-mono text-small text-text';
+  'inline-block border border-rule px-2 font-ui text-ui text-text-secondary';

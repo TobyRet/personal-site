@@ -2,34 +2,36 @@
 import { cx } from '@/lib/cx';
 
 interface Props {
-  size?: 'lead' | 'body' | 'small';
+  /** `reading` for prose. `ui` for interface text, notes and metadata. */
+  size?: 'reading' | 'ui';
   tone?: 'default' | 'secondary';
-  weight?: 'regular' | 'bold';
-  /** Limit the line length to the readable measure. */
+  weight?: 'regular' | 'semibold';
+  italic?: boolean;
+  /** Limit the line length to the reading measure. */
   measure?: boolean;
   as?: 'p' | 'span' | 'div' | 'strong';
   class?: string | undefined;
 }
 
 const {
-  size = 'body',
+  size = 'reading',
   tone = 'default',
   weight = 'regular',
+  italic = false,
   measure = false,
   as: Tag = 'p',
   class: className,
 } = Astro.props;
 
 const sizes = {
-  lead: 'text-lead',
-  body: 'text-body',
-  small: 'text-small',
+  reading: 'font-reading text-reading',
+  ui: 'font-ui text-ui',
 } as const;
 const tones = {
   default: 'text-text',
   secondary: 'text-text-secondary',
 } as const;
-const weights = { regular: 'font-regular', bold: 'font-bold' } as const;
+const weights = { regular: 'font-regular', semibold: 'font-semibold' } as const;
 ---
 
 <Tag
@@ -37,7 +39,8 @@ const weights = { regular: 'font-regular', bold: 'font-bold' } as const;
     sizes[size],
     tones[tone],
     weights[weight],
-    measure && 'max-w-prose',
+    italic && 'italic',
+    measure && 'max-w-reading',
     className,
   )}
 >

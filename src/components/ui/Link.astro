@@ -6,8 +6,8 @@ import { linkClasses } from './styles';
 interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
   href: string;
   /**
-   * `default` is always underlined. `quiet` shows the underline on hover only.
-   * `inverse` is for links on an ink background.
+   * `default` is the accent ink, always underlined, for links in text.
+   * `quiet` is plain ink with an underline on hover, for navigation.
    */
   variant?: keyof typeof linkClasses;
   /** Marks the link as the current page. */

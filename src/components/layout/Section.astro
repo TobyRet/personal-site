@@ -2,7 +2,7 @@
 import { cx } from '@/lib/cx';
 
 interface Props {
-  /** A 4px ink rule above the section. Use it to open major sections. */
+  /** A hairline rule above the section. Use it to separate major sections. */
   rule?: boolean;
   spacing?: 'm' | 'l';
   /** The id of the section heading, so screen readers can name the region. */
@@ -30,7 +30,7 @@ const spacings = {
   aria-labelledby={labelledBy}
   class={cx(spacings[spacing], className)}
 >
-  <div class={cx(rule && 'border-t-4 border-rule pt-8 md:pt-12')}>
+  <div class={cx(rule && 'border-t border-rule pt-8 md:pt-12')}>
     <slot />
   </div>
 </section>

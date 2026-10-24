@@ -19,12 +19,12 @@ const linkClass =
   'group flex flex-col gap-1 py-4 text-link no-underline sm:max-w-narrow hover:underline';
 ---
 
-<nav aria-label={label} class="border-t border-border">
+<nav aria-label={label} class="border-t border-rule font-ui text-ui">
   <ul class="flex flex-col sm:flex-row sm:justify-between sm:gap-8">
     {previous && (
       <li>
         <a href={previous.href} rel="prev" class={linkClass}>
-          <span class="flex items-center gap-2 font-bold">
+          <span class="flex items-center gap-2 font-semibold">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -48,7 +48,7 @@ const linkClass =
           rel="next"
           class={cx(linkClass, 'sm:items-end sm:text-right')}
         >
-          <span class="flex items-center gap-2 font-bold">
+          <span class="flex items-center gap-2 font-semibold">
             Next
             <svg
               aria-hidden="true"

@@ -1,0 +1,28 @@
+---
+/**
+ * One note in the handout margin: a short label and its content.
+ * Set in the UI face, smaller and quieter than the reading column.
+ */
+import { cx } from '@/lib/cx';
+
+interface Props {
+  label?: string | undefined;
+  /** `accent` draws attention, for example to availability. */
+  tone?: 'default' | 'accent';
+  class?: string | undefined;
+}
+
+const { label, tone = 'default', class: className } = Astro.props;
+---
+
+<div class={cx('font-ui text-ui', className)}>
+  {label && <p class="font-semibold text-text">{label}</p>}
+  <div
+    class={cx(
+      tone === 'accent' ? 'text-accent' : 'text-text-secondary',
+      'flex flex-col gap-1',
+    )}
+  >
+    <slot />
+  </div>
+</div>

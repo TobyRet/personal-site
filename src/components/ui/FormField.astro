@@ -1,5 +1,4 @@
 ---
-import { cx } from '@/lib/cx';
 import { fieldClasses } from './styles';
 import { fieldIds } from './fieldIds';
 
@@ -17,7 +16,7 @@ const { id, label, hint, error, labelSuffix } = Astro.props;
 const ids = fieldIds(id);
 ---
 
-<div class={cx(fieldClasses.group, error && fieldClasses.groupError)}>
+<div class={fieldClasses.group}>
   <label for={id} class={fieldClasses.label}>
     {label}
     {labelSuffix && <span class="font-regular"> {labelSuffix}</span>}

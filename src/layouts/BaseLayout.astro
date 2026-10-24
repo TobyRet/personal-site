@@ -5,6 +5,7 @@
  */
 import '@/styles/global.css';
 import { site } from '@/site.config';
+import { STORAGE_KEY } from '@/lib/readingSettings';
 
 export interface Props {
   /** Page title. The site name is added after it. */
@@ -31,6 +32,23 @@ const canonical = Astro.site
     {canonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!--
+      Applies the reader's saved Aa settings before the page paints, so there
+      is no flash of the default size or theme. Mirrors src/lib/readingSettings.ts.
+    -->
+    <script is:inline define:vars={{ key: STORAGE_KEY }}>
+      try {
+        const s = JSON.parse(localStorage.getItem(key) || '{}');
+        const root = document.documentElement;
+        if (s.textSize === 'l' || s.textSize === 'xl')
+          root.dataset.textSize = s.textSize;
+        if (s.font === 'sans') root.dataset.readingFont = 'sans';
+        if (s.theme === 'light' || s.theme === 'dark')
+          root.dataset.theme = s.theme;
+      } catch {
+        // Storage unavailable: keep the defaults.
+      }
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />

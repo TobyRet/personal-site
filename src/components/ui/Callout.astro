@@ -1,34 +1,22 @@
 ---
+/**
+ * A note set apart from the reading column: an optional label and an indent.
+ * No box and no coloured bar; the indent and label do the work.
+ */
 import { cx } from '@/lib/cx';
 
 interface Props {
-  /**
-   * `inset`: a grey bar for side notes and asides.
-   * `important`: an ink bar for things the reader must not miss.
-   */
-  variant?: 'inset' | 'important';
-  /** Optional bold first line. */
+  /** Optional label, for example "Note" or "What I would do differently". */
   title?: string;
   class?: string | undefined;
 }
 
-const { variant = 'inset', title, class: className } = Astro.props;
-
-const variants = {
-  inset: 'border-border',
-  important: 'border-rule',
-} as const;
+const { title, class: className } = Astro.props;
 ---
 
-<div
-  class={cx(
-    'flex max-w-prose flex-col gap-2 border-l-4 py-2 pl-6',
-    variants[variant],
-    className,
-  )}
->
-  {title && <p class="font-bold">{title}</p>}
-  <div class="flex flex-col gap-4">
+<div class={cx('flex max-w-reading flex-col gap-2 pl-6 md:pl-8', className)}>
+  {title && <p class="font-ui text-ui font-semibold text-accent">{title}</p>}
+  <div class="flex flex-col gap-4 text-text-secondary">
     <slot />
   </div>
 </div>

@@ -1,7 +1,7 @@
 ---
 import { cx } from '@/lib/cx';
 
-type Size = 'display' | 'xl' | 'l' | 'm' | 's';
+type Size = 'title' | 'heading' | 'reading';
 
 interface Props {
   /** The heading level. Keep levels in order on every page. */
@@ -15,18 +15,16 @@ interface Props {
 const { level, size, id, class: className } = Astro.props;
 
 const defaultSize: Record<Props['level'], Size> = {
-  1: 'xl',
-  2: 'l',
-  3: 'm',
-  4: 's',
+  1: 'title',
+  2: 'heading',
+  3: 'reading',
+  4: 'reading',
 };
 
 const sizes: Record<Size, string> = {
-  display: 'text-display',
-  xl: 'text-xl',
-  l: 'text-l',
-  m: 'text-m',
-  s: 'text-body',
+  title: 'text-title font-regular',
+  heading: 'text-heading font-semibold',
+  reading: 'text-reading font-semibold',
 };
 
 const Tag = `h${level}` as const;
@@ -35,7 +33,7 @@ const Tag = `h${level}` as const;
 <Tag
   id={id}
   class={cx(
-    'font-bold text-text',
+    'font-reading text-text',
     sizes[size ?? defaultSize[level]],
     className,
   )}

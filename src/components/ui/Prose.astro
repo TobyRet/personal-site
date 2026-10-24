@@ -11,7 +11,7 @@
 
 <style>
   .prose {
-    max-width: var(--container-prose);
+    max-width: var(--container-reading);
   }
 
   .prose :global(> * + *) {
@@ -20,18 +20,16 @@
 
   .prose :global(h2) {
     margin-top: var(--spacing-12);
-    padding-top: var(--spacing-6);
-    border-top: var(--border-thick) solid var(--color-rule);
-    font-size: var(--text-l);
-    line-height: var(--text-l--line-height);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--text-heading);
+    line-height: var(--text-heading--line-height);
+    font-weight: var(--font-weight-semibold);
   }
 
   .prose :global(h3) {
     margin-top: var(--spacing-8);
-    font-size: var(--text-m);
-    line-height: var(--text-m--line-height);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--text-reading);
+    line-height: var(--text-reading--line-height);
+    font-weight: var(--font-weight-semibold);
   }
 
   .prose :global(:is(h2, h3) + *) {
@@ -61,6 +59,7 @@
     text-decoration-line: underline;
     text-decoration-thickness: var(--border-thin);
     text-underline-offset: var(--underline-offset);
+    text-decoration-color: var(--color-link);
   }
 
   .prose :global(a:hover) {
@@ -68,18 +67,18 @@
   }
 
   .prose :global(strong) {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-semibold);
   }
 
   .prose :global(code) {
-    font-family: var(--font-mono);
+    font-family: var(--font-ui);
     background-color: var(--color-bg-subtle);
     padding-inline: var(--spacing-1);
   }
 
   .prose :global(blockquote) {
-    border-left: var(--border-thick) solid var(--color-border);
-    padding-left: var(--spacing-6);
+    padding-left: var(--spacing-8);
+    font-style: italic;
     color: var(--color-text-secondary);
   }
 </style>

@@ -8,36 +8,17 @@ export interface SummaryRow {
 
 interface Props {
   rows: SummaryRow[];
-  /** Set values in the mono face. Use it for data such as dates and stacks. */
-  mono?: boolean;
-  /** `stacked` keeps keys above values at every width. Use it in narrow columns. */
-  layout?: 'columns' | 'stacked';
   class?: string | undefined;
 }
 
-const {
-  rows,
-  mono = false,
-  layout = 'columns',
-  class: className,
-} = Astro.props;
-
-const rowClasses = {
-  columns: 'grid grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-6',
-  stacked: 'grid grid-cols-1 gap-1',
-} as const;
-
-const valueClasses = {
-  columns: 'sm:col-span-2',
-  stacked: '',
-} as const;
+const { rows, class: className } = Astro.props;
 ---
 
-<dl class={cx('border-t border-border', className)}>
+<dl class={cx('font-ui text-ui', className)}>
   {rows.map((row) => (
-    <div class={cx('border-b border-border py-3', rowClasses[layout])}>
-      <dt class="font-bold">{row.key}</dt>
-      <dd class={cx(valueClasses[layout], mono && 'font-mono text-small')}>
+    <div class="grid grid-cols-1 gap-1 border-b border-rule py-3 sm:grid-cols-3 sm:gap-6">
+      <dt class="font-semibold text-text">{row.key}</dt>
+      <dd class="text-text-secondary sm:col-span-2">
         {Array.isArray(row.value) ? row.value.join(', ') : row.value}
       </dd>
     </div>
