@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+.wrangler/
+
+# Secrets (see .dev.vars.example)
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+!.env.example
+
+# Test output
+coverage/
+playwright-report/
+test-results/
+blob-report/
+screenshots/
+
+# Logs
+*.log
+
+# OS and editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
