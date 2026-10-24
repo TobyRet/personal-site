@@ -5,3 +5,4 @@ playwright-report/
 test-results/
 bun.lock
 worker-configuration.d.ts
+.impeccable/mocks/

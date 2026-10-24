@@ -30,23 +30,36 @@ We will upgrade when they do.
 
 ## Styling: Tailwind CSS 4 with our tokens only
 
-All tokens live in `src/styles/tokens.css`. Raw values sit on `:root`. A `@theme static` block exposes them to Tailwind after `--*: initial` clears every default colour, font, spacing step, radius and shadow. So a class like `bg-red-500`, `p-5`, `rounded` or `shadow` does not exist, and using a value outside the system fails silently at build time instead of slipping through.
+All tokens live in `src/styles/tokens.css`. Raw values sit on `:root`. A `@theme static` block exposes them to Tailwind after `--*: initial` clears every default colour, font, spacing step, radius and shadow. So a class like `bg-red-500`, `p-5`, `rounded` or `shadow` does not exist.
 
 We kept Tailwind over plain CSS or CSS modules for two reasons:
 
 - Utility classes in components can only name tokens. That enforces the brief's "no magic values" rule mechanically.
 - Styles sit next to the markup, so small components stay single-purpose and easy to change.
 
+`scripts/check-design.mjs` (part of `bun run lint`) fails on Tailwind arbitrary values such as `p-[13px]` and on inline `style` attributes. Layout values that need a token use Tailwind's custom property syntax, for example `grid-cols-(--layout-handout)`.
+
 Shared class strings for controls live in `src/components/ui/styles.ts`, so the React contact form island looks the same as the Astro components.
 
 Focus styles are plain CSS outside Tailwind's layers, so no utility class can override them.
 
-## Design direction
+## Design direction: the margin-note handout
 
-The direction is GOV.UK-influenced, text-led, black and white, with signal yellow as the one accent. Product context is in `PRODUCT.md`. The design contract is in `.impeccable/surfaces/`.
+The first build followed GOV.UK too closely and looked like a copy. The owner asked for GOV.UK's plainness without its look, and for reading as pleasant as an e-reader. We ran impeccable's direction round. Its dice assigned a "letter of introduction" direction (5th on our ranked list). After hearing that, the owner chose the top-ranked direction, the margin-note handout. Product context is in `PRODUCT.md`. The design contract is in `.impeccable/surfaces/`.
 
-- Font: Atkinson Hyperlegible Next, with its Mono sibling for data such as dates and stacks. It is open-licence, designed for legibility, not Inter, and self-hosted through `@fontsource-variable`. The packages pin the font version and generate the `@font-face` rules.
-- The impeccable detector flags the thick left border on `Callout` and on form fields with errors. We keep both on purpose. They are GOV.UK's inset text and error patterns, which the brief asks for.
+- Each page is a calm reading column of about 34em, with facts in a margin to the right. On phones the margin folds in under the title.
+- Literata for reading and headings: an open-licence serif made for e-book reading. We load the weight-only files (about 52 KB for Latin), not the optical-size files (about 110 KB), to protect page speed.
+- Atkinson Hyperlegible Next for the interface: nav, labels, forms, buttons and notes. It was designed for low-vision legibility.
+- One accent, blue-black ink, for links, notes and focus. Light and dark themes, with every text colour at AA contrast or better.
+
+## Reading settings ("Aa") without a framework
+
+Readers can change text size, reading font and theme. Choices are stored in `localStorage` and applied as data attributes on `<html>`, which the tokens read.
+
+- The control is an Astro component with a small script (a custom element), not a React island. A React island in the header would load React (about 40 to 45 KB compressed) on every page. The whole page now ships about 1 KB of compressed JavaScript.
+- A tiny inline script in `<head>` applies saved settings before the page paints, so there is no flash.
+- Without JavaScript the button stays hidden, and the site follows the device's own dark mode, zoom and font settings.
+- React is still installed for the contact form, which is the only island.
 
 ## Email provider
 

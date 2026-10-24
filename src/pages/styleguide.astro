@@ -4,11 +4,14 @@
  * Not linked from the site, noindex, and excluded from the sitemap.
  */
 import Grid from '@/components/layout/Grid.astro';
+import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Section from '@/components/layout/Section.astro';
 import Stack from '@/components/layout/Stack.astro';
 import Breadcrumbs from '@/components/nav/Breadcrumbs.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
+import CaseStudyFacts from '@/components/sections/CaseStudyFacts.astro';
 import Button from '@/components/ui/Button.astro';
 import Callout from '@/components/ui/Callout.astro';
 import ErrorSummary from '@/components/ui/ErrorSummary.astro';
@@ -24,55 +27,71 @@ import Text from '@/components/ui/Text.astro';
 import Textarea from '@/components/ui/Textarea.astro';
 
 const colours = [
-  { name: 'ink', className: 'bg-ink', value: '#0f1111' },
-  { name: 'grey-700', className: 'bg-grey-700', value: '#4d5557' },
-  { name: 'grey-500', className: 'bg-grey-500', value: '#80878a' },
-  { name: 'grey-200', className: 'bg-grey-200', value: '#d6d9da' },
-  { name: 'grey-50', className: 'bg-grey-50', value: '#f4f5f5' },
-  { name: 'white', className: 'bg-white', value: '#ffffff' },
-  { name: 'accent', className: 'bg-accent', value: '#ffd60a' },
-  { name: 'success', className: 'bg-success', value: '#0b7a4b' },
-  { name: 'error', className: 'bg-error', value: '#c42b2b' },
+  { name: 'bg', className: 'bg-bg', light: '#ffffff', dark: '#151515' },
+  {
+    name: 'bg-subtle',
+    className: 'bg-bg-subtle',
+    light: '#f5f5f3',
+    dark: '#1e1e1d',
+  },
+  { name: 'text', className: 'bg-text', light: '#1a1a1a', dark: '#e8e6e1' },
+  {
+    name: 'text-secondary',
+    className: 'bg-text-secondary',
+    light: '#5e5e5e',
+    dark: '#a8a6a1',
+  },
+  { name: 'accent', className: 'bg-accent', light: '#1d3a6b', dark: '#9fbbe8' },
+  { name: 'rule', className: 'bg-rule', light: '#d8d8d4', dark: '#3a3a38' },
+  {
+    name: 'control',
+    className: 'bg-control',
+    light: '#767676',
+    dark: '#8a8a87',
+  },
+  { name: 'error', className: 'bg-error', light: '#a3262a', dark: '#f08a8a' },
+  {
+    name: 'success',
+    className: 'bg-success',
+    light: '#1e6b45',
+    dark: '#7cc79d',
+  },
 ];
 
-const semantic = [
-  ['text', 'ink'],
-  ['text-secondary', 'grey-700'],
-  ['bg', 'white'],
-  ['bg-subtle', 'grey-50'],
-  ['border', 'grey-200'],
-  ['border-strong', 'grey-500'],
-  ['rule', 'ink'],
-  ['link', 'ink'],
-  ['focus', 'accent'],
-  ['focus-text', 'ink'],
-  ['success', 'green'],
-  ['error', 'red'],
-].map(([key, value]) => ({ key: key ?? '', value: value ?? '' }));
-
-const typeScale = [
-  { name: 'display', className: 'text-display font-bold' },
-  { name: 'xl', className: 'text-xl font-bold' },
-  { name: 'l', className: 'text-l font-bold' },
-  { name: 'm', className: 'text-m font-bold' },
-  { name: 'lead', className: 'text-lead' },
-  { name: 'body', className: 'text-body' },
-  { name: 'small', className: 'text-small' },
-  { name: 'mono small', className: 'font-mono text-small' },
+const typeRoles = [
+  {
+    name: 'title',
+    className: 'font-reading text-title',
+    sample: 'I steady projects and still write the code',
+  },
+  {
+    name: 'heading',
+    className: 'font-reading text-heading font-semibold',
+    sample: 'The situation',
+  },
+  {
+    name: 'reading',
+    className: 'font-reading text-reading',
+    sample:
+      'A calm column for long reading, set at about 65 characters a line.',
+  },
+  {
+    name: 'reading italic',
+    className: 'font-reading text-reading italic',
+    sample: 'One month of cover became five.',
+  },
+  {
+    name: 'ui',
+    className: 'font-ui text-ui',
+    sample: 'Navigation, labels, notes and forms',
+  },
 ];
 
-const spacing = [
-  { key: '1', className: 'w-1', size: '4px' },
-  { key: '2', className: 'w-2', size: '8px' },
-  { key: '3', className: 'w-3', size: '12px' },
-  { key: '4', className: 'w-4', size: '16px' },
-  { key: '6', className: 'w-6', size: '24px' },
-  { key: '8', className: 'w-8', size: '32px' },
-  { key: '12', className: 'w-12', size: '48px' },
-  { key: '16', className: 'w-16', size: '64px' },
-  { key: '24', className: 'w-24', size: '96px' },
-  { key: '32', className: 'w-32', size: '128px' },
-];
+const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32].map((key) => ({
+  key,
+  className: `w-${key}`,
+  size: `${key * 4}px`,
+}));
 
 const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 ---
@@ -81,38 +100,50 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
   title="Styleguide"
   description="Design tokens and components for this site."
   noindex
-  showAvailability={false}
 >
-  <Section spacing="m">
-    <Stack gap={4}>
+  <Handout>
+    <Fragment slot="title">
       <Heading level={1}>Styleguide</Heading>
-      <Text size="lead" measure>
-        Every design token and component on the site. Pages use only what this
-        page shows.
+      <Text italic tone="secondary" class="mt-2">
+        Every token and component on the site. Use the Aa control to try the
+        reader settings.
       </Text>
-    </Stack>
-  </Section>
+    </Fragment>
+    <Fragment slot="notes">
+      <AvailabilityNote />
+      <CaseStudyFacts
+        client="Lorem ipsum"
+        sector="Dolor sit"
+        position="Technical lead"
+        dates="2025 to 2026"
+        stack={['TypeScript', 'React', 'Node.js']}
+      />
+    </Fragment>
+    <Text>
+      This page is itself a handout: the reading column on the left, notes in
+      the margin on the right. On phones the notes fold in under the title.
+    </Text>
+  </Handout>
 
   <Section rule labelledBy="colour">
     <Stack gap={8}>
       <Heading level={2} id="colour">
         Colour
       </Heading>
-      <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      <Text size="ui" tone="secondary">
+        Values are light / dark. The swatches follow the current theme.
+      </Text>
+      <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
         {colours.map((colour) => (
-          <li class="flex flex-col gap-2">
-            <span
-              class={`block h-16 border border-border ${colour.className}`}
-            />
-            <span class="font-bold">{colour.name}</span>
-            <span class="font-mono text-small text-text-secondary">
-              {colour.value}
+          <li class="flex flex-col gap-2 font-ui text-ui">
+            <span class={`block h-12 border border-rule ${colour.className}`} />
+            <span class="font-semibold">{colour.name}</span>
+            <span class="text-text-secondary">
+              {colour.light} / {colour.dark}
             </span>
           </li>
         ))}
       </ul>
-      <Heading level={3}>Semantic tokens</Heading>
-      <SummaryList rows={semantic} mono class="max-w-prose" />
     </Stack>
   </Section>
 
@@ -122,16 +153,14 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         Typography
       </Heading>
       <Text measure>
-        Atkinson Hyperlegible Next for all text. Atkinson Hyperlegible Mono for
-        data only. Sizes step up at 768px.
+        Literata for reading and headings. Atkinson Hyperlegible Next for the
+        interface. Four roles, each scaled by the reader's text size setting.
       </Text>
       <Stack gap={6}>
-        {typeScale.map((step) => (
-          <div class="flex flex-col gap-1 border-b border-border pb-4">
-            <span class="font-mono text-small text-text-secondary">
-              {step.name}
-            </span>
-            <span class={step.className}>Hands-on technical lead</span>
+        {typeRoles.map((role) => (
+          <div class="flex flex-col gap-1 border-b border-rule pb-4">
+            <span class="font-ui text-ui text-text-secondary">{role.name}</span>
+            <span class={role.className}>{role.sample}</span>
           </div>
         ))}
       </Stack>
@@ -143,14 +172,12 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
       <Heading level={2} id="spacing">
         Spacing
       </Heading>
-      <ul class="flex flex-col gap-2">
+      <ul class="flex flex-col gap-2 font-ui text-ui">
         {spacing.map((step) => (
           <li class="flex items-center gap-4">
-            <span class="w-12 font-mono text-small">{step.key}</span>
-            <span class={`block h-4 bg-ink ${step.className}`} />
-            <span class="font-mono text-small text-text-secondary">
-              {step.size}
-            </span>
+            <span class="w-12">{step.key}</span>
+            <span class={`block h-4 bg-text ${step.className}`} />
+            <span class="text-text-secondary">{step.size}</span>
           </li>
         ))}
       </ul>
@@ -163,15 +190,10 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         Links and buttons
       </Heading>
       <p class="flex flex-wrap gap-6">
-        <Link href="#links">Default link</Link>
+        <Link href="#links">Link in text</Link>
         <Link href="#links" variant="quiet">
           Quiet link
         </Link>
-        <span class="bg-ink px-2">
-          <Link href="#links" variant="inverse">
-            Inverse link
-          </Link>
-        </span>
       </p>
       <div class="flex flex-wrap gap-4">
         <Button>Primary button</Button>
@@ -179,7 +201,7 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         <Button href="#links">Link as button</Button>
         <Button disabled>Disabled</Button>
       </div>
-      <Text tone="secondary" size="small">
+      <Text size="ui" tone="secondary">
         Tab through this section to see focus styles.
       </Text>
     </Stack>
@@ -199,11 +221,8 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         </div>
       </Stack>
       <Stack gap={4}>
-        <Heading level={3}>Callouts</Heading>
-        <Callout>
-          <p>{sample}</p>
-        </Callout>
-        <Callout variant="important" title="Important">
+        <Heading level={3}>Callout</Heading>
+        <Callout title="Note">
           <p>{sample}</p>
         </Callout>
       </Stack>
@@ -213,11 +232,9 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
           rows={[
             { key: 'Sector', value: 'Lorem ipsum' },
             { key: 'Role', value: 'Lorem ipsum dolor' },
-            { key: 'Dates', value: 'Jan 2026 to Jun 2026' },
             { key: 'Stack', value: ['TypeScript', 'React', 'Node.js'] },
           ]}
-          mono
-          class="max-w-prose"
+          class="max-w-reading"
         />
       </Stack>
       <Stack gap={4}>
@@ -227,13 +244,12 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         </Quote>
       </Stack>
       <Stack gap={4}>
-        <Heading level={3}>Case study card</Heading>
-        <Grid layout="halves">
+        <Heading level={3}>Case study list</Heading>
+        <div>
           <CaseStudyCard
             title="Lorem ipsum dolor sit amet"
             href="#content"
             summary={sample}
-            client="Lorem ipsum"
             sector="Dolor"
             position="Technical lead"
             dates="2025 to 2026"
@@ -243,13 +259,12 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
             title="Consectetur adipiscing elit sed do"
             href="#content"
             summary={sample}
-            client="Lorem ipsum"
             sector="Dolor"
             position="Senior engineer"
             dates="2024"
             headingLevel={4}
           />
-        </Grid>
+        </div>
       </Stack>
       <Stack gap={4}>
         <Heading level={3}>Prose</Heading>
@@ -269,6 +284,9 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
             <li>First step</li>
             <li>Second step</li>
           </ol>
+          <blockquote>
+            <p>{sample}</p>
+          </blockquote>
         </Prose>
       </Stack>
     </Stack>
@@ -308,33 +326,35 @@ const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
           },
         ]}
       />
-      <div class="flex max-w-narrow flex-col gap-6">
-        <Input id="sg-name" name="name" label="Name" autocomplete="name" />
-        <Input
-          id="sg-company"
-          name="company"
-          label="Company"
-          labelSuffix="(optional)"
-          hint="The organisation you work for."
-        />
-        <Input
-          id="sg-email-error"
-          name="email"
-          type="email"
-          label="Email address"
-          value="not-an-email"
-          error="Enter an email address in the correct format, like name@example.com"
-        />
-        <Textarea
-          id="sg-message"
-          name="message"
-          label="Message"
-          hint="Lorem ipsum dolor sit amet."
-        />
-        <div>
-          <Button type="button">Send message</Button>
+      <Grid layout="halves">
+        <div class="flex flex-col gap-6">
+          <Input id="sg-name" name="name" label="Name" autocomplete="name" />
+          <Input
+            id="sg-company"
+            name="company"
+            label="Company"
+            labelSuffix="(optional)"
+            hint="The organisation you work for."
+          />
+          <Input
+            id="sg-email-error"
+            name="email"
+            type="email"
+            label="Email address"
+            value="not-an-email"
+            error="Enter an email address in the correct format, like name@example.com"
+          />
+          <Textarea
+            id="sg-message"
+            name="message"
+            label="Message"
+            hint="Lorem ipsum dolor sit amet."
+          />
+          <div>
+            <Button type="button">Send message</Button>
+          </div>
         </div>
-      </div>
+      </Grid>
     </Stack>
   </Section>
 </Page>

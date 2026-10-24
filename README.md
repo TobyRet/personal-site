@@ -63,5 +63,6 @@ docs/decisions.md       Key decisions and why we made them.
 - Styleguide: run `bun run dev` and open http://localhost:4321/styleguide/ to see every token and component.
 - Components use token classes only. `bun run lint` fails on Tailwind arbitrary values (`p-[13px]`) and inline `style` attributes.
 - Site-wide settings (name, links, availability, analytics): `src/site.config.ts`.
+- Light and dark themes and the reader's Aa settings are handled in `tokens.css`. Components never pick colours for a theme themselves.
 
 <!-- TODO: expand this README as each phase lands (content editing, contact form setup, deploy, uptime monitoring). -->
