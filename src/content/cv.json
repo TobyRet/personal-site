@@ -1,0 +1,99 @@
+[
+  {
+    "id": "equal-experts",
+    "organisation": "Equal Experts",
+    "role": "Technical Principal, Technical Lead and Senior Software Engineer",
+    "location": "Melbourne and remote",
+    "start": "2025-09",
+    "summary": "Led a team stabilising a global student housing platform. Covered a super fund's member portal for five months. Did the technical research for a bid with a global energy software platform."
+  },
+  {
+    "id": "amador",
+    "organisation": "Amador",
+    "role": "Technical Lead (part-time)",
+    "location": "Sydney and remote",
+    "start": "2025-04",
+    "summary": "Sole lead engineer on a live two-sided marketplace. Took an inherited prototype to production in about four months."
+  },
+  {
+    "id": "terem",
+    "organisation": "Terem",
+    "role": "Lead Engineer",
+    "location": "Sydney and remote",
+    "start": "2025-05",
+    "end": "2025-09",
+    "summary": "Led engineering on a new flight scheduling front end for a major Australian airline, from design to first release."
+  },
+  {
+    "id": "dfe-2024",
+    "organisation": "Department for Education",
+    "role": "Senior Software Developer",
+    "location": "London",
+    "start": "2024-10",
+    "end": "2025-02",
+    "summary": "Rebuilt the Register Early Career Teachers service with Ruby on Rails and PostgreSQL."
+  },
+  {
+    "id": "abcam",
+    "organisation": "Abcam (through Crosstide)",
+    "role": "Senior Engineer",
+    "location": "Cambridge, UK",
+    "start": "2022-01",
+    "end": "2024-10",
+    "summary": "Rebuilt the global e-commerce platform. Led the order tracking system. Launched in the US, Europe, China and Japan."
+  },
+  {
+    "id": "mastercard",
+    "organisation": "Mastercard",
+    "role": "Senior Software Engineer",
+    "location": "London",
+    "start": "2023-09",
+    "end": "2024-01",
+    "summary": "Helped build and release a new fraud detection UI. Built deployment pipelines and added security scans."
+  },
+  {
+    "id": "dfe-2019",
+    "organisation": "Department for Education",
+    "role": "Senior Software Developer",
+    "location": "London",
+    "start": "2019-10",
+    "end": "2021-12",
+    "summary": "Built Find Postgraduate Teacher Training, Publish Postgraduate Teacher Training and Apply for Teacher Training."
+  },
+  {
+    "id": "trussle",
+    "organisation": "Trussle (through Crosstide)",
+    "role": "Senior Engineer",
+    "location": "London",
+    "start": "2019-05",
+    "end": "2019-10",
+    "summary": "Rebuilt the online mortgage application with TypeScript, React and Node.js."
+  },
+  {
+    "id": "moj",
+    "organisation": "Ministry of Justice",
+    "role": "Senior Software Developer",
+    "location": "London",
+    "start": "2018-02",
+    "end": "2019-05",
+    "summary": "Developed the Prison Visits Booking Service and Offender Management in Custody."
+  },
+  {
+    "id": "gds",
+    "organisation": "Government Digital Service",
+    "role": "Software Developer",
+    "location": "London",
+    "start": "2017-07",
+    "end": "2018-02",
+    "summary": "Helped rebuild data.gov.uk."
+  },
+  {
+    "id": "codurance",
+    "organisation": "Codurance",
+    "role": "Software Developer (Consultant)",
+    "location": "London",
+    "start": "2014-09",
+    "end": "2017-08",
+    "summary": "Helped clients build quality software and adopt Extreme Programming practices."
+  }
+]

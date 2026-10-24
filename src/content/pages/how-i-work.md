@@ -1,0 +1,35 @@
+---
+title: How I work
+subtitle: The kinds of engagement I take on, and how I work with teams.
+description: 'How Toby Retallick works as a contractor: hands-on tech lead, senior engineer, project cover and AI-assisted delivery.'
+---
+
+## Hands-on technical lead
+
+I lead the technical direction and still write production code. I set up delivery practices, such as pull request reviews, automated tests and CI, and I make sure the team can keep them going after I leave.
+
+<!-- TODO: copy. Add how you usually start an engagement and what clients get in the first weeks. -->
+
+## Senior engineer
+
+I join an existing team as a senior full-stack engineer. I pick up the work quickly, raise the standard of the code around me, and help less experienced developers.
+
+<!-- TODO: copy. -->
+
+## Stepping in to cover or steady a project
+
+Sometimes a project loses a key person, or a platform becomes unstable. I step in, keep things running, and leave the team in a better state. On a super fund's member portal, one month of cover became five.
+
+<!-- TODO: copy. -->
+
+## AI-assisted delivery
+
+I use AI agents in a disciplined way. Each change goes through a spike, a spec and a review before the build. Agents have a written scope, and a person approves every merge. I can help teams adopt the same approach.
+
+<!-- TODO: copy. -->
+
+## Working with teams and stakeholders
+
+<!-- TODO: copy. How you work with product owners, designers, offshore teams and senior stakeholders. -->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
