@@ -1,0 +1,85 @@
+---
+/**
+ * Styles rendered Markdown (case studies, page copy) using design tokens only.
+ * Use it around `<Content />` from a content collection entry.
+ */
+---
+
+<div class="prose">
+  <slot />
+</div>
+
+<style>
+  .prose {
+    max-width: var(--container-prose);
+  }
+
+  .prose :global(> * + *) {
+    margin-top: var(--spacing-4);
+  }
+
+  .prose :global(h2) {
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-6);
+    border-top: var(--border-thick) solid var(--color-rule);
+    font-size: var(--text-l);
+    line-height: var(--text-l--line-height);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose :global(h3) {
+    margin-top: var(--spacing-8);
+    font-size: var(--text-m);
+    line-height: var(--text-m--line-height);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose :global(:is(h2, h3) + *) {
+    margin-top: var(--spacing-4);
+  }
+
+  .prose :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(ul) {
+    padding-left: var(--spacing-6);
+    list-style-type: disc;
+  }
+
+  .prose :global(ol) {
+    padding-left: var(--spacing-6);
+    list-style-type: decimal;
+  }
+
+  .prose :global(li + li) {
+    margin-top: var(--spacing-2);
+  }
+
+  .prose :global(a) {
+    color: var(--color-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--border-thin);
+    text-underline-offset: var(--underline-offset);
+  }
+
+  .prose :global(a:hover) {
+    text-decoration-thickness: var(--border-medium);
+  }
+
+  .prose :global(strong) {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    background-color: var(--color-bg-subtle);
+    padding-inline: var(--spacing-1);
+  }
+
+  .prose :global(blockquote) {
+    border-left: var(--border-thick) solid var(--color-border);
+    padding-left: var(--spacing-6);
+    color: var(--color-text-secondary);
+  }
+</style>

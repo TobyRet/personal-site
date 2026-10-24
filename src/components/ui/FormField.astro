@@ -1,0 +1,36 @@
+---
+import { cx } from '@/lib/cx';
+import { fieldClasses } from './styles';
+import { fieldIds } from './fieldIds';
+
+interface Props {
+  /** The id of the control inside this field. */
+  id: string;
+  label: string;
+  hint?: string | undefined;
+  error?: string | undefined;
+  /** Shown after the label, for example "(optional)". */
+  labelSuffix?: string | undefined;
+}
+
+const { id, label, hint, error, labelSuffix } = Astro.props;
+const ids = fieldIds(id);
+---
+
+<div class={cx(fieldClasses.group, error && fieldClasses.groupError)}>
+  <label for={id} class={fieldClasses.label}>
+    {label}
+    {labelSuffix && <span class="font-regular"> {labelSuffix}</span>}
+  </label>
+  {hint && (
+    <p id={ids.hint} class={fieldClasses.hint}>
+      {hint}
+    </p>
+  )}
+  {error && (
+    <p id={ids.error} class={fieldClasses.error}>
+      <span class="sr-only">Error:</span> {error}
+    </p>
+  )}
+  <slot />
+</div>

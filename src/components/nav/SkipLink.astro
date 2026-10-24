@@ -1,0 +1,15 @@
+---
+interface Props {
+  /** The id of the main content element. */
+  target?: string;
+}
+
+const { target = 'main' } = Astro.props;
+---
+
+<a
+  href={`#${target}`}
+  class="sr-only block px-gutter py-3 font-bold text-body underline focus:not-sr-only"
+>
+  Skip to main content
+</a>

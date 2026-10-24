@@ -1,0 +1,32 @@
+---
+/**
+ * The standard page: skip link, header, availability banner, main content and footer.
+ * Every route renders inside this.
+ */
+import BaseLayout, {
+  type Props as BaseProps,
+} from '@/layouts/BaseLayout.astro';
+import Footer from '@/components/nav/Footer.astro';
+import Header from '@/components/nav/Header.astro';
+import SkipLink from '@/components/nav/SkipLink.astro';
+import AvailabilityBanner from '@/components/sections/AvailabilityBanner.astro';
+import Container from './Container.astro';
+
+interface Props extends BaseProps {
+  /** Show the availability banner under the header. */
+  showAvailability?: boolean;
+}
+
+const { showAvailability = true, ...baseProps } = Astro.props;
+---
+
+<BaseLayout {...baseProps}>
+  <SkipLink />
+  <Header currentPath={Astro.url.pathname} />
+  {showAvailability && <AvailabilityBanner />}
+  <slot name="before-main" />
+  <Container as="main" class="flex-1" id="main" tabindex="-1">
+    <slot />
+  </Container>
+  <Footer />
+</BaseLayout>

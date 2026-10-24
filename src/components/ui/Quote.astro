@@ -1,0 +1,35 @@
+---
+import Link from './Link.astro';
+
+interface Props {
+  /** Who said it. */
+  name: string;
+  /** Their role and organisation. */
+  position?: string;
+  /** Where the quote was first published, if public. */
+  sourceHref?: string;
+  sourceLabel?: string;
+}
+
+const {
+  name,
+  position,
+  sourceHref,
+  sourceLabel = 'Read the original',
+} = Astro.props;
+---
+
+<figure class="flex max-w-prose flex-col gap-4 border-t-4 border-rule pt-6">
+  <blockquote class="text-lead">
+    <slot />
+  </blockquote>
+  <figcaption class="flex flex-col gap-1">
+    <span class="font-bold">{name}</span>
+    {position && <span class="text-text-secondary">{position}</span>}
+    {sourceHref && (
+      <span class="text-small">
+        <Link href={sourceHref}>{sourceLabel}</Link>
+      </span>
+    )}
+  </figcaption>
+</figure>

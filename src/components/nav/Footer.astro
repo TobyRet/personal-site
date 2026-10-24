@@ -1,0 +1,32 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Link from '@/components/ui/Link.astro';
+import Text from '@/components/ui/Text.astro';
+import { site } from '@/site.config';
+
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'Email', href: `mailto:${site.email}` },
+  { label: 'LinkedIn', href: site.linkedIn },
+  { label: 'GitHub', href: site.github },
+  { label: 'Privacy', href: '/privacy/' },
+];
+---
+
+<footer class="mt-16 border-t-4 border-rule bg-bg-subtle">
+  <Container class="flex flex-col gap-6 py-8 md:py-12">
+    <nav aria-label="Footer">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {links.map((link) => (
+          <li>
+            <Link href={link.href}>{link.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <Text size="small" tone="secondary">
+      {`© ${year} ${site.name}. Contracting through ${site.company}.`}
+    </Text>
+  </Container>
+</footer>

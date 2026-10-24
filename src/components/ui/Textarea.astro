@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cx } from '@/lib/cx';
+import FormField from './FormField.astro';
+import { describedBy } from './fieldIds';
+import { fieldClasses } from './styles';
+
+interface Props extends Omit<
+  HTMLAttributes<'textarea'>,
+  'id' | 'name' | 'class'
+> {
+  id: string;
+  name: string;
+  label: string;
+  hint?: string | undefined;
+  error?: string | undefined;
+  labelSuffix?: string | undefined;
+  value?: string | undefined;
+}
+
+const {
+  id,
+  name,
+  label,
+  hint,
+  error,
+  labelSuffix,
+  value,
+  rows = 6,
+  ...rest
+} = Astro.props;
+---
+
+<FormField
+  id={id}
+  label={label}
+  hint={hint}
+  error={error}
+  labelSuffix={labelSuffix}
+>
+  <textarea
+    id={id}
+    name={name}
+    rows={rows}
+    aria-describedby={describedBy(id, Boolean(hint), Boolean(error))}
+    aria-invalid={error ? 'true' : undefined}
+    class={cx(fieldClasses.control, error && fieldClasses.controlError)}
+    {...rest}
+  >{value}</textarea>
+</FormField>

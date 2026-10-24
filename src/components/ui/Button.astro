@@ -1,0 +1,35 @@
+---
+import { cx } from '@/lib/cx';
+import { buttonClasses } from './styles';
+
+interface BaseProps {
+  variant?: 'primary' | 'secondary';
+  class?: string | undefined;
+}
+
+/** Pass `href` to render a link that looks like a button. */
+type Props = BaseProps &
+  (
+    | { href: string; type?: never; disabled?: never }
+    | { href?: never; type?: 'button' | 'submit' | 'reset'; disabled?: boolean }
+  );
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  disabled,
+  class: className,
+} = Astro.props;
+const classes = cx(buttonClasses.base, buttonClasses[variant], className);
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+  </a>
+) : (
+  <button type={type} disabled={disabled} class={classes}>
+    <slot />
+  </button>
+)}

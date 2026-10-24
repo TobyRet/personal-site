@@ -1,0 +1,45 @@
+---
+import { cx } from '@/lib/cx';
+
+interface Props {
+  size?: 'lead' | 'body' | 'small';
+  tone?: 'default' | 'secondary';
+  weight?: 'regular' | 'bold';
+  /** Limit the line length to the readable measure. */
+  measure?: boolean;
+  as?: 'p' | 'span' | 'div' | 'strong';
+  class?: string | undefined;
+}
+
+const {
+  size = 'body',
+  tone = 'default',
+  weight = 'regular',
+  measure = false,
+  as: Tag = 'p',
+  class: className,
+} = Astro.props;
+
+const sizes = {
+  lead: 'text-lead',
+  body: 'text-body',
+  small: 'text-small',
+} as const;
+const tones = {
+  default: 'text-text',
+  secondary: 'text-text-secondary',
+} as const;
+const weights = { regular: 'font-regular', bold: 'font-bold' } as const;
+---
+
+<Tag
+  class={cx(
+    sizes[size],
+    tones[tone],
+    weights[weight],
+    measure && 'max-w-prose',
+    className,
+  )}
+>
+  <slot />
+</Tag>

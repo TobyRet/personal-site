@@ -1,0 +1,56 @@
+---
+import Heading from '@/components/ui/Heading.astro';
+import Link from '@/components/ui/Link.astro';
+import Text from '@/components/ui/Text.astro';
+
+interface Props {
+  title: string;
+  href: string;
+  summary: string;
+  /** Client name, or an anonymised description such as "Global student housing platform". */
+  client: string;
+  sector: string;
+  /** Your role on the project. */
+  position: string;
+  /** Display dates, for example "Sep 2025 to Apr 2026". */
+  dates: string;
+  /** The heading level for the title. Match the page outline. */
+  headingLevel?: 2 | 3 | 4;
+}
+
+const {
+  title,
+  href,
+  summary,
+  client,
+  sector,
+  position,
+  dates,
+  headingLevel = 3,
+} = Astro.props;
+---
+
+<article class="flex flex-col gap-3 border-t border-border pt-6">
+  <Heading level={headingLevel} size="m">
+    <Link href={href}>{title}</Link>
+  </Heading>
+  <Text measure>{summary}</Text>
+  <dl class="flex flex-wrap gap-x-6 gap-y-1 font-mono text-small text-text-secondary">
+    <div class="flex gap-2">
+      <dt class="sr-only">Client</dt>
+      <dd>{client}</dd>
+    </div>
+    <div class="flex gap-2">
+      <dt class="sr-only">Sector</dt>
+      <dd>{sector}</dd>
+    </div>
+    <div class="flex gap-2">
+      <dt class="sr-only">Role</dt>
+      <dd>{position}</dd>
+    </div>
+    <div class="flex gap-2">
+      <dt class="sr-only">Dates</dt>
+      <dd>{dates}</dd>
+    </div>
+  </dl>
+</article>

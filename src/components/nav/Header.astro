@@ -1,0 +1,44 @@
+---
+import Container from '@/components/layout/Container.astro';
+import Link from '@/components/ui/Link.astro';
+import { site } from '@/site.config';
+
+interface Props {
+  /** The current URL path, used to mark the active nav item. */
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isCurrent = (href: string) =>
+  currentPath === href || currentPath.startsWith(href);
+---
+
+<header class="border-b border-border">
+  <Container class="flex flex-col gap-3 py-4 md:flex-row md:items-baseline md:justify-between md:py-6">
+    <Link
+      href="/"
+      variant="quiet"
+      class="text-m font-bold"
+      current={currentPath === '/'}
+    >
+      {site.name}
+    </Link>
+    <nav aria-label="Main">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {site.nav.map((item) => (
+          <li>
+            <Link
+              href={item.href}
+              variant={isCurrent(item.href) ? 'default' : 'quiet'}
+              current={isCurrent(item.href)}
+              class={isCurrent(item.href) ? 'font-bold' : undefined}
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </Container>
+</header>

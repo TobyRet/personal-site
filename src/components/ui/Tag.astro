@@ -1,0 +1,14 @@
+---
+import { cx } from '@/lib/cx';
+import { tagClasses } from './styles';
+
+interface Props {
+  class?: string | undefined;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class={cx(tagClasses, className)}>
+  <slot />
+</span>

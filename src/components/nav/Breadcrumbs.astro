@@ -1,0 +1,41 @@
+---
+import Link from '@/components/ui/Link.astro';
+
+export interface Crumb {
+  label: string;
+  /** Leave out for the current page. */
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="py-4">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-small">
+    {items.map((item, index) => (
+      <li class="flex items-center gap-2">
+        {index > 0 && (
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 8 12"
+            class="h-3 w-2 fill-none stroke-text-secondary stroke-2"
+          >
+            <path d="M1.5 1l5 5-5 5" />
+          </svg>
+        )}
+        {item.href ? (
+          <Link href={item.href}>{item.label}</Link>
+        ) : (
+          <span aria-current="page" class="text-text-secondary">
+            {item.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

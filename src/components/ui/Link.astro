@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cx } from '@/lib/cx';
+import { linkClasses } from './styles';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href: string;
+  /**
+   * `default` is always underlined. `quiet` shows the underline on hover only.
+   * `inverse` is for links on an ink background.
+   */
+  variant?: keyof typeof linkClasses;
+  /** Marks the link as the current page. */
+  current?: boolean;
+  class?: string | undefined;
+}
+
+const {
+  href,
+  variant = 'default',
+  current = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const isExternal = /^https?:\/\//.test(href);
+---
+
+<a
+  href={href}
+  rel={isExternal ? 'external' : undefined}
+  aria-current={current ? 'page' : undefined}
+  class={cx(linkClasses[variant], className)}
+  {...rest}
+>
+  <slot />
+</a>

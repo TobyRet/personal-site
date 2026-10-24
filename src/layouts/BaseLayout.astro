@@ -1,0 +1,38 @@
+---
+/**
+ * The document shell: <html>, <head> and global CSS.
+ * SEO tags (Open Graph, JSON-LD, canonical) are completed in phase 5.
+ */
+import '@/styles/global.css';
+import { site } from '@/site.config';
+
+export interface Props {
+  /** Page title. The site name is added after it. */
+  title: string;
+  description: string;
+  /** Keep the page out of search results. */
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <slot />
+  </body>
+</html>

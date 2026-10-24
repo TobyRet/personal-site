@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cx } from '@/lib/cx';
+
+interface Props extends Omit<HTMLAttributes<'div'>, 'class'> {
+  /** `page` for full layouts, `narrow` for single-column pages such as forms. */
+  width?: 'page' | 'narrow';
+  as?: 'div' | 'header' | 'footer' | 'main' | 'section';
+  class?: string | undefined;
+}
+
+const {
+  width = 'page',
+  as: Tag = 'div',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const widths = {
+  page: 'max-w-page',
+  narrow: 'max-w-narrow',
+} as const;
+---
+
+<Tag class={cx('mx-auto w-full px-gutter', widths[width], className)} {...rest}>
+  <slot />
+</Tag>

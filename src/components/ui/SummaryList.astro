@@ -1,0 +1,45 @@
+---
+import { cx } from '@/lib/cx';
+
+export interface SummaryRow {
+  key: string;
+  value: string | string[];
+}
+
+interface Props {
+  rows: SummaryRow[];
+  /** Set values in the mono face. Use it for data such as dates and stacks. */
+  mono?: boolean;
+  /** `stacked` keeps keys above values at every width. Use it in narrow columns. */
+  layout?: 'columns' | 'stacked';
+  class?: string | undefined;
+}
+
+const {
+  rows,
+  mono = false,
+  layout = 'columns',
+  class: className,
+} = Astro.props;
+
+const rowClasses = {
+  columns: 'grid grid-cols-1 gap-1 sm:grid-cols-3 sm:gap-6',
+  stacked: 'grid grid-cols-1 gap-1',
+} as const;
+
+const valueClasses = {
+  columns: 'sm:col-span-2',
+  stacked: '',
+} as const;
+---
+
+<dl class={cx('border-t border-border', className)}>
+  {rows.map((row) => (
+    <div class={cx('border-b border-border py-3', rowClasses[layout])}>
+      <dt class="font-bold">{row.key}</dt>
+      <dd class={cx(valueClasses[layout], mono && 'font-mono text-small')}>
+        {Array.isArray(row.value) ? row.value.join(', ') : row.value}
+      </dd>
+    </div>
+  ))}
+</dl>

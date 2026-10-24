@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cx } from '@/lib/cx';
+import FormField from './FormField.astro';
+import { describedBy } from './fieldIds';
+import { fieldClasses } from './styles';
+
+interface Props extends Omit<HTMLAttributes<'input'>, 'id' | 'name' | 'class'> {
+  id: string;
+  name: string;
+  label: string;
+  hint?: string | undefined;
+  error?: string | undefined;
+  labelSuffix?: string | undefined;
+  /** Match the width to the expected answer. */
+  width?: 'full' | 'narrow';
+}
+
+const {
+  id,
+  name,
+  label,
+  hint,
+  error,
+  labelSuffix,
+  width = 'full',
+  type = 'text',
+  ...rest
+} = Astro.props;
+
+const widths = { full: '', narrow: 'max-w-narrow' } as const;
+---
+
+<FormField
+  id={id}
+  label={label}
+  hint={hint}
+  error={error}
+  labelSuffix={labelSuffix}
+>
+  <input
+    id={id}
+    name={name}
+    type={type}
+    aria-describedby={describedBy(id, Boolean(hint), Boolean(error))}
+    aria-invalid={error ? 'true' : undefined}
+    class={cx(
+      fieldClasses.control,
+      widths[width],
+      error && fieldClasses.controlError,
+    )}
+    {...rest}
+  />
+</FormField>
