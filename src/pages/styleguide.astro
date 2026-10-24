@@ -1,0 +1,340 @@
+---
+/**
+ * Internal styleguide. Shows every token and every component variant.
+ * Not linked from the site, noindex, and excluded from the sitemap.
+ */
+import Grid from '@/components/layout/Grid.astro';
+import Page from '@/components/layout/Page.astro';
+import Section from '@/components/layout/Section.astro';
+import Stack from '@/components/layout/Stack.astro';
+import Breadcrumbs from '@/components/nav/Breadcrumbs.astro';
+import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
+import Button from '@/components/ui/Button.astro';
+import Callout from '@/components/ui/Callout.astro';
+import ErrorSummary from '@/components/ui/ErrorSummary.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Input from '@/components/ui/Input.astro';
+import Link from '@/components/ui/Link.astro';
+import Pagination from '@/components/ui/Pagination.astro';
+import Prose from '@/components/ui/Prose.astro';
+import Quote from '@/components/ui/Quote.astro';
+import SummaryList from '@/components/ui/SummaryList.astro';
+import Tag from '@/components/ui/Tag.astro';
+import Text from '@/components/ui/Text.astro';
+import Textarea from '@/components/ui/Textarea.astro';
+
+const colours = [
+  { name: 'ink', className: 'bg-ink', value: '#0f1111' },
+  { name: 'grey-700', className: 'bg-grey-700', value: '#4d5557' },
+  { name: 'grey-500', className: 'bg-grey-500', value: '#80878a' },
+  { name: 'grey-200', className: 'bg-grey-200', value: '#d6d9da' },
+  { name: 'grey-50', className: 'bg-grey-50', value: '#f4f5f5' },
+  { name: 'white', className: 'bg-white', value: '#ffffff' },
+  { name: 'accent', className: 'bg-accent', value: '#ffd60a' },
+  { name: 'success', className: 'bg-success', value: '#0b7a4b' },
+  { name: 'error', className: 'bg-error', value: '#c42b2b' },
+];
+
+const semantic = [
+  ['text', 'ink'],
+  ['text-secondary', 'grey-700'],
+  ['bg', 'white'],
+  ['bg-subtle', 'grey-50'],
+  ['border', 'grey-200'],
+  ['border-strong', 'grey-500'],
+  ['rule', 'ink'],
+  ['link', 'ink'],
+  ['focus', 'accent'],
+  ['focus-text', 'ink'],
+  ['success', 'green'],
+  ['error', 'red'],
+].map(([key, value]) => ({ key: key ?? '', value: value ?? '' }));
+
+const typeScale = [
+  { name: 'display', className: 'text-display font-bold' },
+  { name: 'xl', className: 'text-xl font-bold' },
+  { name: 'l', className: 'text-l font-bold' },
+  { name: 'm', className: 'text-m font-bold' },
+  { name: 'lead', className: 'text-lead' },
+  { name: 'body', className: 'text-body' },
+  { name: 'small', className: 'text-small' },
+  { name: 'mono small', className: 'font-mono text-small' },
+];
+
+const spacing = [
+  { key: '1', className: 'w-1', size: '4px' },
+  { key: '2', className: 'w-2', size: '8px' },
+  { key: '3', className: 'w-3', size: '12px' },
+  { key: '4', className: 'w-4', size: '16px' },
+  { key: '6', className: 'w-6', size: '24px' },
+  { key: '8', className: 'w-8', size: '32px' },
+  { key: '12', className: 'w-12', size: '48px' },
+  { key: '16', className: 'w-16', size: '64px' },
+  { key: '24', className: 'w-24', size: '96px' },
+  { key: '32', className: 'w-32', size: '128px' },
+];
+
+const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+---
+
+<Page
+  title="Styleguide"
+  description="Design tokens and components for this site."
+  noindex
+  showAvailability={false}
+>
+  <Section spacing="m">
+    <Stack gap={4}>
+      <Heading level={1}>Styleguide</Heading>
+      <Text size="lead" measure>
+        Every design token and component on the site. Pages use only what this
+        page shows.
+      </Text>
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="colour">
+    <Stack gap={8}>
+      <Heading level={2} id="colour">
+        Colour
+      </Heading>
+      <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {colours.map((colour) => (
+          <li class="flex flex-col gap-2">
+            <span
+              class={`block h-16 border border-border ${colour.className}`}
+            />
+            <span class="font-bold">{colour.name}</span>
+            <span class="font-mono text-small text-text-secondary">
+              {colour.value}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <Heading level={3}>Semantic tokens</Heading>
+      <SummaryList rows={semantic} mono class="max-w-prose" />
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="type">
+    <Stack gap={8}>
+      <Heading level={2} id="type">
+        Typography
+      </Heading>
+      <Text measure>
+        Atkinson Hyperlegible Next for all text. Atkinson Hyperlegible Mono for
+        data only. Sizes step up at 768px.
+      </Text>
+      <Stack gap={6}>
+        {typeScale.map((step) => (
+          <div class="flex flex-col gap-1 border-b border-border pb-4">
+            <span class="font-mono text-small text-text-secondary">
+              {step.name}
+            </span>
+            <span class={step.className}>Hands-on technical lead</span>
+          </div>
+        ))}
+      </Stack>
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="spacing">
+    <Stack gap={8}>
+      <Heading level={2} id="spacing">
+        Spacing
+      </Heading>
+      <ul class="flex flex-col gap-2">
+        {spacing.map((step) => (
+          <li class="flex items-center gap-4">
+            <span class="w-12 font-mono text-small">{step.key}</span>
+            <span class={`block h-4 bg-ink ${step.className}`} />
+            <span class="font-mono text-small text-text-secondary">
+              {step.size}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="links">
+    <Stack gap={8}>
+      <Heading level={2} id="links">
+        Links and buttons
+      </Heading>
+      <p class="flex flex-wrap gap-6">
+        <Link href="#links">Default link</Link>
+        <Link href="#links" variant="quiet">
+          Quiet link
+        </Link>
+        <span class="bg-ink px-2">
+          <Link href="#links" variant="inverse">
+            Inverse link
+          </Link>
+        </span>
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <Button>Primary button</Button>
+        <Button variant="secondary">Secondary button</Button>
+        <Button href="#links">Link as button</Button>
+        <Button disabled>Disabled</Button>
+      </div>
+      <Text tone="secondary" size="small">
+        Tab through this section to see focus styles.
+      </Text>
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="content">
+    <Stack gap={12}>
+      <Heading level={2} id="content">
+        Content
+      </Heading>
+      <Stack gap={4}>
+        <Heading level={3}>Tags</Heading>
+        <div class="flex flex-wrap gap-2">
+          <Tag>TypeScript</Tag>
+          <Tag>React</Tag>
+          <Tag>Laravel</Tag>
+        </div>
+      </Stack>
+      <Stack gap={4}>
+        <Heading level={3}>Callouts</Heading>
+        <Callout>
+          <p>{sample}</p>
+        </Callout>
+        <Callout variant="important" title="Important">
+          <p>{sample}</p>
+        </Callout>
+      </Stack>
+      <Stack gap={4}>
+        <Heading level={3}>Summary list</Heading>
+        <SummaryList
+          rows={[
+            { key: 'Sector', value: 'Lorem ipsum' },
+            { key: 'Role', value: 'Lorem ipsum dolor' },
+            { key: 'Dates', value: 'Jan 2026 to Jun 2026' },
+            { key: 'Stack', value: ['TypeScript', 'React', 'Node.js'] },
+          ]}
+          mono
+          class="max-w-prose"
+        />
+      </Stack>
+      <Stack gap={4}>
+        <Heading level={3}>Quote</Heading>
+        <Quote name="Lorem Ipsum" position="Dolor sit, Amet Consulting">
+          {sample}
+        </Quote>
+      </Stack>
+      <Stack gap={4}>
+        <Heading level={3}>Case study card</Heading>
+        <Grid layout="halves">
+          <CaseStudyCard
+            title="Lorem ipsum dolor sit amet"
+            href="#content"
+            summary={sample}
+            client="Lorem ipsum"
+            sector="Dolor"
+            position="Technical lead"
+            dates="2025 to 2026"
+            headingLevel={4}
+          />
+          <CaseStudyCard
+            title="Consectetur adipiscing elit sed do"
+            href="#content"
+            summary={sample}
+            client="Lorem ipsum"
+            sector="Dolor"
+            position="Senior engineer"
+            dates="2024"
+            headingLevel={4}
+          />
+        </Grid>
+      </Stack>
+      <Stack gap={4}>
+        <Heading level={3}>Prose</Heading>
+        <Prose>
+          <p>
+            {sample} <a href="#content">An inline link</a> and{' '}
+            <code>inline code</code>.
+          </p>
+          <h2>Prose heading level 2</h2>
+          <p>{sample}</p>
+          <ul>
+            <li>First item</li>
+            <li>Second item</li>
+          </ul>
+          <h3>Prose heading level 3</h3>
+          <ol>
+            <li>First step</li>
+            <li>Second step</li>
+          </ol>
+        </Prose>
+      </Stack>
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="navigation">
+    <Stack gap={8}>
+      <Heading level={2} id="navigation">
+        Navigation
+      </Heading>
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Work', href: '#navigation' },
+          { label: 'Lorem ipsum' },
+        ]}
+      />
+      <Pagination
+        label="Example pagination"
+        previous={{ label: 'Lorem ipsum dolor', href: '#navigation' }}
+        next={{ label: 'Sit amet consectetur', href: '#navigation' }}
+      />
+    </Stack>
+  </Section>
+
+  <Section rule labelledBy="forms">
+    <Stack gap={8}>
+      <Heading level={2} id="forms">
+        Forms
+      </Heading>
+      <ErrorSummary
+        focusOnLoad={false}
+        errors={[
+          {
+            fieldId: 'sg-email-error',
+            text: 'Enter an email address in the correct format',
+          },
+        ]}
+      />
+      <div class="flex max-w-narrow flex-col gap-6">
+        <Input id="sg-name" name="name" label="Name" autocomplete="name" />
+        <Input
+          id="sg-company"
+          name="company"
+          label="Company"
+          labelSuffix="(optional)"
+          hint="The organisation you work for."
+        />
+        <Input
+          id="sg-email-error"
+          name="email"
+          type="email"
+          label="Email address"
+          value="not-an-email"
+          error="Enter an email address in the correct format, like name@example.com"
+        />
+        <Textarea
+          id="sg-message"
+          name="message"
+          label="Message"
+          hint="Lorem ipsum dolor sit amet."
+        />
+        <div>
+          <Button type="button">Send message</Button>
+        </div>
+      </div>
+    </Stack>
+  </Section>
+</Page>

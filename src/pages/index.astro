@@ -1,18 +1,22 @@
 ---
-import '@/styles/global.css';
+import Page from '@/components/layout/Page.astro';
+import Section from '@/components/layout/Section.astro';
+import Stack from '@/components/layout/Stack.astro';
+import Heading from '@/components/ui/Heading.astro';
+import Text from '@/components/ui/Text.astro';
+import { site } from '@/site.config';
 ---
 
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Toby Retallick</title>
-  </head>
-  <body>
-    <main>
-      <!-- TODO: replace with the real home page in phase 3. -->
-      <h1>Toby Retallick</h1>
-      <p>Site setup in progress.</p>
-    </main>
-  </body>
-</html>
+<Page title={site.name} description={`${site.name}, ${site.jobTitle}.`}>
+  <!-- TODO: replace with the real home page in phase 3. -->
+  <Section>
+    <Stack gap={6}>
+      <Heading level={1} size="display">
+        {site.name}
+      </Heading>
+      <Text size="lead" measure>
+        Site setup in progress.
+      </Text>
+    </Stack>
+  </Section>
+</Page>

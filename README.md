@@ -27,7 +27,7 @@ Use `dev` while you work. Use `preview` to check the exact Worker you will deplo
 | `bun run dev`        | Start the dev server with live reload.            |
 | `bun run build`      | Build the site into `dist/`.                      |
 | `bun run preview`    | Build, then serve it with `wrangler dev`.         |
-| `bun run lint`       | Run ESLint and check Prettier formatting.         |
+| `bun run lint`       | ESLint, Prettier and the design token check.      |
 | `bun run format`     | Format every file with Prettier.                  |
 | `bun run check`      | Type-check Astro and TypeScript files.            |
 | `bun run test`       | Run unit tests (Vitest).                          |
@@ -56,5 +56,12 @@ tests/unit/             Vitest tests.
 tests/e2e/              Playwright tests.
 docs/decisions.md       Key decisions and why we made them.
 ```
+
+## Design system
+
+- Tokens: `src/styles/tokens.css`. Change a colour, size or space here and it changes everywhere.
+- Styleguide: run `bun run dev` and open http://localhost:4321/styleguide/ to see every token and component.
+- Components use token classes only. `bun run lint` fails on Tailwind arbitrary values (`p-[13px]`) and inline `style` attributes.
+- Site-wide settings (name, links, availability, analytics): `src/site.config.ts`.
 
 <!-- TODO: expand this README as each phase lands (content editing, contact form setup, deploy, uptime monitoring). -->
