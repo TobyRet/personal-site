@@ -1,6 +1,7 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/literata/wght.css';
+@import '@fontsource-variable/literata/wght-italic.css';
 @import '@fontsource-variable/atkinson-hyperlegible-next/wght.css';
-@import '@fontsource-variable/atkinson-hyperlegible-mono/wght.css';
 @import './tokens.css';
 
 /*
@@ -11,24 +12,26 @@
   html {
     color: var(--color-text);
     background-color: var(--color-bg);
-    font-family: var(--font-sans);
+    font-family: var(--font-reading);
     font-size: 100%;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    scrollbar-color: var(--color-border-strong) var(--color-bg);
+    scrollbar-color: var(--color-control) var(--color-bg);
+    accent-color: var(--color-accent);
   }
 
   body {
-    font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
+    font-size: var(--text-reading);
+    line-height: var(--text-reading--line-height);
     font-weight: var(--font-weight-regular);
-    caret-color: var(--color-text);
-    -webkit-font-smoothing: antialiased;
+    caret-color: var(--color-accent);
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
   }
 
   ::selection {
     background-color: var(--color-accent);
-    color: var(--color-focus-text);
+    color: var(--color-bg);
   }
 
   h1,
@@ -40,8 +43,10 @@
 
   p,
   li,
-  dd {
+  dd,
+  blockquote {
     text-wrap: pretty;
+    hanging-punctuation: first;
   }
 
   /* Tabular figures keep dates and numbers aligned. */
@@ -52,45 +57,19 @@
 }
 
 /*
- * Focus styles sit outside any layer on purpose. Unlayered CSS beats every
- * Tailwind layer, so a utility colour on a link or button can never hide focus.
- *
- * The accent fills the element, and a 4px ink bar sits beneath it.
- * It reads on any background. The transparent outline keeps a visible
- * ring in Windows high contrast (forced colours) mode.
+ * Focus sits outside any layer on purpose: unlayered CSS beats every
+ * Tailwind layer, so no utility can hide it. One outline, offset from the
+ * element, in the accent ink. It reads in light and dark themes, and the
+ * outline also survives Windows high contrast (forced colours) mode.
  */
 :focus-visible {
-  outline: var(--focus-ring) solid transparent;
-  outline-offset: 0;
-  background-color: var(--color-focus);
-  color: var(--color-focus-text);
-  box-shadow:
-    0 calc(var(--border-medium) * -1) var(--color-focus),
-    0 var(--focus-bar) var(--color-focus-text);
-  text-decoration: none;
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-offset);
 }
 
-/* Controls keep their own background. They get an accent ring and an ink inset instead. */
-:is(input, textarea, select):focus-visible {
-  outline: var(--focus-ring) solid var(--color-focus);
-  outline-offset: 0;
-  background-color: inherit;
-  color: inherit;
-  box-shadow: inset 0 0 0 var(--border-medium) var(--color-focus-text);
-}
-
-:is(input, textarea, select):focus {
-  outline: var(--focus-ring) solid var(--color-focus);
-  outline-offset: 0;
-  box-shadow: inset 0 0 0 var(--border-medium) var(--color-focus-text);
-}
-
-/* Regions focused by script or the skip link (main, the error summary) need no focus style. */
+/* Regions focused by script or the skip link (main, the error summary) need no ring. */
 [tabindex='-1']:focus {
   outline: none;
-  background-color: transparent;
-  color: inherit;
-  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
