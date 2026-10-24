@@ -19,7 +19,7 @@ They arrive from a CV, LinkedIn or a referral link, often on a phone between oth
 
 ## Product Purpose
 
-A personal portfolio site that wins contract work for a hands-on technical lead and senior full-stack engineer. Success means the right people get in touch through the form, email or LinkedIn, already knowing what kind of engagement they want.
+A personal portfolio site that wins contract work for a hands-on technical lead and senior full-stack engineer. Success means the right people get in touch through the contact form or LinkedIn, already knowing what kind of engagement they want.
 
 ## Positioning
 
@@ -39,12 +39,12 @@ Visitors scan and compare. They read a case study to check fit with their own si
 - Pages: Home, Work index plus one page per case study, How I work, About, CV (HTML plus PDF download), Contact, Privacy, 404, an internal noindex styleguide.
 - Case studies are typed content collection entries. Each body has: The situation, The constraints, What I did, The result, Stack, What I would do differently.
 - Initial case studies: Amador (startup marketplace), legacy platform stabilisation (global student housing platform), member portal cover (super fund), Abcam e-commerce rebuild, airline flight scheduling front end.
-- Contact form: name, email, company (optional), message. Turnstile, server-side Zod validation, honeypot, rate limiting, email to the owner.
+- Contact form: name, email, company (optional), message. Turnstile, server-side Zod validation, honeypot, rate limiting, email to the owner. The destination address is a Cloudflare secret, never in the repo or in `wrangler.jsonc`.
 - Cloudflare Web Analytics by default; GA4 possible later behind cookie consent.
 - Open decision: whether clients can be named. Until decided, keep the brief's split (Amador and Abcam named; the student housing platform, super fund and airline described by sector).
 - Identity (from the CV): Toby Retallick, Technical Lead and Senior Full-Stack Engineer. Based in the Greater Brisbane Area, Queensland. Works remotely across Australia and is happy to travel. Contracts through Byte Size Australia Pty Ltd. Available from November 2026.
 - Looking for hands-on tech lead or senior engineer roles in product engineering, on any web stack. Prefers contract work, and is open to fixed-term or permanent roles for the right organisation.
-- Phone number: on the CV, but not published on the site unless the owner asks.
+- Phone number and email address: not published on the site or in the repo. Visitors use the contact form or LinkedIn. The repo is public.
 
 ## Brand Commitments
 

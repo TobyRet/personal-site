@@ -18,7 +18,6 @@ export interface SiteConfig {
   jobTitle: string;
   location: string;
   workingPattern: string;
-  email: string;
   linkedIn: string;
   github: string;
   company: string;
@@ -37,7 +36,6 @@ export const site: SiteConfig = {
   jobTitle: 'Technical Lead and Senior Full-Stack Engineer',
   location: 'Greater Brisbane Area, Queensland',
   workingPattern: 'Remote across Australia, happy to travel',
-  email: 'hello@example.com',
   linkedIn: 'https://www.linkedin.com/in/tobyret',
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
