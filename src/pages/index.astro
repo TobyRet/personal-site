@@ -5,6 +5,7 @@ import Stack from '@/components/layout/Stack.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
 import ClientList from '@/components/sections/ClientList.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
+import Headshot from '@/components/sections/Headshot.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Testimonial from '@/components/sections/Testimonial.astro';
 import ThroughList from '@/components/sections/ThroughList.astro';
@@ -39,9 +40,12 @@ const { goodFit = [] } = page.data;
         </Text>
       </Stack>
     </Stack>
+    <Fragment slot="notes">
+      <Headshot />
+      {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
+    </Fragment>
 
     <Stack gap={12}>
-      {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
       <Stack gap={6}>
         <ClientList clients={site.clients} />
         <ThroughList consultancies={site.through} />
