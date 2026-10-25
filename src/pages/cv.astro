@@ -11,6 +11,7 @@ import MarginNote from '@/components/ui/MarginNote.astro';
 import Prose from '@/components/ui/Prose.astro';
 import { getCvEntries, getPage } from '@/lib/content';
 import { formatRange } from '@/lib/dates';
+import { metaLine } from '@/lib/text';
 import { site } from '@/site.config';
 
 const page = await getPage('cv');
@@ -52,10 +53,7 @@ const experience = await getCvEntries();
               {data.role}, {data.organisation}
             </Heading>
             <p class="font-ui text-ui text-text-secondary">
-              {formatRange(data.start, data.end)}
-              <span aria-hidden="true"> · </span>
-              <span class="sr-only">, </span>
-              {data.location}
+              {metaLine([formatRange(data.start, data.end), data.location])}
             </p>
             <p>{data.summary}</p>
           </li>

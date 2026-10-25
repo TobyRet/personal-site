@@ -2,6 +2,7 @@
 /** One case study in a list: title, a one-line summary and a detail line. */
 import Heading from '@/components/ui/Heading.astro';
 import Link from '@/components/ui/Link.astro';
+import { metaLine } from '@/lib/text';
 import Tag from '@/components/ui/Tag.astro';
 
 interface Props {
@@ -38,13 +39,7 @@ const tags = allTags.slice(0, 3);
   </Heading>
   <p class="text-reading text-text">{summary}</p>
   <p class="font-ui text-ui text-text-secondary">
-    {sector}
-    <span aria-hidden="true"> · </span>
-    <span class="sr-only">, </span>
-    {position}
-    <span aria-hidden="true"> · </span>
-    <span class="sr-only">, </span>
-    {dates}
+    {metaLine([sector, position, dates])}
   </p>
   {tags.length > 0 && (
     <ul class="mt-2 flex flex-wrap gap-2" aria-label="Stack">

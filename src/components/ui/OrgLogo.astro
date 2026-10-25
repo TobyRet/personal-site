@@ -1,0 +1,29 @@
+---
+/**
+ * An organisation's logo in one ink. The logos are inline SVGs with
+ * `fill="currentColor"`, so they take the text colour in light and dark mode.
+ * They are decorative: name the organisation in text beside or around them.
+ */
+import EqualExpertsLogo from '@/assets/logos/equal-experts.svg';
+import TeremLogo from '@/assets/logos/terem.svg';
+import { cx } from '@/lib/cx';
+import type { LogoKey } from '@/site.config';
+
+interface Props {
+  logo: LogoKey;
+  class?: string | undefined;
+}
+
+const { logo, class: className } = Astro.props;
+
+// Terem's leaf mark is much taller than its wordmark, so it is set taller
+// to make the wordmarks look the same size.
+const logos = {
+  'equal-experts': { Logo: EqualExpertsLogo, height: 'h-(--size-logo-mark)' },
+  terem: { Logo: TeremLogo, height: 'h-(--size-logo-mark-tall)' },
+} as const;
+
+const { Logo, height } = logos[logo];
+---
+
+<Logo class={cx('block w-auto', height, className)} />

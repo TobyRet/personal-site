@@ -19,13 +19,33 @@ export interface Organisation {
   href: string;
 }
 
+/** A logo in src/assets/logos/, shown in one ink by the OrgLogo component. */
+export type LogoKey = 'equal-experts' | 'terem';
+
 /** A consultancy the work came through, shown as a monochrome logo. */
 export interface Consultancy extends Organisation {
-  /** Which logo in src/assets/logos/ to show. */
-  logo: 'equal-experts' | 'terem';
+  logo: LogoKey;
+}
+
+/** A quote for the home page. */
+export interface Testimonial {
+  /** Show it on the home page. Keep this false until the author agrees. */
+  show: boolean;
+  /** Word for word from the source. Shorten only with an ellipsis. */
+  quote: string;
+  /** The person who said it. Leave empty to credit only the organisation. */
+  name: string;
+  role: string;
+  organisation: string;
+  /** Where the quote was first published. */
+  link: string;
+  /** A logo to show in the credit. */
+  logo?: LogoKey;
 }
 
 export interface SiteConfig {
+  /** The site's public address, with no trailing slash. Canonical URLs, Open Graph tags and the sitemap use it. */
+  url: string;
   name: string;
   jobTitle: string;
   location: string;
@@ -33,10 +53,11 @@ export interface SiteConfig {
   linkedIn: string;
   github: string;
   company: string;
-  /** Clients for the home page's "Clients include" line. Only names already public. */
-  clients: Organisation[];
+  /** Client names for the home page's "Clients include" line, as plain text. Only names already public. */
+  clients: string[];
   /** Consultancies for the home page's "Through" logos. */
   through: Consultancy[];
+  testimonial: Testimonial;
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
@@ -50,6 +71,7 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
+  url: 'https://personal-site.billowing-firefly-aa29.workers.dev',
   name: 'Toby Retallick',
   jobTitle: 'Technical Lead and Senior Full-Stack Engineer',
   location: 'Greater Brisbane Area, Queensland',
@@ -58,21 +80,12 @@ export const site: SiteConfig = {
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
   clients: [
-    { name: 'Abcam', href: 'https://www.abcam.com/' },
-    { name: 'Mastercard', href: 'https://www.mastercard.com/' },
-    { name: 'Amador', href: 'https://www.amador.life/' },
-    {
-      name: 'the Department for Education',
-      href: 'https://www.gov.uk/government/organisations/department-for-education',
-    },
-    {
-      name: 'the Ministry of Justice',
-      href: 'https://www.gov.uk/government/organisations/ministry-of-justice',
-    },
-    {
-      name: 'the Government Digital Service',
-      href: 'https://www.gov.uk/government/organisations/government-digital-service',
-    },
+    'Abcam',
+    'Mastercard',
+    'Amador',
+    'the Department for Education',
+    'the Ministry of Justice',
+    'the Government Digital Service',
   ],
   through: [
     {
@@ -82,6 +95,17 @@ export const site: SiteConfig = {
     },
     { name: 'Terem', href: 'https://terem.tech/', logo: 'terem' },
   ],
+  testimonial: {
+    // Hidden until the author confirms permission. See private/todo.md.
+    show: false,
+    quote:
+      "What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don't find that in a single lead often.",
+    name: '',
+    role: '',
+    organisation: 'Equal Experts Australia',
+    link: 'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
+    logo: 'equal-experts',
+  },
   cvPdf: '',
   availability: {
     status: 'available',

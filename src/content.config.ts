@@ -58,14 +58,6 @@ const pages = defineCollection({
     subtitle: z.string().optional(),
     /** Home page: completes "Good fit if you need", one full sentence per item. */
     goodFit: z.array(z.string()).optional(),
-    /** Home page: a quote from a public post, word for word. Leave out to hide it. */
-    testimonial: z
-      .object({
-        quote: z.string(),
-        attribution: z.string(),
-        sourceHref: z.url(),
-      })
-      .optional(),
   }),
 });
 

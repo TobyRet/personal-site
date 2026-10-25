@@ -24,7 +24,7 @@ import { site } from '@/site.config';
 const page = await getPage('home');
 const { Content } = await render(page);
 const featured = await getFeaturedCaseStudies();
-const { testimonial, goodFit = [] } = page.data;
+const { goodFit = [] } = page.data;
 ---
 
 <Page title={site.name} description={page.data.description}>
@@ -52,7 +52,7 @@ const { testimonial, goodFit = [] } = page.data;
     </Fragment>
 
     <Stack gap={12}>
-      {testimonial && <Testimonial {...testimonial} />}
+      {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
       <Stack gap={6}>
         <ClientList clients={site.clients} />
         <ThroughList consultancies={site.through} />

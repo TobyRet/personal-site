@@ -17,7 +17,3 @@ I retrained as a software engineer at Makers in 2014. I then worked as a consult
 In London I worked on public services. I helped rebuild data.gov.uk at the Government Digital Service. I built services for the Ministry of Justice and the Department for Education, including Find Postgraduate Teacher Training and Apply for Teacher Training.
 
 Since then I have contracted for clients such as Abcam and Mastercard. In 2025 I moved to Australia.
-
-## Outside work
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -19,7 +19,3 @@ Sometimes a project loses a key person, or a platform becomes unstable. I step i
 ## AI-assisted delivery
 
 I use AI agents in a disciplined way. Each change goes through a spike, a spec and a review before the build. Agents have a written scope, and a person approves every merge. I can help teams adopt the same approach.
-
-## Working with teams and stakeholders
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.

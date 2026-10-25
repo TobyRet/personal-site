@@ -239,26 +239,12 @@ for (const viewport of [
   });
 }
 
-test('quote is credited and linked', async ({ page }) => {
+test('the testimonial stays hidden until permission is confirmed', async ({
+  page,
+}) => {
   await page.goto('/');
-  const figure = page
-    .locator('figure')
-    .filter({ hasText: 'What sets him apart is the combination' });
-  await expect(figure).toHaveCount(1);
-  const caption = figure.locator('figcaption');
-  await expect(caption).toContainText('Equal Experts Australia, 2026');
-  await expect(
-    caption.getByRole('link', { name: 'Read the original post on LinkedIn' }),
-  ).toHaveAttribute(
-    'href',
-    'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
-  );
-  const logo = figure.locator('svg');
-  await expect(logo).toHaveCount(1);
-  await expect(logo).toHaveAttribute('aria-hidden', 'true');
-  const box = await logo.boundingBox();
-  expect(box?.width).toBeGreaterThan(0);
-  expect(box?.height).toBeGreaterThan(0);
+  await expect(page.locator('main figure')).toHaveCount(0);
+  await expect(page.locator('main')).not.toContainText('What sets him apart');
 });
 
 test('clients and good fit are listed', async ({ page }) => {
@@ -273,23 +259,45 @@ test('clients and good fit are listed', async ({ page }) => {
   await expect(goodFit.getByRole('listitem')).toHaveCount(3);
 });
 
-test('client names link to their sites', async ({ page }) => {
+test('client names are plain text', async ({ page }) => {
   await page.goto('/');
-  await expect(
-    page.getByRole('link', { name: 'Amador', exact: true }),
-  ).toHaveAttribute('href', 'https://www.amador.life/');
-  await expect(
-    page.getByRole('link', { name: 'Abcam', exact: true }),
-  ).toHaveAttribute('href', 'https://www.abcam.com/');
-  await expect(
-    page.getByRole('link', {
-      name: 'the Department for Education',
-      exact: true,
-    }),
-  ).toHaveAttribute(
-    'href',
-    'https://www.gov.uk/government/organisations/department-for-education',
+  const line = page.locator('main p').filter({ hasText: 'Clients include' });
+  await expect(line).toContainText(
+    'Abcam, Mastercard, Amador, the Department for Education',
   );
+  await expect(line.getByRole('link')).toHaveCount(0);
+});
+
+test('canonical and Open Graph URLs use the site address', async ({ page }) => {
+  await page.goto('/work/amador/');
+  const canonical =
+    'https://personal-site.billowing-firefly-aa29.workers.dev/work/amador/';
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    canonical,
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    'content',
+    canonical,
+  );
+});
+
+test('contact offers LinkedIn, with no "not ready" message', async ({
+  page,
+}) => {
+  await page.goto('/contact/');
+  const main = page.locator('main');
+  await expect(main).not.toContainText('not ready');
+  await expect(
+    main.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+  ).toHaveAttribute('href', /linkedin\.com/);
+});
+
+test('placeholder sections are not published', async ({ page }) => {
+  for (const path of ['/about/', '/how-i-work/']) {
+    await page.goto(path);
+    await expect(page.locator('main')).not.toContainText(/lorem ipsum/i);
+  }
 });
 
 test('the consultancies show as linked logos', async ({ page }) => {

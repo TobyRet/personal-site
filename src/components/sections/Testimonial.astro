@@ -1,28 +1,32 @@
 ---
 /**
- * The home page quote, credited with the Equal Experts logo.
- * The logo is inline, so it takes the text colour in light and dark mode.
- * It is decorative: the credit text names the organisation.
+ * The home page quote, set as a pull quote. The credit names the person
+ * when known, then their role and organisation, with an optional logo.
  */
-import EqualExpertsLogo from '@/assets/logos/equal-experts.svg';
+import OrgLogo from '@/components/ui/OrgLogo.astro';
 import Quote from '@/components/ui/Quote.astro';
+import type { Testimonial } from '@/site.config';
 
 interface Props {
-  quote: string;
-  attribution: string;
-  sourceHref: string;
+  testimonial: Testimonial;
 }
 
-const { quote, attribution, sourceHref } = Astro.props;
+const { quote, name, role, organisation, link, logo } = Astro.props.testimonial;
+
+const credit = name || organisation;
+const position = name
+  ? [role, organisation].filter(Boolean).join(', ')
+  : role || undefined;
 ---
 
 <Quote
-  name={attribution}
-  sourceHref={sourceHref}
+  name={credit}
+  position={position}
+  sourceHref={link}
   sourceLabel="Read the original post on LinkedIn"
   variant="pull"
   class="my-4"
 >
   {quote}
-  <EqualExpertsLogo slot="mark" class="block h-(--size-logo-mark) w-auto" />
+  {logo && <OrgLogo slot="mark" logo={logo} />}
 </Quote>
