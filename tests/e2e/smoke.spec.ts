@@ -189,21 +189,31 @@ test('technical detail opens with the keyboard', async ({ page }) => {
   expect(results.violations).toEqual([]);
 });
 
-test('work cards show sector, role and stack tags', async ({ page }) => {
+test('work cards show the stack as plain text in the detail line', async ({
+  page,
+}) => {
   await page.goto('/work/');
   const card = page
     .getByRole('article')
     .filter({ hasText: 'flight scheduling' });
-  for (const text of [
-    'Aviation',
-    'Lead engineer',
-    'React',
-    'TypeScript',
-    'Zustand',
-  ]) {
-    await expect(card).toContainText(text);
-  }
+  await expect(card).toContainText(
+    'Aviation · Lead engineer · 2025 · React, TypeScript, Zustand',
+  );
   await expect(card).not.toContainText('Vite');
+  await expect(card.getByRole('list')).toHaveCount(0);
+});
+
+test('get in touch goes straight to LinkedIn', async ({ page }) => {
+  for (const path of ['/', '/work/amador/']) {
+    await page.goto(path);
+    const links = page.getByRole('link', { name: 'Get in touch' });
+    for (const link of await links.all()) {
+      await expect(link).toHaveAttribute(
+        'href',
+        'https://www.linkedin.com/in/tobyret',
+      );
+    }
+  }
 });
 
 test('no horizontal scroll on phones', async ({ page }) => {

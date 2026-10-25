@@ -37,7 +37,7 @@ const caseStudies = await getCaseStudies();
           sector={entry.data.sector}
           position={entry.data.role}
           dates={formatYears(entry.data.start, entry.data.end)}
-          tags={entry.data.stack}
+          stack={entry.data.stack}
           headingLevel={2}
         />
       ))}

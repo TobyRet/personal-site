@@ -1,9 +1,11 @@
 ---
-/** One case study in a list: title, a one-line summary and a detail line. */
+/**
+ * One case study in a list: title, a one-line summary and a detail line.
+ * The detail line ends with the first three items of the key stack, as plain text.
+ */
 import Heading from '@/components/ui/Heading.astro';
 import Link from '@/components/ui/Link.astro';
 import { metaLine } from '@/lib/text';
-import Tag from '@/components/ui/Tag.astro';
 
 interface Props {
   title: string;
@@ -15,7 +17,7 @@ interface Props {
   /** Display dates, for example "2025 to 2026". */
   dates: string;
   /** The key stack. The card shows the first three. */
-  tags: string[];
+  stack: string[];
   /** The heading level for the title. Match the page outline. */
   headingLevel?: 2 | 3 | 4;
 }
@@ -27,10 +29,9 @@ const {
   sector,
   position,
   dates,
-  tags: allTags,
+  stack,
   headingLevel = 3,
 } = Astro.props;
-const tags = allTags.slice(0, 3);
 ---
 
 <article class="flex max-w-reading flex-col gap-2 border-t border-rule py-6">
@@ -39,15 +40,6 @@ const tags = allTags.slice(0, 3);
   </Heading>
   <p class="text-reading text-text">{summary}</p>
   <p class="font-ui text-ui text-text-secondary">
-    {metaLine([sector, position, dates])}
+    {metaLine([sector, position, dates, stack.slice(0, 3).join(', ')])}
   </p>
-  {tags.length > 0 && (
-    <ul class="mt-2 flex flex-wrap gap-2" aria-label="Stack">
-      {tags.map((tag) => (
-        <li>
-          <Tag>{tag}</Tag>
-        </li>
-      ))}
-    </ul>
-  )}
 </article>
