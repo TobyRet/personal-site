@@ -372,3 +372,19 @@ test('pages share an Open Graph image that exists', async ({
   expect(response.ok()).toBe(true);
   expect(response.headers()['content-type']).toContain('image/png');
 });
+
+test('phones see availability in the first screen', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/');
+  await expect(
+    page
+      .locator('main')
+      .getByText('Available for contract work from', { exact: false })
+      .first(),
+  ).toBeInViewport({ ratio: 1 });
+});
+
+test('the CV shows no download note until the PDF exists', async ({ page }) => {
+  await page.goto('/cv/');
+  await expect(page.locator('main')).not.toContainText('coming soon');
+});

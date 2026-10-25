@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Stack from '@/components/layout/Stack.astro';
+import AvailabilityLine from '@/components/sections/AvailabilityLine.astro';
 import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
 import ClientList from '@/components/sections/ClientList.astro';
@@ -42,10 +43,11 @@ const { goodFit = [], recentWork } = page.data;
       <div>
         <Button href="/contact/">Get in touch</Button>
       </div>
+      <AvailabilityLine />
       {recentWork && <RecentWork {...recentWork} />}
     </Stack>
     <Fragment slot="notes">
-      <AvailabilityNote />
+      <AvailabilityNote class="hidden lg:block" />
       <MarginNote label="Based in">
         <p>{site.location}</p>
         <p>{site.workingPattern}</p>

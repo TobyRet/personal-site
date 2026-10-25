@@ -1,6 +1,6 @@
 ---
 title: Amador, from prototype to live marketplace
-subtitle: Sole lead engineer for a startup marketplace, from prototype to live product
+subtitle: Sole lead engineer for a startup marketplace
 client: Amador
 clientNamed: true
 sector: Startup, creator marketplace

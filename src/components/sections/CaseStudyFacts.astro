@@ -48,9 +48,5 @@ const { relevantIf, client, sector, position, dates, through, team, stack } =
   </MarginNote>
 )}
 <MarginNote label="Key stack">
-  <ul>
-    {stack.map((item) => (
-      <li>{item}</li>
-    ))}
-  </ul>
+  <p>{stack.join(', ')}</p>
 </MarginNote>

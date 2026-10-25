@@ -22,17 +22,15 @@ const experience = await getCvEntries();
   <Handout>
     <PageTitle slot="title" title={site.name} subtitle={page.data.subtitle} />
     <Fragment slot="notes">
-      <MarginNote label="Download">
-        {site.cvPdf ? (
+      {site.cvPdf && (
+        <MarginNote label="Download">
           <p>
             <Link href={site.cvPdf} download>
               CV as a PDF
             </Link>
           </p>
-        ) : (
-          <p>The PDF is coming soon.</p>
-        )}
-      </MarginNote>
+        </MarginNote>
+      )}
       <ContactNote />
     </Fragment>
 

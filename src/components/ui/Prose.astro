@@ -128,11 +128,13 @@
     margin-top: var(--spacing-4);
   }
 
-  /* A paragraph that holds only bold text is a group label inside the block. */
+  /* A paragraph that holds only bold text is a group label inside the block.
+     It matches the body's h3, so sub-headings look the same everywhere. */
   .prose :global(details > p > strong:only-child) {
-    font-family: var(--font-ui);
-    font-size: var(--text-ui);
-    line-height: var(--text-ui--line-height);
+    font-family: var(--font-reading);
+    font-size: var(--text-reading);
+    line-height: var(--text-reading--line-height);
+    font-weight: var(--font-weight-semibold);
   }
 
   .prose :global(details > p:has(> strong:only-child)) {

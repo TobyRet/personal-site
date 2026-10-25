@@ -18,12 +18,14 @@ interface Props {
 const { previous, next, label, itemName } = Astro.props;
 const suffix = itemName ? ` ${itemName}` : '';
 
+// The nav is set at reading size, so `max-w-reading` (34em) matches the
+// reading column. The list inside switches to the UI face.
 const linkClass =
   'group flex flex-col gap-1 py-4 text-link no-underline sm:max-w-narrow hover:underline';
 ---
 
-<nav aria-label={label} class="border-t border-rule font-ui text-ui">
-  <ul class="flex flex-col sm:flex-row sm:justify-between sm:gap-8">
+<nav aria-label={label} class="max-w-reading border-t border-rule text-reading">
+  <ul class="flex flex-col font-ui text-ui sm:flex-row sm:justify-between sm:gap-8">
     {previous && (
       <li>
         <a
