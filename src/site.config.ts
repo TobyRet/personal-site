@@ -60,6 +60,7 @@ export const site: SiteConfig = {
   clients: [
     { name: 'Abcam', href: 'https://www.abcam.com/' },
     { name: 'Mastercard', href: 'https://www.mastercard.com/' },
+    { name: 'Amador', href: 'https://www.amador.life/' },
     {
       name: 'the Department for Education',
       href: 'https://www.gov.uk/government/organisations/department-for-education',

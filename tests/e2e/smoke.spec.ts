@@ -276,6 +276,9 @@ test('clients and good fit are listed', async ({ page }) => {
 test('client names link to their sites', async ({ page }) => {
   await page.goto('/');
   await expect(
+    page.getByRole('link', { name: 'Amador', exact: true }),
+  ).toHaveAttribute('href', 'https://www.amador.life/');
+  await expect(
     page.getByRole('link', { name: 'Abcam', exact: true }),
   ).toHaveAttribute('href', 'https://www.abcam.com/');
   await expect(
