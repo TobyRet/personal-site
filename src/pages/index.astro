@@ -3,14 +3,12 @@ import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Stack from '@/components/layout/Stack.astro';
-import AvailabilityLine from '@/components/sections/AvailabilityLine.astro';
 import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
 import ClientList from '@/components/sections/ClientList.astro';
 import ContactNote from '@/components/sections/ContactNote.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
-import RecentWork from '@/components/sections/RecentWork.astro';
 import Testimonial from '@/components/sections/Testimonial.astro';
 import ThroughList from '@/components/sections/ThroughList.astro';
 import Button from '@/components/ui/Button.astro';
@@ -26,7 +24,7 @@ import { site } from '@/site.config';
 const page = await getPage('home');
 const { Content } = await render(page);
 const featured = await getFeaturedCaseStudies();
-const { goodFit = [], recentWork } = page.data;
+const { goodFit = [] } = page.data;
 ---
 
 <Page title={site.name} description={page.data.description}>
@@ -40,14 +38,13 @@ const { goodFit = [], recentWork } = page.data;
       <Prose>
         <Content />
       </Prose>
+      <GoodFitList items={goodFit} />
       <div>
         <Button href="/contact/">Get in touch</Button>
       </div>
-      <AvailabilityLine />
-      {recentWork && <RecentWork {...recentWork} />}
     </Stack>
     <Fragment slot="notes">
-      <AvailabilityNote class="hidden lg:block" />
+      <AvailabilityNote />
       <MarginNote label="Based in">
         <p>{site.location}</p>
         <p>{site.workingPattern}</p>
@@ -61,7 +58,6 @@ const { goodFit = [], recentWork } = page.data;
         <ClientList clients={site.clients} />
         <ThroughList consultancies={site.through} />
       </Stack>
-      <GoodFitList items={goodFit} />
 
       <section aria-labelledby="selected-work">
         <Heading level={2} id="selected-work" class="mb-2">

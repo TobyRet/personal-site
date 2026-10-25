@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Locator } from '@playwright/test';
 
 const pages = [
   '/',
@@ -17,6 +17,10 @@ const pages = [
   '/styleguide/',
 ];
 const schemes = ['light', 'dark'] as const;
+
+/** The top of an element on the page, or NaN if it is missing, so comparisons fail. */
+const topOf = async (locator: Locator) =>
+  (await locator.boundingBox())?.y ?? Number.NaN;
 
 for (const path of pages) {
   for (const colorScheme of schemes) {
@@ -220,20 +224,24 @@ test('no horizontal scroll on phones', async ({ page }) => {
   }
 });
 
-test('home leads with the pitch', async ({ page }) => {
+test('home leads with the headline, intro and good fit list', async ({
+  page,
+}) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'I get software into production safely, when it matters.',
+    'I build digital products that work for their users and the business.',
   );
-  const recent = page.getByRole('link', {
-    name: /an inherited prototype taken to production in about four months/,
-  });
-  await expect(recent).toHaveAttribute('href', '/work/amador/');
-  await expect(page.locator('main')).toContainText('Recent work:');
+  const main = page.locator('main');
+  await expect(main).toContainText('I lead the team and I write the code.');
+  await expect(main).not.toContainText('An inherited prototype');
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    'Toby Retallick is a technical lead and senior full-stack engineer who builds digital products that work for their users and the business.',
+  );
 });
 
 for (const viewport of [
-  { width: 360, height: 780 },
+  { width: 390, height: 844 },
   { width: 1280, height: 800 },
 ]) {
   test(`get in touch is in the first screen at ${viewport.width}x${viewport.height}`, async ({
@@ -255,16 +263,17 @@ test('the testimonial stays hidden until permission is confirmed', async ({
   await expect(page.locator('main')).not.toContainText('What sets him apart');
 });
 
-test('clients and good fit are listed', async ({ page }) => {
+test('good fit sits in the hero, before the button, and only once', async ({
+  page,
+}) => {
   await page.goto('/');
-  const main = page.locator('main');
-  await expect(main).toContainText('Clients include');
-  await expect(main).toContainText('Department for Education');
-  const goodFit = page.getByRole('region', { name: 'Good fit if you need' });
-  await expect(
-    goodFit.getByRole('heading', { level: 2, name: 'Good fit if you need' }),
-  ).toBeVisible();
-  await expect(goodFit.getByRole('listitem')).toHaveCount(4);
+  const list = page.getByRole('list', { name: "I'm a good fit if you need:" });
+  await expect(list.getByRole('listitem')).toHaveCount(4);
+  await expect(page.getByText("I'm a good fit if you need:")).toHaveCount(1);
+  expect(await topOf(list)).toBeLessThan(
+    await topOf(page.getByRole('link', { name: 'Get in touch' }).first()),
+  );
+  await expect(page.locator('main')).toContainText('Clients include');
 });
 
 test('AI experience is visible on the home page and linked from How I work', async ({
@@ -272,7 +281,7 @@ test('AI experience is visible on the home page and linked from How I work', asy
 }) => {
   await page.goto('/');
   await expect(page.locator('main')).toContainText(
-    'I also add AI features to products',
+    'A team that wants to use AI safely',
   );
   await page.goto('/how-i-work/');
   await page.getByRole('link', { name: 'See how I used AI on Amador' }).click();
@@ -379,15 +388,22 @@ test('pages share an Open Graph image that exists', async ({
   expect(response.headers()['content-type']).toContain('image/png');
 });
 
-test('phones see availability in the first screen', async ({ page }) => {
+test('on phones, availability comes straight after the hero', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await page.goto('/');
-  await expect(
+  const button = await topOf(
+    page.getByRole('link', { name: 'Get in touch' }).first(),
+  );
+  const availability = await topOf(
     page
-      .locator('main')
-      .getByText('Available for contract work from', { exact: false })
-      .first(),
-  ).toBeInViewport({ ratio: 1 });
+      .getByRole('complementary', { name: 'Notes' })
+      .getByText('Availability', { exact: true }),
+  );
+  const clients = await topOf(page.getByText('Clients include'));
+  expect(availability).toBeGreaterThan(button);
+  expect(availability).toBeLessThan(clients);
 });
 
 test('the CV shows no download note until the PDF exists', async ({ page }) => {
