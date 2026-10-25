@@ -10,6 +10,7 @@ import ContactNote from '@/components/sections/ContactNote.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Testimonial from '@/components/sections/Testimonial.astro';
+import ThroughList from '@/components/sections/ThroughList.astro';
 import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
 import Link from '@/components/ui/Link.astro';
@@ -52,7 +53,10 @@ const { testimonial, goodFit = [] } = page.data;
 
     <Stack gap={12}>
       {testimonial && <Testimonial {...testimonial} />}
-      <ClientList clients={site.clients} />
+      <Stack gap={6}>
+        <ClientList clients={site.clients} />
+        <ThroughList consultancies={site.through} />
+      </Stack>
       <GoodFitList items={goodFit} />
 
       <section aria-labelledby="selected-work">

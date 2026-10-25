@@ -13,6 +13,18 @@ export interface NavItem {
   href: string;
 }
 
+/** An organisation named on the site, linked to its own website. */
+export interface Organisation {
+  name: string;
+  href: string;
+}
+
+/** A consultancy the work came through, shown as a monochrome logo. */
+export interface Consultancy extends Organisation {
+  /** Which logo in src/assets/logos/ to show. */
+  logo: 'equal-experts' | 'terem';
+}
+
 export interface SiteConfig {
   name: string;
   jobTitle: string;
@@ -21,8 +33,10 @@ export interface SiteConfig {
   linkedIn: string;
   github: string;
   company: string;
-  /** Client names for the home page's "Clients include" line. Only names already public. */
-  clients: string[];
+  /** Clients for the home page's "Clients include" line. Only names already public. */
+  clients: Organisation[];
+  /** Consultancies for the home page's "Through" logos. */
+  through: Consultancy[];
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
@@ -44,11 +58,28 @@ export const site: SiteConfig = {
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
   clients: [
-    'Abcam',
-    'Mastercard',
-    'the Department for Education',
-    'the Ministry of Justice',
-    'the Government Digital Service',
+    { name: 'Abcam', href: 'https://www.abcam.com/' },
+    { name: 'Mastercard', href: 'https://www.mastercard.com/' },
+    {
+      name: 'the Department for Education',
+      href: 'https://www.gov.uk/government/organisations/department-for-education',
+    },
+    {
+      name: 'the Ministry of Justice',
+      href: 'https://www.gov.uk/government/organisations/ministry-of-justice',
+    },
+    {
+      name: 'the Government Digital Service',
+      href: 'https://www.gov.uk/government/organisations/government-digital-service',
+    },
+  ],
+  through: [
+    {
+      name: 'Equal Experts',
+      href: 'https://www.equalexperts.com/',
+      logo: 'equal-experts',
+    },
+    { name: 'Terem', href: 'https://terem.tech/', logo: 'terem' },
   ],
   cvPdf: '',
   availability: {

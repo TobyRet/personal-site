@@ -53,6 +53,8 @@
   --layout-handout-rows-lead: auto auto 1fr;
   /* Height of an organisation's logo in a quote credit. Width follows the logo. */
   --size-logo-mark: 1.5rem;
+  /* For a logo whose mark is much taller than its wordmark, so the wordmarks match. */
+  --size-logo-mark-tall: 2rem;
 
   /* Borders, underlines and focus */
   --border-thin: 1px;

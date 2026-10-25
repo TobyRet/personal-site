@@ -1,0 +1,51 @@
+---
+/**
+ * The consultancies the work came through, as monochrome logos linked to
+ * their sites. The logos are inline, so they take the text colour in light
+ * and dark mode. Each link is named by hidden text, not by the logo.
+ */
+import EqualExpertsLogo from '@/assets/logos/equal-experts.svg';
+import TeremLogo from '@/assets/logos/terem.svg';
+import type { Consultancy } from '@/site.config';
+
+interface Props {
+  consultancies: Consultancy[];
+}
+
+const { consultancies } = Astro.props;
+
+// Terem's leaf mark is much taller than its wordmark, so it is set taller
+// to make the two wordmarks look the same size.
+const logos = {
+  'equal-experts': { Logo: EqualExpertsLogo, height: 'h-(--size-logo-mark)' },
+  terem: { Logo: TeremLogo, height: 'h-(--size-logo-mark-tall)' },
+} as const;
+---
+
+{consultancies.length > 0 && (
+  <div class="flex flex-col gap-3">
+    <p id="through-label" class="font-ui text-ui font-semibold text-text">
+      Through
+    </p>
+    <ul
+      aria-labelledby="through-label"
+      class="flex flex-wrap items-center gap-x-8 gap-y-4"
+    >
+      {consultancies.map((consultancy) => {
+        const { Logo, height } = logos[consultancy.logo];
+        return (
+          <li>
+            <a
+              href={consultancy.href}
+              rel="external"
+              class="block text-text transition-colors hover:text-accent"
+            >
+              <span class="sr-only">{consultancy.name}</span>
+              <Logo class={`block w-auto ${height}`} />
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+)}

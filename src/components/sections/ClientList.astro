@@ -1,10 +1,12 @@
 ---
-/** One line of client names, joined in the house style: "A, B and C". */
+/** One line of client names, each linked to its site: "A, B and C". */
+import Link from '@/components/ui/Link.astro';
 import Text from '@/components/ui/Text.astro';
-import { joinWithAnd } from '@/lib/text';
+import { separatorBefore } from '@/lib/text';
+import type { Organisation } from '@/site.config';
 
 interface Props {
-  clients: string[];
+  clients: Organisation[];
 }
 
 const { clients } = Astro.props;
@@ -12,6 +14,13 @@ const { clients } = Astro.props;
 
 {clients.length > 0 && (
   <Text measure>
-    <span class="font-semibold">Clients include</span> {joinWithAnd(clients)}.
+    <span class="font-semibold">Clients include</span>{' '}
+    {clients.map((client, index) => (
+      <>
+        {separatorBefore(index, clients.length)}
+        <Link href={client.href}>{client.name}</Link>
+        {index === clients.length - 1 && '.'}
+      </>
+    ))}
   </Text>
 )}

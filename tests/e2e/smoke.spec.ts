@@ -272,3 +272,36 @@ test('clients and good fit are listed', async ({ page }) => {
   ).toBeVisible();
   await expect(goodFit.getByRole('listitem')).toHaveCount(3);
 });
+
+test('client names link to their sites', async ({ page }) => {
+  await page.goto('/');
+  await expect(
+    page.getByRole('link', { name: 'Abcam', exact: true }),
+  ).toHaveAttribute('href', 'https://www.abcam.com/');
+  await expect(
+    page.getByRole('link', {
+      name: 'the Department for Education',
+      exact: true,
+    }),
+  ).toHaveAttribute(
+    'href',
+    'https://www.gov.uk/government/organisations/department-for-education',
+  );
+});
+
+test('the consultancies show as linked logos', async ({ page }) => {
+  await page.goto('/');
+  const through = page.getByRole('list', { name: 'Through' });
+  const consultancies: [string, string][] = [
+    ['Equal Experts', 'https://www.equalexperts.com/'],
+    ['Terem', 'https://terem.tech/'],
+  ];
+  for (const [name, href] of consultancies) {
+    const link = through.getByRole('link', { name, exact: true });
+    await expect(link).toHaveAttribute('href', href);
+    const logo = link.locator('svg');
+    await expect(logo).toHaveAttribute('aria-hidden', 'true');
+    const box = await logo.boundingBox();
+    expect(box?.height).toBeGreaterThan(0);
+  }
+});
