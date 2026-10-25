@@ -33,7 +33,7 @@ The owner wants the home page to work as a pitch. A visitor should see proof and
 ## Anti-goals (a failure even if it works)
 
 - Breaking the handout world: a serif reading column with notes in a wide margin, hairline rules, no boxes, cards, shadows, gradients, badges in colour, centred heroes or hero banners. See `.impeccable/surfaces/src-pages-index-astro.md`.
-- Client logos as images. There are no logo files and no permission to use them. Coloured logos would also break the black-and-white, text-led brand.
+- Client logos as images. There are no logo files and no permission to use them. Coloured logos would also break the black-and-white, text-led brand. The one exception is the monochrome Equal Experts logo in the quote credit, which the owner chose.
 - Inventing facts. Every claim must come from the existing case study files, the two new source files, or the CV facts in `PRODUCT.md`.
 - Personal data the repo rules forbid (see `CLAUDE.md`).
 - New TODO comments in code or content. Follow-ups go in `private/todo.md`, copy notes in `private/copy-notes.md`.
@@ -88,7 +88,8 @@ The existing schema in `src/content.config.ts` stays, with these changes:
 3. A proof line: "An inherited prototype taken to production in about four months, now used by more than 140 brands and creators." Do not use the super fund outage claim.
 4. The primary "Get in touch" button, inside the first screen on a 360px phone and on desktop.
 5. **A stand-out quote.** A testimonial from a colleague's public LinkedIn post, rendered with the existing `Quote` component and placed after the "Get in touch" button. It is driven by optional content in the home page frontmatter: a `testimonial` with `quote`, `attribution` and `sourceHref`. When the entry is missing, nothing renders. The owner chose to use it now. The text is quoted word for word, and shortened only with an ellipsis:
-   - Quote: "One of the best engineers I've worked with during my six years at Equal Experts … He stays close to the code while shaping the architecture, the delivery approach and the team's engineering practices."
+   - Quote: "What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don't find that in a single lead often." Keep it exactly as written, including its punctuation. The copy check does not apply to quoted text, but this excerpt passes it anyway.
+   - Logo: the Equal Experts logo, monochrome, in the quote's credit. The owner chose to add it before asking Equal Experts. The file is `src/assets/logos/equal-experts.svg`: the logo from equalexperts.com, cleaned, with every fill set to `currentColor`, so it takes the theme's text colour in light and dark. Inline it, so `currentColor` works. Mark it decorative, because the credit text names Equal Experts Australia. Size it with tokens, about the cap height of the heading face.
    - Attribution: "A colleague at Equal Experts Australia". Do not name the author in the repo.
    - Source link, labelled "Read the original post on LinkedIn": https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/
 6. **Clients include**: a typeset line of client names, not logos. Use only names already public on the site or CV: Abcam, Mastercard, the Department for Education, the Ministry of Justice and the Government Digital Service. Keep the list in `src/site.config.ts`. Amador is not in the line, because the proof line already names its work.
