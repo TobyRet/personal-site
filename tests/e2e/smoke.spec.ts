@@ -315,6 +315,48 @@ test('the Equal Experts quote shows after the hero, credited and linked', async 
   );
 });
 
+test('the home page notes show the headshot, then the quote', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const notes = page.getByRole('complementary', { name: 'Notes' });
+  const headshot = notes.getByRole('img', {
+    name: 'Toby Retallick, outdoors in a cap and a green jacket',
+  });
+  const quote = notes
+    .locator('figure')
+    .filter({ hasText: 'What sets him apart is the combination' });
+  await expect(headshot).toHaveCount(1);
+  await expect(quote).toHaveCount(1);
+  expect(await topOf(headshot)).toBeLessThan(await topOf(quote));
+});
+
+test('the About page links to Youth Music and two case studies', async ({
+  page,
+}) => {
+  await page.goto('/about/');
+  const main = page.locator('main');
+  await expect(
+    main.getByRole('link', { name: 'Youth Music', exact: true }),
+  ).toHaveAttribute('href', 'https://www.youthmusic.org.uk/');
+  await expect(
+    main.getByRole('link', { name: 'Youth Music', exact: true }),
+  ).toHaveAttribute('rel', 'external');
+  const links: [string, string][] = [
+    [
+      'steady a global student housing platform',
+      '/work/student-housing-platform-stabilisation/',
+    ],
+    ['taken Amador', '/work/amador/'],
+  ];
+  for (const [name, href] of links) {
+    const link = main.getByRole('link', { name, exact: true });
+    await expect(link).toHaveAttribute('href', href);
+    const response = await page.request.get(href);
+    expect(response.ok()).toBe(true);
+  }
+});
+
 test('good fit sits in the hero, before the button, and only once', async ({
   page,
 }) => {
