@@ -1,6 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "personal-site",
+  // My personal Cloudflare account. Deploys must not go to any other account.
+  "account_id": "03e0e37a0841a2eb7ee876a772ae93bc",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
