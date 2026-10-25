@@ -41,7 +41,7 @@ export const site: SiteConfig = {
   linkedIn: 'https://www.linkedin.com/in/tobyret',
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
-  cvPdf: '', // TODO: add a CV PDF without a phone number to public/cv/ and set the path.
+  cvPdf: '',
   availability: {
     status: 'available',
     from: 'November 2026',
@@ -55,7 +55,7 @@ export const site: SiteConfig = {
     { label: 'Contact', href: '/contact/' },
   ],
   analytics: {
-    cloudflareToken: '', // TODO: add the token from the Cloudflare dashboard (phase 5).
+    cloudflareToken: '',
     ga4MeasurementId: '',
   },
 };

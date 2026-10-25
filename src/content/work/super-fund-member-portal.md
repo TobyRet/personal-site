@@ -25,8 +25,6 @@ The fund extended the contract each month, to five months in total. For part of 
 - The fund is APRA-regulated, so changes had to meet strict quality and release controls.
 - Releases were manual and usually happened once a month.
 
-<!-- TODO: copy. Check these constraints and add any others. -->
-
 ## What I did
 
 - I released two member journeys, for withdrawals and pension sign-up, from design to production.
@@ -45,7 +43,5 @@ The fund extended the contract each month, to five months in total. For part of 
 React and TypeScript, with Sass for styles. Figma for design handover. Azure DevOps for code, pipelines and work tracking.
 
 ## What I would do differently
-
-<!-- TODO: copy. -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.

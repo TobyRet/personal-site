@@ -4,8 +4,6 @@ subtitle: What this site collects, and why.
 description: How this site handles the data you send through the contact form, and what its analytics measure.
 ---
 
-<!-- TODO: copy. Review this page before launch. It is a draft, not legal advice. -->
-
 ## The contact form
 
 When you send a message, the site collects your name, email address, company (if you give one) and your message. I use these only to reply to you. The message is sent to me by email. The site does not store it.

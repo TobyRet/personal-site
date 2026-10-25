@@ -20,8 +20,6 @@ When I joined, the product was an inherited prototype. I am the sole lead engine
 
 ## The constraints
 
-<!-- TODO: copy. Replace with the real constraints (team size, budget, timeline, investor milestones). -->
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ## What I did
@@ -39,14 +37,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 More than 140 brands and creators use the platform.
 
-<!-- TODO: copy. Add any other results you can share, such as revenue, retention or speed of delivery. -->
-
 ## Stack
 
 Next.js, React and TypeScript on Vercel. Supabase for Postgres and authentication. Stripe for payments and subscriptions. Cloudflare for the edge Worker. OpenAI for the onboarding flow.
 
 ## What I would do differently
-
-<!-- TODO: copy. -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.

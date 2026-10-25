@@ -26,8 +26,6 @@ I led an Equal Experts team in Australia and India. The work started as modernis
 - US rental fee transparency rules had a fixed deadline, with regulatory penalties if it was missed.
 - The team was spread across several countries and time zones.
 
-<!-- TODO: copy. Check these constraints and add any others. -->
-
 ## What I did
 
 - I delivered the US rental fee transparency changes quickly. We built new modules in isolation with a controlled switchover, so the legacy core did not change.
@@ -47,7 +45,5 @@ I led an Equal Experts team in Australia and India. The work started as modernis
 PHP Laravel for the legacy platform. TypeScript and NestJS for the new modules. Datadog and Sentry for monitoring.
 
 ## What I would do differently
-
-<!-- TODO: copy. -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.

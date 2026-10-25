@@ -1,6 +1,7 @@
 // Fails when site copy uses words or punctuation the style rules ban.
 // Rules: CLAUDE.md "Copy". Scans content, pages and components.
-// Also counts TODO placeholders, so you can see how much copy is left.
+// Also counts lorem ipsum placeholders, so you can see how much copy is left.
+// The styleguide's sample text is not counted.
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -33,13 +34,16 @@ async function* walk(path) {
 }
 
 const problems = [];
-let todos = 0;
+let placeholders = 0;
+const SAMPLE_FILES = new Set(['src/pages/styleguide.astro']);
 
 for (const root of ROOTS) {
   for await (const file of walk(root)) {
     const lines = (await readFile(file, 'utf8')).split('\n');
     lines.forEach((line, index) => {
-      if (/TODO/.test(line)) todos += 1;
+      if (!SAMPLE_FILES.has(file) && /lorem ipsum/i.test(line)) {
+        placeholders += 1;
+      }
       for (const rule of RULES) {
         for (const match of line.matchAll(rule.pattern)) {
           problems.push(`${file}:${index + 1}  ${rule.name}: ${match[0]}`);
@@ -56,4 +60,6 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log(`Copy check passed. ${todos} TODO placeholders remain.`);
+console.log(
+  `Copy check passed. ${placeholders} lorem ipsum placeholders remain.`,
+);

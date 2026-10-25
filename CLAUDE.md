@@ -24,7 +24,7 @@
 
 - Write in Simple Technical English: short sentences, active voice, plain words, one idea per sentence.
 - Do not use em dashes, three-part slogans, or the words "elevate", "empower", "seamless", "unlock" or "leverage".
-- Mark placeholder copy with a TODO comment.
+- Do not put TODO comments in code or content. Track copy changes in `private/copy-notes.md` and other follow-ups in `private/todo.md`.
 
 ## Code
 

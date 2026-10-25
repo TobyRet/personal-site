@@ -20,6 +20,4 @@ Since then I have contracted for clients such as Abcam and Mastercard. In 2025 I
 
 ## Outside work
 
-<!-- TODO: copy. A few lines about you outside work, if you want to share them. -->
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -66,7 +66,7 @@ You can change all copy without touching components.
 - **Show a case study on the home page:** set `featured: true`. Change the order with `order`.
 - **CV entries:** `src/content/cv.json`.
 - **Availability, links and the CV PDF:** `src/site.config.ts`.
-- **Placeholders:** search for `TODO`. `bun run lint` prints how many are left.
+- **Placeholders:** unfinished sections hold lorem ipsum. `bun run lint` prints how many are left.
 
 Copy rules: Simple Technical English, no em dashes, and none of the banned words in `CLAUDE.md`. `bun run lint` checks the last two.
 
@@ -79,5 +79,3 @@ Personal data: this repo is public. Keep the CV, testimonials and anything priva
 - Components use token classes only. `bun run lint` fails on Tailwind arbitrary values (`p-[13px]`), spacing classes with no token (`w-40`) and inline `style` attributes.
 - Site-wide settings (name, links, availability, analytics): `src/site.config.ts`.
 - Light and dark themes and the reader's Aa settings are handled in `tokens.css`. Components never pick colours for a theme themselves.
-
-<!-- TODO: expand this README as each phase lands (content editing, contact form setup, deploy, uptime monitoring). -->

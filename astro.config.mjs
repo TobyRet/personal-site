@@ -8,7 +8,6 @@ import tailwindcss from '@tailwindcss/vite';
 // `export const prerender = false` (the contact endpoint and /health)
 // run on the Cloudflare Worker.
 export default defineConfig({
-  // TODO: replace with the real domain before launch.
   site: 'https://example.com',
   output: 'static',
   trailingSlash: 'ignore',

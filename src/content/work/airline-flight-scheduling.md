@@ -36,8 +36,6 @@ I led engineering on the front end, from design to a successful first-phase rele
 - The schedule covers a full year of flights across about 170 ports and the whole fleet.
 - Schedule files are very large.
 
-<!-- TODO: copy. Check these constraints and add any others. -->
-
 ## What I did
 
 - I set up the front end from scratch with React 19, TypeScript, Vite, Tailwind CSS, shadcn/ui and Radix, with Vitest and React Testing Library for tests.
@@ -50,14 +48,10 @@ I led engineering on the front end, from design to a successful first-phase rele
 
 The first phase released successfully.
 
-<!-- TODO: copy. Add any other results you can share. -->
-
 ## Stack
 
 React 19 and TypeScript, built with Vite. Tailwind CSS with shadcn/ui and Radix for components. Vitest and React Testing Library for tests. GitHub Actions for CI.
 
 ## What I would do differently
-
-<!-- TODO: copy. -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate.
