@@ -431,3 +431,60 @@ test('the privacy page is hidden until its copy is reviewed', async ({
     /noindex/,
   );
 });
+
+test('public pages can be indexed', async ({ request }) => {
+  const response = await request.get('/');
+  expect(response.headers()['x-robots-tag']).toBeUndefined();
+});
+
+test('robots.txt allows crawling and points to the sitemap', async ({
+  request,
+}) => {
+  const text = await (await request.get('/robots.txt')).text();
+  expect(text).toContain('User-agent: *\nAllow: /');
+  expect(text).toContain('Disallow: /styleguide/');
+  expect(text).toContain(
+    'Sitemap: https://tobyretallick.com/sitemap-index.xml',
+  );
+});
+
+test('llms.txt summarises the site and links every case study', async ({
+  request,
+}) => {
+  const text = await (await request.get('/llms.txt')).text();
+  expect(text.startsWith('# Toby Retallick')).toBe(true);
+  for (const slug of [
+    'amador',
+    'student-housing-platform-stabilisation',
+    'super-fund-member-portal',
+    'abcam-ecommerce-rebuild',
+    'airline-flight-scheduling',
+  ]) {
+    expect(text).toContain(`https://tobyretallick.com/work/${slug}/`);
+  }
+});
+
+test('pages carry valid structured data', async ({ page }) => {
+  const graphOf = async () =>
+    JSON.parse(
+      (await page
+        .locator('script[type="application/ld+json"]')
+        .textContent()) ?? '{}',
+    ) as { '@graph': { '@type': string }[] };
+
+  await page.goto('/');
+  const home = (await graphOf())['@graph'].map((node) => node['@type']);
+  expect(home).toEqual(['WebSite', 'Person']);
+  await expect(page).toHaveTitle(
+    'Toby Retallick | Technical Lead and Senior Full-Stack Engineer',
+  );
+
+  await page.goto('/work/amador/');
+  const study = (await graphOf())['@graph'].map((node) => node['@type']);
+  expect(study).toEqual([
+    'WebSite',
+    'Person',
+    'CreativeWork',
+    'BreadcrumbList',
+  ]);
+});

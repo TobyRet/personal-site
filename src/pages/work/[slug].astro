@@ -13,6 +13,7 @@ import Prose from '@/components/ui/Prose.astro';
 import Text from '@/components/ui/Text.astro';
 import { type CaseStudy, caseStudyHref, getCaseStudies } from '@/lib/content';
 import { formatRange } from '@/lib/dates';
+import { caseStudyGraph } from '@/lib/structuredData';
 import { site } from '@/site.config';
 
 export async function getStaticPaths() {
@@ -41,7 +42,19 @@ const toLink = (item: CaseStudy | undefined) =>
   item ? { label: item.data.title, href: caseStudyHref(item) } : undefined;
 ---
 
-<Page title={data.title} description={data.summary}>
+<Page
+  title={data.title}
+  description={data.summary}
+  structuredData={caseStudyGraph(site, {
+    path: caseStudyHref(entry),
+    title: data.title,
+    summary: data.summary,
+    sector: data.sector,
+    stack: data.stack,
+    start: data.start,
+    end: data.end,
+  })}
+>
   <Breadcrumbs
     items={[
       { label: 'Home', href: '/' },
