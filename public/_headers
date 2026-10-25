@@ -1,0 +1,12 @@
+# Headers for static pages and assets. The Worker routes (/health and the
+# contact endpoint) set their own headers.
+#
+# X-Robots-Tag keeps the staging site out of search results. Remove it at launch.
+/*
+  X-Robots-Tag: noindex
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Strict-Transport-Security: max-age=31536000
