@@ -31,7 +31,7 @@ const linkClass =
         <a
           href={previous.href}
           rel="prev"
-          aria-label={`Previous${suffix}: ${previous.label}`}
+          aria-label={`Previous${suffix} ${previous.label}`}
           class={linkClass}
         >
           <span class="flex items-center gap-2 font-semibold">
@@ -56,7 +56,7 @@ const linkClass =
         <a
           href={next.href}
           rel="next"
-          aria-label={`Next${suffix}: ${next.label}`}
+          aria-label={`Next${suffix} ${next.label}`}
           class={cx(linkClass, 'sm:items-end sm:text-right')}
         >
           <span class="flex items-center gap-2 font-semibold">

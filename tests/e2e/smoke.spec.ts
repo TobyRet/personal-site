@@ -362,7 +362,7 @@ test('case study pagination links have clear names', async ({ page }) => {
   await page.goto('/work/amador/');
   await expect(
     page.getByRole('link', {
-      name: 'Next case study: Steadying a global student housing platform',
+      name: 'Next case study Steadying a global student housing platform',
     }),
   ).toBeVisible();
 });
