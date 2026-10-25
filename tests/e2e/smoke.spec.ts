@@ -161,6 +161,18 @@ test('case study margin leads with the match line', async ({ page }) => {
   expect(order).toEqual([...order].sort((a, b) => a - b));
 });
 
+test('the Amador client note links to its website in a new tab', async ({
+  page,
+}) => {
+  await page.goto('/work/amador/');
+  const link = page
+    .getByRole('complementary', { name: 'Notes' })
+    .getByRole('link', { name: 'Amador (opens in a new tab)' });
+  await expect(link).toHaveAttribute('href', 'https://www.amador.life');
+  await expect(link).toHaveAttribute('target', '_blank');
+  await expect(link).toHaveAttribute('rel', /noopener/);
+});
+
 test('team shows only when known', async ({ page }) => {
   await page.goto('/work/student-housing-platform-stabilisation/');
   const notes = page.getByRole('complementary', { name: 'Notes' });
@@ -239,31 +251,47 @@ test('home leads with the headline, intro and good fit list', async ({
 }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'I build digital products that work for their users and the business.',
+    'I’ve owned the product, built the software and led the team.',
   );
   const main = page.locator('main');
-  await expect(main).toContainText('I lead the team and I write the code.');
-  await expect(main).not.toContainText('An inherited prototype');
+  await expect(main).toContainText(
+    'I came to engineering after seven years leading digital products',
+  );
+  await expect(main).not.toContainText('I lead the team and I write the code.');
+  const description =
+    'Toby Retallick is a technical lead and senior full-stack engineer who has owned products, built the software and led the team. 12 years of consulting and contract work in the UK and Australia.';
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    'Toby Retallick is a technical lead and senior full-stack engineer who builds digital products that work for their users and the business.',
+    description,
+  );
+  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+    'content',
+    description,
   );
 });
 
-for (const viewport of [
-  { width: 390, height: 844 },
-  { width: 1280, height: 800 },
-]) {
-  test(`get in touch is in the first screen at ${viewport.width}x${viewport.height}`, async ({
-    page,
-  }) => {
-    await page.setViewportSize(viewport);
-    await page.goto('/');
-    await expect(
-      page.getByRole('link', { name: 'Get in touch' }).first(),
-    ).toBeInViewport({ ratio: 1 });
-  });
-}
+test('get in touch is in the first screen at 1280x800', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await expect(
+    page.getByRole('link', { name: 'Get in touch' }).first(),
+  ).toBeInViewport({ ratio: 1 });
+});
+
+test('on phones, get in touch comes straight after the good fit list', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const list = page.getByRole('list', { name: 'I’m a good fit if you need:' });
+  const button = page.getByRole('link', { name: 'Get in touch' }).first();
+  const listBox = await list.boundingBox();
+  const listBottom = (listBox?.y ?? Number.NaN) + (listBox?.height ?? 0);
+  expect(await topOf(button)).toBeGreaterThan(listBottom);
+  expect(await topOf(button)).toBeLessThan(
+    await topOf(page.locator('main figure')),
+  );
+});
 
 test('the Equal Experts quote shows after the hero, credited and linked', async ({
   page,
@@ -291,9 +319,9 @@ test('good fit sits in the hero, before the button, and only once', async ({
   page,
 }) => {
   await page.goto('/');
-  const list = page.getByRole('list', { name: "I'm a good fit if you need:" });
+  const list = page.getByRole('list', { name: 'I’m a good fit if you need:' });
   await expect(list.getByRole('listitem')).toHaveCount(4);
-  await expect(page.getByText("I'm a good fit if you need:")).toHaveCount(1);
+  await expect(page.getByText('I’m a good fit if you need:')).toHaveCount(1);
   expect(await topOf(list)).toBeLessThan(
     await topOf(page.getByRole('link', { name: 'Get in touch' }).first()),
   );
@@ -304,9 +332,7 @@ test('AI experience is visible on the home page and linked from How I work', asy
   page,
 }) => {
   await page.goto('/');
-  await expect(page.locator('main')).toContainText(
-    'A team that wants to use AI safely',
-  );
+  await expect(page.locator('main')).toContainText('Safe, practical use of AI');
   await page.goto('/how-i-work/');
   await page.getByRole('link', { name: 'See how I used AI on Amador' }).click();
   await expect(page).toHaveURL(/\/work\/amador\/#how-i-used-ai$/);
@@ -384,8 +410,8 @@ test('case study pagination links have clear names', async ({ page }) => {
 test('availability shows on home, contact and case studies only', async ({
   page,
 }) => {
-  const shows = ['/', '/contact/', '/work/amador/'];
-  const hides = ['/work/', '/about/', '/how-i-work/', '/cv/'];
+  const shows = ['/contact/', '/work/amador/'];
+  const hides = ['/', '/work/', '/about/', '/how-i-work/', '/cv/'];
   for (const path of [...shows, ...hides]) {
     await page.goto(path);
     const note = page
@@ -393,6 +419,25 @@ test('availability shows on home, contact and case studies only', async ({
       .getByText('Availability', { exact: true });
     await expect(note).toHaveCount(shows.includes(path) ? 1 : 0);
   }
+});
+
+test('home has one call to action in the hero and one at the end', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'Get in touch' })).toHaveCount(2);
+  await expect(
+    page.getByText(
+      'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
+    ),
+  ).toBeVisible();
+  const closing = page.getByRole('region', { name: 'Work with me' });
+  await expect(closing).toContainText(
+    'Contract preferred. Open to fixed-term or permanent roles.',
+  );
+  await expect(closing).toContainText(
+    'Greater Brisbane Area, Queensland. Remote across Australia, happy to travel.',
+  );
 });
 
 test('pages share an Open Graph image that exists', async ({
@@ -418,9 +463,7 @@ test('on phones, availability comes straight after the hero', async ({
     page.getByRole('link', { name: 'Get in touch' }).first(),
   );
   const availability = await topOf(
-    page
-      .getByRole('complementary', { name: 'Notes' })
-      .getByText('Availability', { exact: true }),
+    page.getByText(/^Available from .* for contract work/),
   );
   const clients = await topOf(page.getByText('Clients include'));
   expect(availability).toBeGreaterThan(button);
