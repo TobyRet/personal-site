@@ -178,3 +178,33 @@ test('technical detail opens with the keyboard', async ({ page }) => {
     .analyze();
   expect(results.violations).toEqual([]);
 });
+
+test('work cards show sector, role and stack tags', async ({ page }) => {
+  await page.goto('/work/');
+  const card = page
+    .getByRole('article')
+    .filter({ hasText: 'flight scheduling' });
+  for (const text of [
+    'Aviation',
+    'Lead engineer',
+    'React',
+    'TypeScript',
+    'Zustand',
+  ]) {
+    await expect(card).toContainText(text);
+  }
+  await expect(card).not.toContainText('Vite');
+});
+
+test('no horizontal scroll on phones', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  for (const path of ['/', '/work/']) {
+    await page.goto(path);
+    const fits = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
+    );
+    expect(fits, path).toBe(true);
+  }
+});
