@@ -3,6 +3,7 @@
  * A quote with its credit. The optional `mark` slot shows a decorative mark,
  * such as an organisation's logo, at the top of the credit.
  */
+import { cx } from '@/lib/cx';
 import Link from './Link.astro';
 
 interface Props {
@@ -13,6 +14,9 @@ interface Props {
   /** Where the quote was first published, if public. */
   sourceHref?: string;
   sourceLabel?: string;
+  /** `pull` sets the quote large and italic, with an accent rule on the left. */
+  variant?: 'default' | 'pull';
+  class?: string | undefined;
 }
 
 const {
@@ -20,12 +24,23 @@ const {
   position,
   sourceHref,
   sourceLabel = 'Read the original',
+  variant = 'default',
+  class: className,
 } = Astro.props;
+const pull = variant === 'pull';
 const hasMark = Astro.slots.has('mark');
 ---
 
-<figure class="flex max-w-reading flex-col gap-4">
-  <blockquote class="text-reading">
+<figure
+  class={cx(
+    'flex max-w-reading flex-col gap-4',
+    pull && 'gap-6 border-l-2 border-accent pl-6',
+    className,
+  )}
+>
+  <blockquote
+    class={cx(pull ? 'font-reading text-heading italic' : 'text-reading')}
+  >
     <p>
       “<slot />”
     </p>

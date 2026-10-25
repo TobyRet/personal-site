@@ -8,7 +8,7 @@ goodFit:
   - Cover for a key role in a regulated environment.
 testimonial:
   quote: What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don't find that in a single lead often.
-  attribution: A colleague at Equal Experts Australia
+  attribution: Equal Experts Australia, 2026
   sourceHref: https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/
 ---
 

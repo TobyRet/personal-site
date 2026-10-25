@@ -51,6 +51,8 @@
   --layout-handout-rows: auto 1fr;
   /* With a lead: title, then lead, then body. The notes span all three. */
   --layout-handout-rows-lead: auto auto 1fr;
+  /* Height of an organisation's logo in a quote credit. Width follows the logo. */
+  --size-logo-mark: 1.5rem;
 
   /* Borders, underlines and focus */
   --border-thin: 1px;

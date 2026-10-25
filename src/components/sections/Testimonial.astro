@@ -20,7 +20,9 @@ const { quote, attribution, sourceHref } = Astro.props;
   name={attribution}
   sourceHref={sourceHref}
   sourceLabel="Read the original post on LinkedIn"
+  variant="pull"
+  class="my-4"
 >
   {quote}
-  <EqualExpertsLogo slot="mark" class="block h-4 w-auto" />
+  <EqualExpertsLogo slot="mark" class="block h-(--size-logo-mark) w-auto" />
 </Quote>

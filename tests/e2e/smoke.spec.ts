@@ -241,7 +241,7 @@ test('quote is credited and linked', async ({ page }) => {
     .filter({ hasText: 'What sets him apart is the combination' });
   await expect(figure).toHaveCount(1);
   const caption = figure.locator('figcaption');
-  await expect(caption).toContainText('A colleague at Equal Experts Australia');
+  await expect(caption).toContainText('Equal Experts Australia, 2026');
   await expect(
     caption.getByRole('link', { name: 'Read the original post on LinkedIn' }),
   ).toHaveAttribute(
