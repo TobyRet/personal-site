@@ -293,7 +293,7 @@ test('on phones, get in touch comes straight after the good fit list', async ({
   );
 });
 
-test('the Equal Experts quote shows after the hero, credited and linked', async ({
+test('the Equal Experts quote shows by the hero, credited and linked', async ({
   page,
 }) => {
   await page.goto('/');
