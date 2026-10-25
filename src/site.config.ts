@@ -21,6 +21,8 @@ export interface SiteConfig {
   linkedIn: string;
   github: string;
   company: string;
+  /** Client names for the home page's "Clients include" line. Only names already public. */
+  clients: string[];
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
@@ -41,6 +43,13 @@ export const site: SiteConfig = {
   linkedIn: 'https://www.linkedin.com/in/tobyret',
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
+  clients: [
+    'Abcam',
+    'Mastercard',
+    'the Department for Education',
+    'the Ministry of Justice',
+    'the Government Digital Service',
+  ],
   cvPdf: '',
   availability: {
     status: 'available',

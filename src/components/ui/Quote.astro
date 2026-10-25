@@ -1,4 +1,8 @@
 ---
+/**
+ * A quote with its credit. The optional `mark` slot shows a decorative mark,
+ * such as an organisation's logo, at the top of the credit.
+ */
 import Link from './Link.astro';
 
 interface Props {
@@ -17,6 +21,7 @@ const {
   sourceHref,
   sourceLabel = 'Read the original',
 } = Astro.props;
+const hasMark = Astro.slots.has('mark');
 ---
 
 <figure class="flex max-w-reading flex-col gap-4">
@@ -26,6 +31,11 @@ const {
     </p>
   </blockquote>
   <figcaption class="flex flex-col font-ui text-ui">
+    {hasMark && (
+      <span class="mb-2 text-text">
+        <slot name="mark" />
+      </span>
+    )}
     <span class="font-semibold">{name}</span>
     {position && <span class="text-text-secondary">{position}</span>}
     {sourceHref && (

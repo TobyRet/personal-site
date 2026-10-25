@@ -1,0 +1,17 @@
+---
+/** One line of client names, joined in the house style: "A, B and C". */
+import Text from '@/components/ui/Text.astro';
+import { joinWithAnd } from '@/lib/text';
+
+interface Props {
+  clients: string[];
+}
+
+const { clients } = Astro.props;
+---
+
+{clients.length > 0 && (
+  <Text measure>
+    <span class="font-semibold">Clients include</span> {joinWithAnd(clients)}.
+  </Text>
+)}

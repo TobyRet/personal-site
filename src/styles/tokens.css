@@ -49,6 +49,8 @@
   --layout-handout: minmax(0, 34em) 16rem;
   /* Title row hugs its content; the body row takes any extra height from the notes. */
   --layout-handout-rows: auto 1fr;
+  /* With a lead: title, then lead, then body. The notes span all three. */
+  --layout-handout-rows-lead: auto auto 1fr;
 
   /* Borders, underlines and focus */
   --border-thin: 1px;

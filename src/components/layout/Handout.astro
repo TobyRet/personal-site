@@ -6,7 +6,12 @@
  * in the margin to the right, starting level with the title.
  * Phones: the notes fold in under the title, before the body.
  *
- * Slots: `title` (heading and subtitle), `notes` (MarginNote items), default (body).
+ * Slots: `title` (heading and subtitle), `notes` (MarginNote items),
+ * `lead` (optional), default (body).
+ *
+ * With a `lead`, phones show the title, the lead, the notes, then the body.
+ * On desktop the lead sits in the reading column between the title and the
+ * body, and the notes stay in the margin beside all three.
  */
 import { cx } from '@/lib/cx';
 
@@ -18,29 +23,44 @@ interface Props {
 
 const { tight = false, class: className } = Astro.props;
 const hasNotes = Astro.slots.has('notes');
+const hasLead = Astro.slots.has('lead');
+const placed = hasNotes && hasLead;
 ---
 
 <div
   class={cx(
     'grid grid-cols-1 gap-x-12 gap-y-8 pb-12 md:pb-16',
     tight ? 'pt-4 md:pt-6' : 'pt-12 md:pt-16',
+    hasNotes && 'lg:grid-cols-(--layout-handout)',
     hasNotes &&
-      'lg:grid-cols-(--layout-handout) lg:grid-rows-(--layout-handout-rows)',
+      (hasLead
+        ? 'lg:grid-rows-(--layout-handout-rows-lead)'
+        : 'lg:grid-rows-(--layout-handout-rows)'),
     className,
   )}
 >
-  <div class="max-w-reading">
+  <div class={cx('max-w-reading', placed && 'lg:col-start-1')}>
     <slot name="title" />
   </div>
+  {hasLead && (
+    <div class={cx('max-w-reading', placed && 'lg:col-start-1')}>
+      <slot name="lead" />
+    </div>
+  )}
   {hasNotes && (
     <aside
       aria-label="Notes"
-      class="flex flex-col gap-4 border-t border-rule pt-4 lg:row-span-2 lg:border-t-0 lg:pt-2"
+      class={cx(
+        'flex flex-col gap-4 border-t border-rule pt-4 lg:border-t-0 lg:pt-2',
+        placed
+          ? 'lg:col-start-2 lg:row-span-3 lg:row-start-1'
+          : 'lg:row-span-2',
+      )}
     >
       <slot name="notes" />
     </aside>
   )}
-  <div class="max-w-reading">
+  <div class={cx('max-w-reading', placed && 'lg:col-start-1')}>
     <slot />
   </div>
 </div>

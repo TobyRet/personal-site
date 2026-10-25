@@ -208,3 +208,62 @@ test('no horizontal scroll on phones', async ({ page }) => {
     expect(fits, path).toBe(true);
   }
 });
+
+test('home leads with the pitch', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'I get important software into production safely',
+  );
+  await expect(page.locator('main')).toContainText(
+    'An inherited prototype taken to production in about four months',
+  );
+});
+
+for (const viewport of [
+  { width: 360, height: 780 },
+  { width: 1280, height: 800 },
+]) {
+  test(`get in touch is in the first screen at ${viewport.width}x${viewport.height}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    await expect(
+      page.getByRole('link', { name: 'Get in touch' }).first(),
+    ).toBeInViewport({ ratio: 1 });
+  });
+}
+
+test('quote is credited and linked', async ({ page }) => {
+  await page.goto('/');
+  const figure = page
+    .locator('figure')
+    .filter({ hasText: 'What sets him apart is the combination' });
+  await expect(figure).toHaveCount(1);
+  const caption = figure.locator('figcaption');
+  await expect(caption).toContainText('A colleague at Equal Experts Australia');
+  await expect(
+    caption.getByRole('link', { name: 'Read the original post on LinkedIn' }),
+  ).toHaveAttribute(
+    'href',
+    'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
+  );
+  const logo = figure.locator('svg');
+  await expect(logo).toHaveCount(1);
+  await expect(logo).toHaveAttribute('aria-hidden', 'true');
+  const box = await logo.boundingBox();
+  expect(box?.width).toBeGreaterThan(0);
+  expect(box?.height).toBeGreaterThan(0);
+});
+
+test('clients and good fit are listed', async ({ page }) => {
+  await page.goto('/');
+  const main = page.locator('main');
+  await expect(main).toContainText('Clients include');
+  await expect(main).toContainText('Department for Education');
+  const goodFit = page.getByRole('region', { name: 'Good fit if you need' });
+  await expect(
+    goodFit.getByRole('heading', { level: 2, name: 'Good fit if you need' }),
+  ).toBeVisible();
+  await expect(goodFit.getByRole('listitem')).toHaveCount(3);
+});

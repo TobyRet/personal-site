@@ -1,0 +1,26 @@
+---
+/**
+ * The home page quote, credited with the Equal Experts logo.
+ * The logo is inline, so it takes the text colour in light and dark mode.
+ * It is decorative: the credit text names the organisation.
+ */
+import EqualExpertsLogo from '@/assets/logos/equal-experts.svg';
+import Quote from '@/components/ui/Quote.astro';
+
+interface Props {
+  quote: string;
+  attribution: string;
+  sourceHref: string;
+}
+
+const { quote, attribution, sourceHref } = Astro.props;
+---
+
+<Quote
+  name={attribution}
+  sourceHref={sourceHref}
+  sourceLabel="Read the original post on LinkedIn"
+>
+  {quote}
+  <EqualExpertsLogo slot="mark" class="block h-4 w-auto" />
+</Quote>
