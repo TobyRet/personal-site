@@ -265,12 +265,26 @@ for (const viewport of [
   });
 }
 
-test('the testimonial stays hidden until permission is confirmed', async ({
+test('the Equal Experts quote shows after the hero, credited and linked', async ({
   page,
 }) => {
   await page.goto('/');
-  await expect(page.locator('main figure')).toHaveCount(0);
-  await expect(page.locator('main')).not.toContainText('What sets him apart');
+  const figure = page
+    .locator('main figure')
+    .filter({ hasText: 'What sets him apart is the combination' });
+  await expect(figure).toHaveCount(1);
+  const caption = figure.locator('figcaption');
+  await expect(caption).toContainText('Equal Experts Australia');
+  await expect(
+    caption.getByRole('link', { name: 'Read the original post on LinkedIn' }),
+  ).toHaveAttribute(
+    'href',
+    'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
+  );
+  await expect(figure.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+  expect(await topOf(figure)).toBeLessThan(
+    await topOf(page.getByText('Clients include')),
+  );
 });
 
 test('good fit sits in the hero, before the button, and only once', async ({
