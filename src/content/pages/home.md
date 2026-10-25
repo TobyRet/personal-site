@@ -1,12 +1,10 @@
 ---
-title: I build digital products that work for their users and the business.
-subtitle: Technical lead and senior full-stack engineer. 12 years of consulting and contract work in the UK and Australia.
-description: Toby Retallick is a technical lead and senior full-stack engineer who builds digital products that work for their users and the business.
+title: I’ve owned the product, built the software and led the team.
+subtitle: Technical lead and senior full-stack engineer with 12 years of consulting and contract work in the UK and Australia. I came to engineering after seven years leading digital products, with my own team and budget.
+description: Toby Retallick is a technical lead and senior full-stack engineer who has owned products, built the software and led the team. 12 years of consulting and contract work in the UK and Australia.
 goodFit:
-  - A hands-on lead for a new build or an inherited product.
-  - Someone to steady a legacy platform.
+  - A hands-on lead for a new build, or for a prototype that needs to become a live product.
+  - Someone to steady a legacy platform and get the team back to planned work.
   - Cover for a key role in a regulated environment.
-  - A team that wants to use AI safely, in its product or in how it delivers.
+  - Safe, practical use of AI, in your product or in how your team delivers.
 ---
-
-I lead the team and I write the code. I am as comfortable working with stakeholders as I am in the code.

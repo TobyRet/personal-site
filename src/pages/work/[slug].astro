@@ -67,6 +67,7 @@ const toLink = (item: CaseStudy | undefined) =>
     <Fragment slot="notes">
       <CaseStudyFacts
         client={data.client}
+        clientHref={data.clientNamed ? data.clientHref : undefined}
         sector={data.sector}
         position={data.role}
         dates={formatRange(data.start, data.end)}

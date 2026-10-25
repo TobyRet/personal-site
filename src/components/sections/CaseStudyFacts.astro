@@ -1,11 +1,14 @@
 ---
 /** The facts of a case study, as margin notes. */
+import Link from '@/components/ui/Link.astro';
 import MarginNote from '@/components/ui/MarginNote.astro';
 
 interface Props {
   /** One sentence on when this work matches a reader's need. */
   relevantIf: string;
   client: string;
+  /** The client's website, opened in a new tab. */
+  clientHref?: string | undefined;
   sector: string;
   /** Your role on the project. */
   position: string;
@@ -18,15 +21,33 @@ interface Props {
   stack: string[];
 }
 
-const { relevantIf, client, sector, position, dates, through, team, stack } =
-  Astro.props;
+const {
+  relevantIf,
+  client,
+  clientHref,
+  sector,
+  position,
+  dates,
+  through,
+  team,
+  stack,
+} = Astro.props;
 ---
 
 <MarginNote label="Relevant if you need" tone="accent">
   <p>{relevantIf}</p>
 </MarginNote>
 <MarginNote label="Client">
-  <p>{client}</p>
+  <p>
+    {clientHref ? (
+      <Link href={clientHref} target="_blank" rel="external noopener">
+        {client}
+        <span class="sr-only"> (opens in a new tab)</span>
+      </Link>
+    ) : (
+      client
+    )}
+  </p>
 </MarginNote>
 <MarginNote label="Sector">
   <p>{sector}</p>

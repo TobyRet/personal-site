@@ -3,6 +3,7 @@ title: Amador, from prototype to live marketplace
 subtitle: Sole lead engineer for a startup marketplace
 client: Amador
 clientNamed: true
+clientHref: https://www.amador.life
 sector: Startup, creator marketplace
 role: Technical lead (part-time)
 start: 2025-04
