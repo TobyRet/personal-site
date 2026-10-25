@@ -1,12 +1,9 @@
 ---
-import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Stack from '@/components/layout/Stack.astro';
-import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
 import ClientList from '@/components/sections/ClientList.astro';
-import ContactNote from '@/components/sections/ContactNote.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Testimonial from '@/components/sections/Testimonial.astro';
@@ -14,15 +11,12 @@ import ThroughList from '@/components/sections/ThroughList.astro';
 import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
 import Link from '@/components/ui/Link.astro';
-import MarginNote from '@/components/ui/MarginNote.astro';
-import Prose from '@/components/ui/Prose.astro';
 import Text from '@/components/ui/Text.astro';
 import { caseStudyHref, getFeaturedCaseStudies, getPage } from '@/lib/content';
 import { formatYears } from '@/lib/dates';
 import { site } from '@/site.config';
 
 const page = await getPage('home');
-const { Content } = await render(page);
 const featured = await getFeaturedCaseStudies();
 const { goodFit = [] } = page.data;
 ---
@@ -35,22 +29,16 @@ const { goodFit = [] } = page.data;
       subtitle={page.data.subtitle}
     />
     <Stack slot="lead" gap={6}>
-      <Prose>
-        <Content />
-      </Prose>
       <GoodFitList items={goodFit} />
-      <div>
-        <Button href={site.contactHref}>Get in touch</Button>
-      </div>
+      <Stack gap={2}>
+        <div>
+          <Button href={site.contactHref}>Get in touch</Button>
+        </div>
+        <Text size="ui" tone="secondary">
+          {site.availabilityLine}
+        </Text>
+      </Stack>
     </Stack>
-    <Fragment slot="notes">
-      <AvailabilityNote />
-      <MarginNote label="Based in">
-        <p>{site.location}</p>
-        <p>{site.workingPattern}</p>
-      </MarginNote>
-      <ContactNote />
-    </Fragment>
 
     <Stack gap={12}>
       {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
@@ -86,6 +74,10 @@ const { goodFit = [] } = page.data;
         <Text>
           Tell me about your project and when you need someone. I take on
           hands-on lead, senior engineer and cover roles.
+        </Text>
+        {site.availability.note && <Text>{site.availability.note}</Text>}
+        <Text>
+          {site.location}. {site.workingPattern}.
         </Text>
         <div>
           <Button href={site.contactHref}>Get in touch</Button>
