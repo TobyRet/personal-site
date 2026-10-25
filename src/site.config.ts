@@ -101,8 +101,7 @@ export const site: SiteConfig = {
     { name: 'Terem', href: 'https://terem.tech/', logo: 'terem' },
   ],
   testimonial: {
-    // Hidden until the author confirms permission. See private/todo.md.
-    show: false,
+    show: true,
     quote:
       "What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don't find that in a single lead often.",
     name: '',
