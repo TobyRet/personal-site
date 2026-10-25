@@ -1,6 +1,6 @@
 ---
 title: Amador, from prototype to live marketplace
-subtitle: Sole lead engineer on a two-sided marketplace for brands and creators
+subtitle: Sole lead engineer for a startup marketplace, from prototype to live product
 client: Amador
 clientNamed: true
 sector: Startup, creator marketplace
@@ -16,17 +16,17 @@ order: 1
 
 ## At a glance
 
-Amador is a two-sided marketplace where brands find creators for user-generated content. I joined as sole lead engineer when the product was an inherited prototype. I took it to a live production platform in about four months. More than 140 brands and creators now use it.
+Amador is a two-sided marketplace where brands find creators for user-generated content. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
 
 ## The situation
 
-Amador is a two-sided marketplace. Brands use it to find creators for user-generated content. Amador was selected for the Antler Australia pre-seed residency.
+Amador was selected for the Antler Australia pre-seed residency. When I joined, the product was an inherited prototype.
 
-When I joined, the product was an inherited prototype. I am the sole lead engineer. I work with the founder on technical direction and product.
+I work with the founder on technical direction and product.
 
 ## What I did
 
-- I took the prototype to a live production platform in about four months.
+- I took the prototype to a live production platform.
 - I built campaigns, brand surveys and polls.
 - I built an AI onboarding flow. It uses OpenAI to write a brand identity and community kit. A token balance meters each brand's AI use.
 - I designed the points ledger and a tiered subscription model.
@@ -34,7 +34,9 @@ When I joined, the product was an inherited prototype. I am the sole lead engine
 
 ## The result
 
-More than 140 brands and creators use the platform.
+- More than 140 brands and creators use the platform.
+- The founder can release changes safely, through a guarded workflow.
+- Amador was accepted into the Vercel for Startups programme.
 
 <details>
 <summary>Technical detail</summary>

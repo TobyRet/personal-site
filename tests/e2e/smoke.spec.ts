@@ -217,11 +217,13 @@ test('no horizontal scroll on phones', async ({ page }) => {
 test('home leads with the pitch', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-    'I get important software into production safely',
+    'I get software into production safely, when it matters.',
   );
-  await expect(page.locator('main')).toContainText(
-    'An inherited prototype taken to production in about four months',
-  );
+  const recent = page.getByRole('link', {
+    name: /an inherited prototype taken to production in about four months/,
+  });
+  await expect(recent).toHaveAttribute('href', '/work/amador/');
+  await expect(page.locator('main')).toContainText('Recent work:');
 });
 
 for (const viewport of [
