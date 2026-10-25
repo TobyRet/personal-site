@@ -63,6 +63,8 @@ export interface SiteConfig {
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
+  /** The one-line availability and location shown under the home page button. When it changes, update `availability` too: the contact page and case studies read that. */
+  availabilityLine: string;
   nav: NavItem[];
   analytics: {
     /** Cloudflare Web Analytics beacon token. Empty turns it off. */
@@ -116,6 +118,8 @@ export const site: SiteConfig = {
     from: 'November 2026',
     note: 'Contract preferred. Open to fixed-term or permanent roles.',
   },
+  availabilityLine:
+    'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
   nav: [
     { label: 'Work', href: '/work/' },
     { label: 'How I work', href: '/how-i-work/' },

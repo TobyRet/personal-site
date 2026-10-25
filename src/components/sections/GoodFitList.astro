@@ -1,5 +1,5 @@
 ---
-/** "I'm a good fit if you need:" and its short list, for the home page hero. */
+/** "I’m a good fit if you need:" and its short list, for the home page hero. */
 import Text from '@/components/ui/Text.astro';
 
 interface Props {
@@ -11,7 +11,7 @@ const { items } = Astro.props;
 
 {items.length > 0 && (
   <div class="flex max-w-reading flex-col gap-3">
-    <Text id="good-fit">I'm a good fit if you need:</Text>
+    <Text id="good-fit">I’m a good fit if you need:</Text>
     <ul
       aria-labelledby="good-fit"
       class="flex list-disc flex-col gap-2 pl-6 font-reading text-reading"
