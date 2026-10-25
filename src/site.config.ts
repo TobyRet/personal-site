@@ -51,6 +51,8 @@ export interface SiteConfig {
   location: string;
   workingPattern: string;
   linkedIn: string;
+  /** Where the "Get in touch" buttons go. LinkedIn until the contact form exists, then /contact/. */
+  contactHref: string;
   github: string;
   company: string;
   /** Client names for the home page's "Clients include" line, as plain text. Only names already public. */
@@ -70,13 +72,16 @@ export interface SiteConfig {
   };
 }
 
+const linkedIn = 'https://www.linkedin.com/in/tobyret';
+
 export const site: SiteConfig = {
   url: 'https://personal-site.billowing-firefly-aa29.workers.dev',
   name: 'Toby Retallick',
   jobTitle: 'Technical Lead and Senior Full-Stack Engineer',
   location: 'Greater Brisbane Area, Queensland',
   workingPattern: 'Remote across Australia, happy to travel',
-  linkedIn: 'https://www.linkedin.com/in/tobyret',
+  linkedIn,
+  contactHref: linkedIn,
   github: 'https://github.com/TobyRet',
   company: 'Byte Size Australia Pty Ltd',
   clients: [

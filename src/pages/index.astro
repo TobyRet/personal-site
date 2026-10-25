@@ -40,7 +40,7 @@ const { goodFit = [] } = page.data;
       </Prose>
       <GoodFitList items={goodFit} />
       <div>
-        <Button href="/contact/">Get in touch</Button>
+        <Button href={site.contactHref}>Get in touch</Button>
       </div>
     </Stack>
     <Fragment slot="notes">
@@ -71,7 +71,7 @@ const { goodFit = [] } = page.data;
             sector={entry.data.sector}
             position={entry.data.role}
             dates={formatYears(entry.data.start, entry.data.end)}
-            tags={entry.data.stack}
+            stack={entry.data.stack}
           />
         ))}
         <p class="border-t border-rule pt-6 font-ui text-ui">
@@ -88,7 +88,7 @@ const { goodFit = [] } = page.data;
           hands-on lead, senior engineer and cover roles.
         </Text>
         <div>
-          <Button href="/contact/">Get in touch</Button>
+          <Button href={site.contactHref}>Get in touch</Button>
         </div>
       </section>
     </Stack>

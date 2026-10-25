@@ -13,6 +13,7 @@ import Prose from '@/components/ui/Prose.astro';
 import Text from '@/components/ui/Text.astro';
 import { type CaseStudy, caseStudyHref, getCaseStudies } from '@/lib/content';
 import { formatRange } from '@/lib/dates';
+import { site } from '@/site.config';
 
 export async function getStaticPaths() {
   const caseStudies = await getCaseStudies();
@@ -77,7 +78,7 @@ const toLink = (item: CaseStudy | undefined) =>
       </Heading>
       <Text>Tell me about your project and when you need someone.</Text>
       <div>
-        <Button href="/contact/">Get in touch</Button>
+        <Button href={site.contactHref}>Get in touch</Button>
       </div>
     </section>
   </Handout>

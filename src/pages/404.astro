@@ -4,6 +4,7 @@ import Page from '@/components/layout/Page.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Link from '@/components/ui/Link.astro';
 import Text from '@/components/ui/Text.astro';
+import { site } from '@/site.config';
 ---
 
 <Page
@@ -20,7 +21,7 @@ import Text from '@/components/ui/Text.astro';
     <Text>
       Go to the <Link href="/">home page</Link>, see my
       <Link href="/work/">case studies</Link>, or
-      <Link href="/contact/">get in touch</Link>.
+      <Link href={site.contactHref}>get in touch</Link>.
     </Text>
   </Handout>
 </Page>
