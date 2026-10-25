@@ -302,8 +302,7 @@ test('client names are plain text', async ({ page }) => {
 
 test('canonical and Open Graph URLs use the site address', async ({ page }) => {
   await page.goto('/work/amador/');
-  const canonical =
-    'https://personal-site.billowing-firefly-aa29.workers.dev/work/amador/';
+  const canonical = 'https://tobyretallick.com/work/amador/';
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
     canonical,
@@ -380,9 +379,7 @@ test('pages share an Open Graph image that exists', async ({
   const image = await page
     .locator('meta[property="og:image"]')
     .getAttribute('content');
-  expect(image).toBe(
-    'https://personal-site.billowing-firefly-aa29.workers.dev/og-default.png',
-  );
+  expect(image).toBe('https://tobyretallick.com/og-default.png');
   const response = await request.get('/og-default.png');
   expect(response.ok()).toBe(true);
   expect(response.headers()['content-type']).toContain('image/png');

@@ -71,7 +71,7 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  url: 'https://personal-site.billowing-firefly-aa29.workers.dev',
+  url: 'https://tobyretallick.com',
   name: 'Toby Retallick',
   jobTitle: 'Technical Lead and Senior Full-Stack Engineer',
   location: 'Greater Brisbane Area, Queensland',
