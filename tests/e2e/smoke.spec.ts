@@ -333,3 +333,42 @@ test('the consultancies show as linked logos', async ({ page }) => {
     expect(box?.height).toBeGreaterThan(0);
   }
 });
+
+test('case study pagination links have clear names', async ({ page }) => {
+  await page.goto('/work/amador/');
+  await expect(
+    page.getByRole('link', {
+      name: 'Next case study: Steadying a global student housing platform',
+    }),
+  ).toBeVisible();
+});
+
+test('availability shows on home, contact and case studies only', async ({
+  page,
+}) => {
+  const shows = ['/', '/contact/', '/work/amador/'];
+  const hides = ['/work/', '/about/', '/how-i-work/', '/cv/'];
+  for (const path of [...shows, ...hides]) {
+    await page.goto(path);
+    const note = page
+      .getByRole('complementary', { name: 'Notes' })
+      .getByText('Availability', { exact: true });
+    await expect(note).toHaveCount(shows.includes(path) ? 1 : 0);
+  }
+});
+
+test('pages share an Open Graph image that exists', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/about/');
+  const image = await page
+    .locator('meta[property="og:image"]')
+    .getAttribute('content');
+  expect(image).toBe(
+    'https://personal-site.billowing-firefly-aa29.workers.dev/og-default.png',
+  );
+  const response = await request.get('/og-default.png');
+  expect(response.ok()).toBe(true);
+  expect(response.headers()['content-type']).toContain('image/png');
+});

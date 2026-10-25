@@ -55,6 +55,11 @@
   --size-logo-mark: 1.5rem;
   /* For a logo whose mark is much taller than its wordmark, so the wordmarks match. */
   --size-logo-mark-tall: 2rem;
+  /* Icons beside link text, such as LinkedIn and GitHub. Scales with the text. */
+  --size-icon: 1.1em;
+  /* The share card for social previews, captured at 2x to give 1200 by 630. */
+  --size-share-width: 600px;
+  --size-share-height: 315px;
 
   /* Borders, underlines and focus */
   --border-thin: 1px;

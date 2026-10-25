@@ -1,0 +1,36 @@
+---
+/**
+ * A link to one of my profiles, with its icon before the name.
+ * The icon is decorative: the visible name labels the link.
+ * Icons are from Bootstrap Icons (MIT licence).
+ */
+import GitHubIcon from '@/assets/icons/github.svg';
+import LinkedInIcon from '@/assets/icons/linkedin.svg';
+import { cx } from '@/lib/cx';
+import { linkClasses } from './styles';
+
+interface Props {
+  network: 'linkedin' | 'github';
+  href: string;
+  /** Defaults to the network's name. */
+  label?: string | undefined;
+  class?: string | undefined;
+}
+
+const networks = {
+  linkedin: { Icon: LinkedInIcon, name: 'LinkedIn' },
+  github: { Icon: GitHubIcon, name: 'GitHub' },
+} as const;
+
+const { network, href, label, class: className } = Astro.props;
+const { Icon, name } = networks[network];
+---
+
+<a
+  href={href}
+  rel="external"
+  class={cx('inline-flex items-center gap-2', linkClasses.default, className)}
+>
+  <Icon class="size-(--size-icon) shrink-0" />
+  {label ?? name}
+</a>

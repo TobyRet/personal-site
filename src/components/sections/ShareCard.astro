@@ -1,0 +1,19 @@
+---
+/**
+ * The image used when a page is shared on social sites: name and role on
+ * the reading paper. scripts/og-image.mjs captures it to public/og-default.png.
+ */
+import { site } from '@/site.config';
+---
+
+<div class="flex h-(--size-share-height) w-(--size-share-width) flex-col justify-between bg-bg p-12 text-text">
+  <div class="flex flex-col gap-3">
+    <p class="font-reading text-title">{site.name}</p>
+    <p class="font-reading text-heading text-text-secondary italic">
+      Technical lead and senior full-stack engineer
+    </p>
+  </div>
+  <p class="border-t border-rule pt-4 font-ui text-ui text-accent">
+    {site.location}
+  </p>
+</div>

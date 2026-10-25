@@ -20,7 +20,8 @@
     "cf-typegen": "wrangler types",
     "deploy": "astro build && wrangler deploy",
     "prepare": "husky",
-    "check:pii": "node scripts/check-pii.mjs"
+    "check:pii": "node scripts/check-pii.mjs",
+    "og-image": "node scripts/og-image.mjs http://localhost:4321"
   },
   "lint-staged": {
     "*.{js,mjs,ts,tsx,astro}": [

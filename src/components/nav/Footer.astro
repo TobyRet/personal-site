@@ -1,14 +1,13 @@
 ---
 import Container from '@/components/layout/Container.astro';
 import Link from '@/components/ui/Link.astro';
+import SocialLink from '@/components/ui/SocialLink.astro';
 import { site } from '@/site.config';
 
 const year = new Date().getFullYear();
 
 const links = [
   { label: 'Contact', href: '/contact/' },
-  { label: 'LinkedIn', href: site.linkedIn },
-  { label: 'GitHub', href: site.github },
   { label: 'Privacy', href: '/privacy/' },
 ];
 ---
@@ -16,10 +15,18 @@ const links = [
 <footer class="mt-16 border-t border-rule font-ui text-ui">
   <Container class="flex flex-col gap-4 py-8 md:py-12">
     <nav aria-label="Footer">
-      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <li class="flex">
+          <SocialLink network="linkedin" href={site.linkedIn} />
+        </li>
+        <li class="flex">
+          <SocialLink network="github" href={site.github} />
+        </li>
         {links.map((link) => (
-          <li>
-            <Link href={link.href}>{link.label}</Link>
+          <li class="flex">
+            <Link href={link.href} class="inline-flex items-center">
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>

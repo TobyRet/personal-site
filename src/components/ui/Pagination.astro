@@ -11,9 +11,12 @@ interface Props {
   next?: PageLink | undefined;
   /** Names the navigation landmark, for example "Case studies". */
   label: string;
+  /** What one item is called, for the link labels: "Next case study". */
+  itemName?: string | undefined;
 }
 
-const { previous, next, label } = Astro.props;
+const { previous, next, label, itemName } = Astro.props;
+const suffix = itemName ? ` ${itemName}` : '';
 
 const linkClass =
   'group flex flex-col gap-1 py-4 text-link no-underline sm:max-w-narrow hover:underline';
@@ -23,7 +26,12 @@ const linkClass =
   <ul class="flex flex-col sm:flex-row sm:justify-between sm:gap-8">
     {previous && (
       <li>
-        <a href={previous.href} rel="prev" class={linkClass}>
+        <a
+          href={previous.href}
+          rel="prev"
+          aria-label={`Previous${suffix}: ${previous.label}`}
+          class={linkClass}
+        >
           <span class="flex items-center gap-2 font-semibold">
             <svg
               aria-hidden="true"
@@ -33,7 +41,7 @@ const linkClass =
             >
               <path d="M7 1L2 6l5 5M2 6h14" />
             </svg>
-            Previous
+            Previous{suffix}
           </span>
           <span class="underline decoration-1 underline-offset-4 group-hover:decoration-2">
             {previous.label}
@@ -46,10 +54,11 @@ const linkClass =
         <a
           href={next.href}
           rel="next"
+          aria-label={`Next${suffix}: ${next.label}`}
           class={cx(linkClass, 'sm:items-end sm:text-right')}
         >
           <span class="flex items-center gap-2 font-semibold">
-            Next
+            Next{suffix}
             <svg
               aria-hidden="true"
               focusable="false"
