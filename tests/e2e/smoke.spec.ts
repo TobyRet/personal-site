@@ -488,3 +488,17 @@ test('pages carry valid structured data', async ({ page }) => {
     'BreadcrumbList',
   ]);
 });
+
+test('pages load Cloudflare Web Analytics with the site token', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const beacon = page.locator(
+    'script[src="https://static.cloudflareinsights.com/beacon.min.js"]',
+  );
+  await expect(beacon).toHaveCount(1);
+  await expect(beacon).toHaveAttribute(
+    'data-cf-beacon',
+    '{"token":"4a6c84caf8c349d3a1201acb05765fde"}',
+  );
+});

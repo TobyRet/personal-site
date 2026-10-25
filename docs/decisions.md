@@ -72,3 +72,11 @@ The site is built to be read by people first, and by search engines and AI tools
 - **llms.txt:** a plain Markdown summary for AI tools (https://llmstxt.org): who, availability, good fit, every case study with its summary, and links.
 - **Structured data:** JSON-LD on every page describes the site and a Person (with LinkedIn and GitHub as `sameAs`). Case studies add a CreativeWork credited to the Person, and a BreadcrumbList.
 - **Share image:** one 1200 by 630 card for every page, made with `bun run og-image`.
+
+## Analytics: Cloudflare Web Analytics
+
+Cloudflare Web Analytics counts page views and visits without cookies and without tracking individual visitors, so the site needs no cookie banner.
+
+- The beacon is added by `BaseLayout.astro` when `analytics.cloudflareToken` is set in `site.config.ts`. The token is public: it appears in every page.
+- Cloudflare's automatic injection did not reach pages served from the Worker's static assets, so the site uses the manual snippet ("Enable with JS Snippet installation" in the dashboard).
+- GA4 can be added later through `analytics.ga4MeasurementId`, and must load only after cookie consent.

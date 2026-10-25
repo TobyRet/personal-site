@@ -125,7 +125,8 @@ export const site: SiteConfig = {
     { label: 'Contact', href: '/contact/' },
   ],
   analytics: {
-    cloudflareToken: '',
+    // Public site token from Cloudflare Web Analytics. It appears in every page.
+    cloudflareToken: '4a6c84caf8c349d3a1201acb05765fde',
     ga4MeasurementId: '',
   },
 };

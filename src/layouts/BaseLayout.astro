@@ -77,5 +77,15 @@ const shareImage = new URL('/og-default.png', Astro.site ?? site.url).href;
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />
+    {site.analytics.cloudflareToken && (
+      <script
+        is:inline
+        type="module"
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({
+          token: site.analytics.cloudflareToken,
+        })}
+      />
+    )}
   </body>
 </html>
