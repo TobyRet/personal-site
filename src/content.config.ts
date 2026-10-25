@@ -35,7 +35,12 @@ const work = defineCollection({
     start: month,
     /** Leave out for work that is still going. */
     end: month.optional(),
-    stack: z.array(z.string()).min(1),
+    /** The key stack, four to six items. Cards show the first three. The full stack goes in the body. */
+    stack: z.array(z.string()).min(4).max(6),
+    /** Completes "Relevant if you need", as a full sentence. */
+    relevantIf: z.string(),
+    /** The team's size or shape, only where the source says it. */
+    team: z.string().optional(),
     /** One or two sentences for lists and search results. */
     summary: z.string(),
     featured: z.boolean().default(false),

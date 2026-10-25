@@ -8,11 +8,16 @@ role: Senior software engineer
 through: Equal Experts
 start: 2026-04
 end: 2026-09
-stack: [React, TypeScript, Sass, Figma, Azure DevOps]
+stack: [React, TypeScript, Sass, Azure DevOps, Figma]
+relevantIf: Cover for a key front-end role in a regulated environment.
 summary: I joined the fund's member portal team for one month of cover. The fund extended the contract each month, to five months in total.
 featured: false
 order: 3
 ---
+
+## At a glance
+
+A superannuation fund's member portal team needed front-end cover. I joined for one month, and the fund extended the contract each month to five. I released two member journeys and built the platform's first automated deployment pipeline.
 
 ## The situation
 
@@ -20,10 +25,7 @@ The fund's member portal team needed front-end cover. I joined for one month.
 
 The fund extended the contract each month, to five months in total. For part of that time I also covered the Innovation Manager role.
 
-## The constraints
-
-- The fund is APRA-regulated, so changes had to meet strict quality and release controls.
-- Releases were manual and usually happened once a month.
+The fund is APRA-regulated, so changes had to meet strict quality and release controls. Releases were manual and usually happened once a month.
 
 ## What I did
 
@@ -41,7 +43,3 @@ The fund extended the contract each month, to five months in total. For part of 
 ## Stack
 
 React and TypeScript, with Sass for styles. Figma for design handover. Azure DevOps for code, pipelines and work tracking.
-
-## What I would do differently
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.

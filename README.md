@@ -62,7 +62,7 @@ docs/decisions.md       Key decisions and why we made them.
 You can change all copy without touching components.
 
 - **Page copy:** `src/content/pages/*.md`. The frontmatter holds the title, subtitle and meta description. The body is Markdown.
-- **Case studies:** `src/content/work/*.md`, one file each. The file name is the URL, for example `amador.md` becomes `/work/amador/`. The frontmatter is checked against the schema in `src/content.config.ts`. Each body uses six sections: The situation, The constraints, What I did, The result, Stack, What I would do differently.
+- **Case studies:** `src/content/work/*.md`, one file each. The file name is the URL, for example `amador.md` becomes `/work/amador/`. The frontmatter is checked against the schema in `src/content.config.ts`. Each body uses these sections: At a glance, The situation, What I did, The result, Technical detail (optional, collapsed), Stack.
 - **Show a case study on the home page:** set `featured: true`. Change the order with `order`.
 - **CV entries:** `src/content/cv.json`.
 - **Availability, links and the CV PDF:** `src/site.config.ts`.

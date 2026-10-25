@@ -37,7 +37,7 @@ Visitors scan and compare. They read a case study to check fit with their own si
 ## Capabilities and Constraints
 
 - Pages: Home, Work index plus one page per case study, How I work, About, CV (HTML plus PDF download), Contact, Privacy, 404, an internal noindex styleguide.
-- Case studies are typed content collection entries. Each body has: The situation, The constraints, What I did, The result, Stack, What I would do differently.
+- Case studies are typed content collection entries. Each body has: At a glance, The situation, What I did, The result, Technical detail (optional, collapsed), Stack.
 - Initial case studies: Amador (startup marketplace), legacy platform stabilisation (global student housing platform), member portal cover (super fund), Abcam e-commerce rebuild, airline flight scheduling front end.
 - Contact form: name, email, company (optional), message. Turnstile, server-side Zod validation, honeypot, rate limiting, email to the owner. The destination address is a Cloudflare secret, never in the repo or in `wrangler.jsonc`.
 - Cloudflare Web Analytics by default; GA4 possible later behind cookie consent.

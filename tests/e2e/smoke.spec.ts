@@ -44,12 +44,11 @@ test('a visitor can open a case study from the home page', async ({ page }) => {
   await expect(page).toHaveURL(/\/work\/amador\/$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Amador');
   for (const section of [
+    'At a glance',
     'The situation',
-    'The constraints',
     'What I did',
     'The result',
     'Stack',
-    'What I would do differently',
   ]) {
     await expect(
       page.getByRole('heading', { level: 2, name: section }),
