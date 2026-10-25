@@ -1,15 +1,14 @@
 ---
-import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import ContactNote from '@/components/sections/ContactNote.astro';
+import Headshot from '@/components/sections/Headshot.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import MarginNote from '@/components/ui/MarginNote.astro';
 import Prose from '@/components/ui/Prose.astro';
 import { getPage } from '@/lib/content';
 import { site } from '@/site.config';
-import headshot from '@/assets/images/headshot.jpg';
 
 const page = await getPage('about');
 const { Content } = await render(page);
@@ -23,14 +22,7 @@ const { Content } = await render(page);
       subtitle={page.data.subtitle}
     />
     <Fragment slot="notes">
-      <Image
-        src={headshot}
-        alt={`${site.name}, outdoors in a cap and a green jacket`}
-        widths={[128, 256]}
-        sizes="128px"
-        class="h-auto w-32"
-        loading="eager"
-      />
+      <Headshot />
       <MarginNote label="Based in">
         <p>{site.location}</p>
         <p>{site.workingPattern}</p>

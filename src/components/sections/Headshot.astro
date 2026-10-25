@@ -1,0 +1,17 @@
+---
+/**
+ * The headshot for the handout margin, on the home and About pages.
+ */
+import { Image } from 'astro:assets';
+import { site } from '@/site.config';
+import headshot from '@/assets/images/headshot.jpg';
+---
+
+<Image
+  src={headshot}
+  alt={`${site.name}, outdoors in a cap and a green jacket`}
+  widths={[128, 256]}
+  sizes="128px"
+  class="h-auto w-32"
+  loading="eager"
+/>
