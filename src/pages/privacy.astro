@@ -8,9 +8,11 @@ import { getPage } from '@/lib/content';
 
 const page = await getPage('privacy');
 const { Content } = await render(page);
+// Hidden until the copy is reviewed: no footer link, noindex, and left out
+// of the sitemap (astro.config.mjs).
 ---
 
-<Page title={page.data.title} description={page.data.description}>
+<Page title={page.data.title} description={page.data.description} noindex>
   <Handout>
     <PageTitle
       slot="title"

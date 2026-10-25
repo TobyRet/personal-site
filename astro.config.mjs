@@ -22,7 +22,7 @@ export default defineConfig({
     react(),
     // Internal pages stay out of the sitemap.
     sitemap({
-      filter: (page) => !/\/(styleguide|og-card)\/$/.test(page),
+      filter: (page) => !/\/(styleguide|og-card|privacy)\/$/.test(page),
     }),
   ],
   vite: {
