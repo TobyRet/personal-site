@@ -13,7 +13,7 @@ interface Props {
   position: string;
   /** Display dates, for example "2025 to 2026". */
   dates: string;
-  /** The key stack, already trimmed to the first three. */
+  /** The key stack. The card shows the first three. */
   tags: string[];
   /** The heading level for the title. Match the page outline. */
   headingLevel?: 2 | 3 | 4;
@@ -26,9 +26,10 @@ const {
   sector,
   position,
   dates,
-  tags,
+  tags: allTags,
   headingLevel = 3,
 } = Astro.props;
+const tags = allTags.slice(0, 3);
 ---
 
 <article class="flex max-w-reading flex-col gap-2 border-t border-rule py-6">

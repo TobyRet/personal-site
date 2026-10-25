@@ -198,7 +198,12 @@ test('work cards show sector, role and stack tags', async ({ page }) => {
 
 test('no horizontal scroll on phones', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
-  for (const path of ['/', '/work/']) {
+  for (const path of [
+    '/',
+    '/work/',
+    '/work/abcam-ecommerce-rebuild/',
+    '/work/airline-flight-scheduling/',
+  ]) {
     await page.goto(path);
     const fits = await page.evaluate(
       () =>

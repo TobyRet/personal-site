@@ -73,7 +73,9 @@ Planners can scroll and zoom a full season of flights as one smooth chart. The c
 - Lookup maps replace repeated searches, for example from aircraft to row.
 - Zoom recalculates when the user releases the slider, and the view stays on the same date.
 
-**Why not canvas?** HTML elements gave us accessibility, tooltips and simple styling. Drawing only what is on screen kept the page small enough that canvas was not needed.
+**Why not canvas?**
+
+HTML elements gave us accessibility, tooltips and simple styling. Drawing only what is on screen kept the page small enough that canvas was not needed.
 
 </details>
 

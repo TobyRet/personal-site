@@ -7,7 +7,7 @@ import { cx } from '@/lib/cx';
 import Link from './Link.astro';
 
 interface Props {
-  /** Who said it. */
+  /** Who said it, or the organisation credited. */
   name: string;
   /** Their role and organisation. */
   position?: string;
@@ -33,8 +33,8 @@ const hasMark = Astro.slots.has('mark');
 
 <figure
   class={cx(
-    'flex max-w-reading flex-col gap-4',
-    pull && 'gap-6 border-l-2 border-accent pl-6',
+    'flex max-w-reading flex-col',
+    pull ? 'gap-6 border-l-2 border-accent pl-6' : 'gap-4',
     className,
   )}
 >
