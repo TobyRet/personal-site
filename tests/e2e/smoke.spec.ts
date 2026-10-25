@@ -77,30 +77,36 @@ test('skip link is the first focusable element and targets main', async ({
   await expect(page.locator('main#main')).toHaveCount(1);
 });
 
-test('reading settings apply, persist and close with Escape', async ({
+test('the theme switch follows the device, then remembers a choice', async ({
   page,
 }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
-  const button = page.getByRole('button', { name: 'Reading settings' });
-  await button.click();
-  await expect(button).toHaveAttribute('aria-expanded', 'true');
-
-  await page.getByRole('radio', { name: 'Larger' }).check();
-  await page.getByRole('radio', { name: 'Sans serif' }).check();
-  await page.getByRole('radio', { name: 'Dark' }).check();
-
   const html = page.locator('html');
-  await expect(html).toHaveAttribute('data-text-size', 'xl');
-  await expect(html).toHaveAttribute('data-reading-font', 'sans');
-  await expect(html).toHaveAttribute('data-theme', 'dark');
+  const button = page.getByRole('button', { name: 'Dark mode' });
+  await expect(button).toHaveAttribute('aria-pressed', 'false');
+  await expect(html).not.toHaveAttribute('data-theme', /.+/);
 
-  await page.keyboard.press('Escape');
-  await expect(button).toHaveAttribute('aria-expanded', 'false');
-  await expect(button).toBeFocused();
+  await button.focus();
+  await page.keyboard.press('Enter');
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await expect(html).toHaveAttribute('data-theme', 'dark');
 
   await page.reload();
-  await expect(html).toHaveAttribute('data-text-size', 'xl');
   await expect(html).toHaveAttribute('data-theme', 'dark');
+  await expect(page.getByRole('button', { name: 'Dark mode' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
+test('the theme switch starts pressed on a dark device', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('/');
+  await expect(page.getByRole('button', { name: 'Dark mode' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
 });
 
 test('pages load no UI framework', async ({ page }) => {

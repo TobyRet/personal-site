@@ -1,0 +1,84 @@
+---
+/**
+ * The light and dark theme switch: one button in the header.
+ * It follows the device until pressed, then remembers the choice.
+ * Screen readers hear "Dark mode" with its pressed state.
+ *
+ * Plain HTML plus a small script, so pages do not load a UI framework.
+ * Without JavaScript the button stays hidden and the site follows the device.
+ * Icons are from Bootstrap Icons (MIT licence).
+ */
+import MoonIcon from '@/assets/icons/moon.svg';
+import SunIcon from '@/assets/icons/sun.svg';
+---
+
+<theme-toggle class="hidden self-center">
+  <button
+    type="button"
+    aria-pressed="false"
+    class="flex cursor-pointer items-center border border-rule p-1 text-text hover:border-control"
+  >
+    <span class="sr-only">Dark mode</span>
+    <span data-icon="moon">
+      <MoonIcon class="size-(--size-icon)" />
+    </span>
+    <span data-icon="sun" hidden>
+      <SunIcon class="size-(--size-icon)" />
+    </span>
+  </button>
+</theme-toggle>
+
+<script>
+  import {
+    effectiveTheme,
+    loadTheme,
+    saveTheme,
+    type Theme,
+  } from '@/lib/theme';
+
+  function getStorage(): Storage | undefined {
+    try {
+      return window.localStorage;
+    } catch {
+      return undefined;
+    }
+  }
+
+  class ThemeToggle extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector('button');
+      if (!button) return;
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const storage = getStorage();
+      let saved = loadTheme(storage);
+
+      const render = () => {
+        const dark = effectiveTheme(saved, media.matches) === 'dark';
+        button.setAttribute('aria-pressed', String(dark));
+        this.querySelector('[data-icon="moon"]')?.toggleAttribute(
+          'hidden',
+          dark,
+        );
+        this.querySelector('[data-icon="sun"]')?.toggleAttribute(
+          'hidden',
+          !dark,
+        );
+      };
+
+      button.addEventListener('click', () => {
+        const next: Theme =
+          effectiveTheme(saved, media.matches) === 'dark' ? 'light' : 'dark';
+        saved = next;
+        saveTheme(storage, next);
+        document.documentElement.dataset['theme'] = next;
+        render();
+      });
+      media.addEventListener('change', render);
+
+      this.classList.remove('hidden');
+      render();
+    }
+  }
+
+  customElements.define('theme-toggle', ThemeToggle);
+</script>

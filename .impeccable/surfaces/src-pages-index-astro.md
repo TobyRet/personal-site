@@ -17,7 +17,7 @@ Revision: replaces the first GOV.UK-patterned build. The owner said it was too c
 
 THESIS: Every page is a well-set handout. A calm serif reading column carries the story, and the facts sit beside it in a wide margin. It refuses the portfolio defaults: a hero banner, a grid of project cards, and badges.
 
-OWN-WORLD: White paper and near-black ink. One accent, blue-black ink, for links, note markers and availability. Literata for the reading column and headings. Atkinson Hyperlegible Next for the interface and margin notes. Hairline rules, no boxes, no shadows, square corners. A true night page in dark mode. An "Aa" reading-settings control for size, font and theme.
+OWN-WORLD: White paper and near-black ink. One accent, blue-black ink, for links, note markers and availability. Literata for the reading column and headings. Atkinson Hyperlegible Next for the interface and margin notes. Hairline rules, no boxes, no shadows, square corners. A true night page in dark mode. A light and dark theme switch in the header.
 
 STORY: The visitor reads one sentence on who this is, sees availability in the margin, and reads three case studies whose facts sit beside them. Contact is always one link away.
 
