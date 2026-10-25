@@ -56,6 +56,8 @@ const pages = defineCollection({
     /** For the <meta name="description"> tag and search results. */
     description: z.string(),
     subtitle: z.string().optional(),
+    /** Home page: the "Recent work:" line under the button, linked to a case study. */
+    recentWork: z.object({ text: z.string(), href: z.string() }).optional(),
     /** Home page: completes "Good fit if you need", one full sentence per item. */
     goodFit: z.array(z.string()).optional(),
   }),

@@ -9,6 +9,7 @@ import ClientList from '@/components/sections/ClientList.astro';
 import ContactNote from '@/components/sections/ContactNote.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
+import RecentWork from '@/components/sections/RecentWork.astro';
 import Testimonial from '@/components/sections/Testimonial.astro';
 import ThroughList from '@/components/sections/ThroughList.astro';
 import Button from '@/components/ui/Button.astro';
@@ -24,7 +25,7 @@ import { site } from '@/site.config';
 const page = await getPage('home');
 const { Content } = await render(page);
 const featured = await getFeaturedCaseStudies();
-const { goodFit = [] } = page.data;
+const { goodFit = [], recentWork } = page.data;
 ---
 
 <Page title={site.name} description={page.data.description}>
@@ -41,6 +42,7 @@ const { goodFit = [] } = page.data;
       <div>
         <Button href="/contact/">Get in touch</Button>
       </div>
+      {recentWork && <RecentWork {...recentWork} />}
     </Stack>
     <Fragment slot="notes">
       <AvailabilityNote />

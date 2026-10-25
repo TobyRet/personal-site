@@ -18,4 +18,4 @@ Sometimes a project loses a key person, or a platform becomes unstable. I step i
 
 ## AI-assisted delivery
 
-I use AI agents in a disciplined way. Each change goes through a spike, a spec and a review before the build. Agents have a written scope, and a person approves every merge. I can help teams adopt the same approach.
+I use AI agents in a disciplined way. Each change goes through a spike, a spec and a review before the build. Agents have a written scope, and a person approves every merge. I can help teams adopt the same approach. [See how I used AI on Amador](/work/amador/#how-i-used-ai).

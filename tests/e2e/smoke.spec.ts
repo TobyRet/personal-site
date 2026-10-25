@@ -258,7 +258,22 @@ test('clients and good fit are listed', async ({ page }) => {
   await expect(
     goodFit.getByRole('heading', { level: 2, name: 'Good fit if you need' }),
   ).toBeVisible();
-  await expect(goodFit.getByRole('listitem')).toHaveCount(3);
+  await expect(goodFit.getByRole('listitem')).toHaveCount(4);
+});
+
+test('AI experience is visible on the home page and linked from How I work', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.locator('main')).toContainText(
+    'I also add AI features to products',
+  );
+  await page.goto('/how-i-work/');
+  await page.getByRole('link', { name: 'See how I used AI on Amador' }).click();
+  await expect(page).toHaveURL(/\/work\/amador\/#how-i-used-ai$/);
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'How I used AI' }),
+  ).toBeVisible();
 });
 
 test('client names are plain text', async ({ page }) => {
