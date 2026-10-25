@@ -18,13 +18,13 @@ order: 2
 
 ## At a glance
 
-A global student housing platform bought an unstable legacy rental platform with no tests or monitoring. We met a fixed regulatory deadline without changing the legacy core. We also added the first monitoring and tests, so the team could move from firefighting to planned work.
+A global student housing platform bought an unstable legacy rental platform with no tests or monitoring. I led an Equal Experts team in Australia and India. We met a fixed regulatory deadline without changing the legacy core. We also added the first monitoring and tests, so the team could move from firefighting to planned work.
 
 ## The situation
 
 The client runs a global student housing platform with 3 million residents in 25 countries. It had bought an unstable legacy rental platform. The platform had no automated tests and no monitoring, so any change to the legacy core was a risk.
 
-US rental fee transparency rules had a fixed deadline, with regulatory penalties if it was missed. I led an Equal Experts team in Australia and India. The team was spread across several countries and time zones. The work started as modernisation. When the client's priorities changed, it moved to stability and team improvement.
+US rental fee transparency rules had a fixed deadline, with regulatory penalties if it was missed. The team was spread across several countries and time zones. The work started as modernisation. When the client's priorities changed, it moved to stability and team improvement.
 
 ## What I did
 
