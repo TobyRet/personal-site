@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const dir = join(process.cwd(), 'src/content/work');
+const OPTIONAL_AI = 'How I used AI';
 
 /** Each case study body, with the frontmatter removed. */
 const studies = readdirSync(dir)
@@ -22,13 +23,16 @@ describe('case study format', () => {
   it.each(studies)(
     '$name has the required sections in order',
     ({ headings }) => {
-      expect(headings).toEqual([
+      // "How I used AI" is optional, and sits straight after What I did.
+      expect(headings.filter((h) => h !== OPTIONAL_AI)).toEqual([
         'At a glance',
         'The situation',
         'What I did',
         'The result',
         'Stack',
       ]);
+      const ai = headings.indexOf(OPTIONAL_AI);
+      if (ai !== -1) expect(headings[ai - 1]).toBe('What I did');
     },
   );
 
@@ -42,6 +46,11 @@ describe('case study format', () => {
       expect(at).toBeLessThan(body.indexOf('## Stack'));
     },
   );
+
+  it('Amador has a How I used AI section', () => {
+    const amador = studies.find((study) => study.name === 'amador.md');
+    expect(amador?.headings).toContain(OPTIONAL_AI);
+  });
 
   it.each(studies)('$name has no placeholder copy', ({ body }) => {
     expect(body).not.toMatch(/lorem ipsum/i);

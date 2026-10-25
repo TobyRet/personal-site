@@ -1,18 +1,18 @@
 ---
 import MarginNote from '@/components/ui/MarginNote.astro';
+import { availabilityMessage } from '@/lib/availability';
 import { site } from '@/site.config';
 
-const { availability } = site;
+interface Props {
+  class?: string | undefined;
+}
 
-const message =
-  availability.status === 'available'
-    ? `Available for contract work from ${availability.from}.`
-    : availability.status === 'limited'
-      ? 'Limited availability.'
-      : 'Not available for new work.';
+const { class: className } = Astro.props;
+const { availability } = site;
+const message = availabilityMessage(availability);
 ---
 
-<MarginNote label="Availability" tone="accent">
+<MarginNote label="Availability" tone="accent" class={className}>
   <p class="font-semibold">{message}</p>
   {availability.note && <p class="text-text-secondary">{availability.note}</p>}
 </MarginNote>

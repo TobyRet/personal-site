@@ -26,6 +26,10 @@ for (const width of WIDTHS) {
   });
   for (const path of paths) {
     await page.goto(new URL(path, base).href);
+    // The dev server adds a toolbar. Keep it out of the screenshots.
+    await page.addStyleTag({
+      content: 'astro-dev-toolbar { display: none !important; }',
+    });
     const name = path.replace(/^\/|\/$/g, '').replace(/\//g, '_') || 'home';
     await page.screenshot({
       path: `${outDir}/${name}-${colorScheme}-${width}.png`,

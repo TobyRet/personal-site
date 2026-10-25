@@ -20,7 +20,8 @@
     "cf-typegen": "wrangler types",
     "deploy": "astro build && wrangler deploy",
     "prepare": "husky",
-    "check:pii": "node scripts/check-pii.mjs"
+    "check:pii": "node scripts/check-pii.mjs",
+    "og-image": "node scripts/og-image.mjs http://localhost:4321"
   },
   "lint-staged": {
     "*.{js,mjs,ts,tsx,astro}": [
@@ -56,6 +57,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.2",
     "@astrojs/react": "^7.1.1",
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
     "@fontsource-variable/literata": "^5.3.0",
     "astro": "^7.4.2",

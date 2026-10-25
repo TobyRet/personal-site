@@ -1,26 +1,20 @@
 ---
-/** One line of client names, each linked to its site: "A, B and C". */
-import Link from '@/components/ui/Link.astro';
+/** One line of client names as plain text, in the house style: "A, B and C." */
 import Text from '@/components/ui/Text.astro';
 import { separatorBefore } from '@/lib/text';
-import type { Organisation } from '@/site.config';
 
 interface Props {
-  clients: Organisation[];
+  clients: string[];
 }
 
 const { clients } = Astro.props;
+const names = clients
+  .map((client, index) => separatorBefore(index, clients.length) + client)
+  .join('');
 ---
 
 {clients.length > 0 && (
   <Text measure>
-    <span class="font-semibold">Clients include</span>{' '}
-    {clients.map((client, index) => (
-      <>
-        {separatorBefore(index, clients.length)}
-        <Link href={client.href}>{client.name}</Link>
-        {index === clients.length - 1 && '.'}
-      </>
-    ))}
+    <span class="font-semibold">Clients include</span> {names}.
   </Text>
 )}

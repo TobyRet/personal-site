@@ -10,7 +10,7 @@ start: 2025-05
 end: 2025-09
 stack: [React, TypeScript, Zustand, Vite, Node.js, PostgreSQL]
 relevantIf: A lead for a new React front end that handles very large data.
-summary: I led the front end of a flight scheduling tool for a major airline. We rebuilt its main chart so planners can scroll a full season of flights smoothly.
+summary: I led the front end of a flight scheduling tool for a major airline. We rebuilt its main chart so planners can scroll a year of flights smoothly.
 featured: false
 order: 5
 ---

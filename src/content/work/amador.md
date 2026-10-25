@@ -1,6 +1,6 @@
 ---
 title: Amador, from prototype to live marketplace
-subtitle: Sole lead engineer on a two-sided marketplace for brands and creators
+subtitle: Sole lead engineer for a startup marketplace
 client: Amador
 clientNamed: true
 sector: Startup, creator marketplace
@@ -9,32 +9,50 @@ start: 2025-04
 stack: [Next.js, TypeScript, Supabase, Stripe, Cloudflare, Vercel]
 relevantIf: A hands-on lead to take a prototype to a live product.
 team: Sole lead engineer, working with the founder
-summary: I took an inherited prototype to a live production platform in about four months. More than 140 brands and creators now use it.
+summary: I took an inherited prototype to a live product in about four months, with AI-powered onboarding and an AI-assisted engineering workflow.
 featured: true
 order: 1
 ---
 
 ## At a glance
 
-Amador is a two-sided marketplace where brands find creators for user-generated content. I joined as sole lead engineer when the product was an inherited prototype. I took it to a live production platform in about four months. More than 140 brands and creators now use it.
+Amador is a two-sided marketplace where brands find creators for user-generated content. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
 
 ## The situation
 
-Amador is a two-sided marketplace. Brands use it to find creators for user-generated content. Amador was selected for the Antler Australia pre-seed residency.
+Amador was selected for the Antler Australia pre-seed residency. When I joined, the product was an inherited prototype.
 
-When I joined, the product was an inherited prototype. I am the sole lead engineer. I work with the founder on technical direction and product.
+I work with the founder on technical direction and product.
 
 ## What I did
 
-- I took the prototype to a live production platform in about four months.
+- I took the prototype to a live production platform.
 - I built campaigns, brand surveys and polls.
-- I built an AI onboarding flow. It uses OpenAI to write a brand identity and community kit. A token balance meters each brand's AI use.
 - I designed the points ledger and a tiered subscription model.
-- I set up an AI-assisted engineering workflow with Claude Code.
+
+## How I used AI
+
+### In the product
+
+- I built an onboarding flow that uses the OpenAI API to write a brand identity and community kit.
+- Each brand has a token balance that meters its AI use.
+
+### In my engineering work
+
+- I use Claude Code. Each change goes through a spike, a spec and a review before the build.
+- Review agents check security, database, Stripe and UX changes.
+- Scheduled agents triage dependency updates, fix issues, review pull requests and reduce type errors.
+
+### Keeping it safe
+
+- Each agent has a written scope and read-only access to production.
+- Nothing pushes to main. A person approves every merge.
 
 ## The result
 
-More than 140 brands and creators use the platform.
+- More than 140 brands and creators use the platform.
+- The founder can release changes safely, through a guarded workflow.
+- Amador was accepted into the Vercel for Startups programme.
 
 <details>
 <summary>Technical detail</summary>
@@ -48,9 +66,8 @@ More than 140 brands and creators use the platform.
 
 - I added Row Level Security audits, and rate limiting at a Cloudflare edge Worker.
 
-**AI-assisted delivery**
+**Delivery**
 
-- Each change goes through a spike, a spec and a review before the build. Review agents check security, database, Stripe and UX changes. Each agent has a written scope and read-only production access. A person approves every merge.
 - I run the product with trunk-based development, pull request gates, CI and a typecheck ratchet.
 
 </details>

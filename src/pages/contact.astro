@@ -2,10 +2,10 @@
 import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
+import Stack from '@/components/layout/Stack.astro';
 import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
-import Callout from '@/components/ui/Callout.astro';
-import Link from '@/components/ui/Link.astro';
+import Button from '@/components/ui/Button.astro';
 import MarginNote from '@/components/ui/MarginNote.astro';
 import Prose from '@/components/ui/Prose.astro';
 import { getPage } from '@/lib/content';
@@ -24,22 +24,19 @@ const { Content } = await render(page);
     />
     <Fragment slot="notes">
       <AvailabilityNote />
-      <MarginNote label="Elsewhere">
-        <p>
-          <Link href={site.linkedIn}>LinkedIn</Link>
-        </p>
+      <MarginNote label="Based in">
+        <p>{site.location}</p>
+        <p>{site.workingPattern}</p>
       </MarginNote>
     </Fragment>
 
-    <Prose>
-      <Content />
-    </Prose>
-
-    <Callout title="Contact form" class="mt-8">
-      <p>
-        The contact form is not ready yet. For now, message me on{' '}
-        <Link href={site.linkedIn}>LinkedIn</Link>.
-      </p>
-    </Callout>
+    <Stack gap={8}>
+      <Prose>
+        <Content />
+      </Prose>
+      <div>
+        <Button href={site.linkedIn}>Message me on LinkedIn</Button>
+      </div>
+    </Stack>
   </Handout>
 </Page>

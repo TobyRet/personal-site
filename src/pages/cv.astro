@@ -2,7 +2,6 @@
 import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
-import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import ContactNote from '@/components/sections/ContactNote.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Heading from '@/components/ui/Heading.astro';
@@ -11,6 +10,7 @@ import MarginNote from '@/components/ui/MarginNote.astro';
 import Prose from '@/components/ui/Prose.astro';
 import { getCvEntries, getPage } from '@/lib/content';
 import { formatRange } from '@/lib/dates';
+import { metaLine } from '@/lib/text';
 import { site } from '@/site.config';
 
 const page = await getPage('cv');
@@ -22,18 +22,15 @@ const experience = await getCvEntries();
   <Handout>
     <PageTitle slot="title" title={site.name} subtitle={page.data.subtitle} />
     <Fragment slot="notes">
-      <MarginNote label="Download">
-        {site.cvPdf ? (
+      {site.cvPdf && (
+        <MarginNote label="Download">
           <p>
             <Link href={site.cvPdf} download>
               CV as a PDF
             </Link>
           </p>
-        ) : (
-          <p>The PDF is coming soon.</p>
-        )}
-      </MarginNote>
-      <AvailabilityNote />
+        </MarginNote>
+      )}
       <ContactNote />
     </Fragment>
 
@@ -52,10 +49,7 @@ const experience = await getCvEntries();
               {data.role}, {data.organisation}
             </Heading>
             <p class="font-ui text-ui text-text-secondary">
-              {formatRange(data.start, data.end)}
-              <span aria-hidden="true"> · </span>
-              <span class="sr-only">, </span>
-              {data.location}
+              {metaLine([formatRange(data.start, data.end), data.location])}
             </p>
             <p>{data.summary}</p>
           </li>

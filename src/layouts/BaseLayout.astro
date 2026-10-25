@@ -1,7 +1,7 @@
 ---
 /**
  * The document shell: <html>, <head> and global CSS.
- * SEO tags (Open Graph, JSON-LD, canonical) are completed in phase 5.
+ * The canonical and Open Graph URLs come from `site.url` (set in Astro's config).
  */
 import '@/styles/global.css';
 import { site } from '@/site.config';
@@ -17,9 +17,9 @@ export interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
-const canonical = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site).href
-  : undefined;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+// Made by `bun run og-image` from the /og-card/ page.
+const shareImage = new URL('/og-default.png', Astro.site ?? site.url).href;
 ---
 
 <!doctype html>
@@ -29,7 +29,22 @@ const canonical = Astro.site
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${site.name}, technical lead and senior full-stack engineer`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={shareImage} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!--

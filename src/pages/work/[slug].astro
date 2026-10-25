@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Breadcrumbs from '@/components/nav/Breadcrumbs.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
 import CaseStudyFacts from '@/components/sections/CaseStudyFacts.astro';
 import PageTitle from '@/components/sections/PageTitle.astro';
 import Button from '@/components/ui/Button.astro';
@@ -49,17 +50,19 @@ const toLink = (item: CaseStudy | undefined) =>
   />
   <Handout tight>
     <PageTitle slot="title" title={data.title} subtitle={data.subtitle} />
-    <CaseStudyFacts
-      slot="notes"
-      client={data.client}
-      sector={data.sector}
-      position={data.role}
-      dates={formatRange(data.start, data.end)}
-      through={data.through}
-      relevantIf={data.relevantIf}
-      team={data.team}
-      stack={data.stack}
-    />
+    <Fragment slot="notes">
+      <CaseStudyFacts
+        client={data.client}
+        sector={data.sector}
+        position={data.role}
+        dates={formatRange(data.start, data.end)}
+        through={data.through}
+        relevantIf={data.relevantIf}
+        team={data.team}
+        stack={data.stack}
+      />
+      <AvailabilityNote />
+    </Fragment>
 
     <Prose>
       <Content />
@@ -81,6 +84,7 @@ const toLink = (item: CaseStudy | undefined) =>
 
   <Pagination
     label="More case studies"
+    itemName="case study"
     previous={toLink(previous)}
     next={toLink(next)}
   />

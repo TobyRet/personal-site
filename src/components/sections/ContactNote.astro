@@ -1,15 +1,19 @@
 ---
 /** A margin note with the ways to get in touch. */
-import Link from '@/components/ui/Link.astro';
+import SocialLink from '@/components/ui/SocialLink.astro';
 import MarginNote from '@/components/ui/MarginNote.astro';
 import { site } from '@/site.config';
 ---
 
 <MarginNote label="Get in touch">
   <p>
-    <Link href="/contact/">Send a message</Link>
+    <SocialLink
+      network="linkedin"
+      href={site.linkedIn}
+      label="Message me on LinkedIn"
+    />
   </p>
   <p>
-    <Link href={site.linkedIn}>LinkedIn</Link>
+    <SocialLink network="github" href={site.github} label="See my GitHub" />
   </p>
 </MarginNote>
