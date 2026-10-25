@@ -10,6 +10,8 @@ interface Props {
   /** Limit the line length to the reading measure. */
   measure?: boolean;
   as?: 'p' | 'span' | 'div' | 'strong';
+  /** Lets another element point to this text, for example as its label. */
+  id?: string | undefined;
   class?: string | undefined;
 }
 
@@ -20,6 +22,7 @@ const {
   italic = false,
   measure = false,
   as: Tag = 'p',
+  id,
   class: className,
 } = Astro.props;
 
@@ -35,6 +38,7 @@ const weights = { regular: 'font-regular', semibold: 'font-semibold' } as const;
 ---
 
 <Tag
+  id={id}
   class={cx(
     sizes[size],
     tones[tone],
