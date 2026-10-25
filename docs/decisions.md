@@ -52,11 +52,12 @@ The first build followed GOV.UK too closely and looked like a copy. The owner as
 - Atkinson Hyperlegible Next for the interface: nav, labels, forms, buttons and notes. It was designed for low-vision legibility.
 - One accent, blue-black ink, for links, notes and focus. Light and dark themes, with every text colour at AA contrast or better.
 
-## Reading settings ("Aa") without a framework
+## Theme switch without a framework
 
-Readers can change text size, reading font and theme. Choices are stored in `localStorage` and applied as data attributes on `<html>`, which the tokens read.
+Readers can switch between light and dark. With no choice saved, the site follows the device. The choice is stored in `localStorage` and applied as `data-theme` on `<html>`, which the tokens read.
 
-- The control is an Astro component with a small script (a custom element), not a React island. A React island in the header would load React (about 40 to 45 KB compressed) on every page. The whole page now ships about 1 KB of compressed JavaScript.
-- A tiny inline script in `<head>` applies saved settings before the page paints, so there is no flash.
-- Without JavaScript the button stays hidden, and the site follows the device's own dark mode, zoom and font settings.
+- The switch replaced an "Aa" reading settings control (text size, font and theme). Text size repeated browser zoom, the font choice was rarely useful, and the control crowded the phone header. The owner chose to keep only light and dark.
+- The switch is an Astro component with a small script (a custom element), not a React island. A React island in the header would load React (about 40 to 45 KB compressed) on every page.
+- A tiny inline script in `<head>` applies a saved choice before the page paints, so there is no flash.
+- Without JavaScript the button stays hidden, and the site follows the device's dark mode.
 - React is still installed for the contact form, which is the only island.

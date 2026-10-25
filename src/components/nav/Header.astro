@@ -2,7 +2,7 @@
 import Container from '@/components/layout/Container.astro';
 import Link from '@/components/ui/Link.astro';
 import { site } from '@/site.config';
-import ReadingSettings from './ReadingSettings.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   /** The current URL path, used to mark the active nav item. */
@@ -48,6 +48,6 @@ const isCurrent = (href: string) =>
         ))}
       </ul>
     </nav>
-    <ReadingSettings />
+    <ThemeToggle />
   </Container>
 </header>

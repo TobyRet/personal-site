@@ -2,16 +2,14 @@
  * Design tokens. The single source of truth for colour, type, spacing,
  * layout, borders and motion.
  *
- * 1. :root holds raw values. Themes, viewport sizes and the reader's
- *    "Aa" settings redefine them further down.
+ * 1. :root holds raw values. The dark theme and viewport sizes redefine
+ *    them further down.
  * 2. @theme exposes them to Tailwind. `static` emits every token as a CSS
  *    variable, even when no utility uses it. `--*: initial` removes every
  *    Tailwind default first, so only these tokens exist as utilities.
  *
- * Reader settings are data attributes on <html>, set by ReadingSettings:
- *   data-theme="light" | "dark"        (absent: follow the system)
- *   data-text-size="l" | "xl"          (absent: default size)
- *   data-reading-font="sans"           (absent: serif)
+ * The theme switch sets a data attribute on <html> (see ThemeToggle):
+ *   data-theme="light" | "dark"        (absent: follow the device)
  */
 
 :root {
@@ -33,9 +31,6 @@
     'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next',
     system-ui, sans-serif;
   --family-reading: var(--family-serif);
-
-  /* Type: the reader's chosen scale (Aa control) */
-  --reading-scale: 1;
 
   /* Type: base sizes on small screens, before the reader's scale */
   --base-title: 2rem;
@@ -110,18 +105,6 @@
   color-scheme: dark;
 }
 
-:root[data-text-size='l'] {
-  --reading-scale: 1.125;
-}
-
-:root[data-text-size='xl'] {
-  --reading-scale: 1.25;
-}
-
-:root[data-reading-font='sans'] {
-  --family-reading: var(--family-sans);
-}
-
 @theme static {
   --*: initial;
 
@@ -149,14 +132,14 @@
   --font-weight-bold: 700;
 
   /* Type: four roles. Each scales with the reader's Aa setting. */
-  --text-title: calc(var(--base-title) * var(--reading-scale));
+  --text-title: var(--base-title);
   --text-title--line-height: 1.2;
   --text-title--letter-spacing: -0.01em;
-  --text-heading: calc(var(--base-heading) * var(--reading-scale));
+  --text-heading: var(--base-heading);
   --text-heading--line-height: 1.3;
-  --text-reading: calc(var(--base-reading) * var(--reading-scale));
+  --text-reading: var(--base-reading);
   --text-reading--line-height: 1.6;
-  --text-ui: calc(var(--base-ui) * var(--reading-scale));
+  --text-ui: var(--base-ui);
   --text-ui--line-height: 1.5;
 
   /* Type: line heights, for overrides */
