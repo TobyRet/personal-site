@@ -76,6 +76,72 @@
     padding-inline: var(--spacing-1);
   }
 
+  .prose :global(details) {
+    border-block: var(--border-thin) solid var(--color-rule);
+  }
+
+  .prose :global(details[open]) {
+    padding-bottom: var(--spacing-6);
+  }
+
+  .prose :global(summary) {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    min-height: var(--spacing-12);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-ui);
+    font-size: var(--text-ui);
+    line-height: var(--text-ui--line-height);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .prose :global(summary::-webkit-details-marker) {
+    display: none;
+  }
+
+  /* The marker is a drawn chevron: it points right when closed, down when open. */
+  .prose :global(summary::before) {
+    content: '';
+    flex: none;
+    width: var(--spacing-2);
+    height: var(--spacing-2);
+    border-right: var(--border-medium) solid currentColor;
+    border-bottom: var(--border-medium) solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform var(--default-transition-duration) var(--ease-out);
+  }
+
+  .prose :global(details[open] > summary::before) {
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prose :global(summary::before) {
+      transition: none;
+    }
+  }
+
+  .prose :global(details > * + *) {
+    margin-top: var(--spacing-4);
+  }
+
+  /* A paragraph that holds only bold text is a group label inside the block. */
+  .prose :global(details > p > strong:only-child) {
+    font-family: var(--font-ui);
+    font-size: var(--text-ui);
+    line-height: var(--text-ui--line-height);
+  }
+
+  .prose :global(details > p:has(> strong:only-child)) {
+    margin-top: var(--spacing-8);
+  }
+
+  .prose :global(details > p:has(> strong:only-child) + *) {
+    margin-top: var(--spacing-2);
+  }
+
   .prose :global(blockquote) {
     padding-left: var(--spacing-8);
     font-style: italic;

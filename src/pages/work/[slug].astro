@@ -56,6 +56,9 @@ const toLink = (item: CaseStudy | undefined) =>
       position={data.role}
       dates={formatRange(data.start, data.end)}
       through={data.through}
+      relevantIf={data.relevantIf}
+      team={data.team}
+      stack={data.stack}
     />
 
     <Prose>

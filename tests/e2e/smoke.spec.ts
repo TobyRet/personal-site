@@ -135,3 +135,46 @@ test('/health responds ok', async ({ request }) => {
   expect(response.ok()).toBe(true);
   expect(await response.json()).toEqual({ status: 'ok' });
 });
+
+test('case study margin leads with the match line', async ({ page }) => {
+  await page.goto('/work/airline-flight-scheduling/');
+  const notes = page.getByRole('complementary', { name: 'Notes' });
+  const text = (await notes.innerText()).replace(/\s+/g, ' ');
+  const order = [
+    'Relevant if you need',
+    'A lead for a new React front end that handles very large data.',
+    'Client',
+    'Key stack',
+    'Zustand',
+  ].map((part) => text.indexOf(part));
+  expect(order.every((index) => index >= 0)).toBe(true);
+  expect(order).toEqual([...order].sort((a, b) => a - b));
+});
+
+test('team shows only when known', async ({ page }) => {
+  await page.goto('/work/student-housing-platform-stabilisation/');
+  const notes = page.getByRole('complementary', { name: 'Notes' });
+  await expect(notes).toContainText('Team');
+  await expect(notes).toContainText('Team in Australia and India');
+  await page.goto('/work/super-fund-member-portal/');
+  await expect(
+    page
+      .getByRole('complementary', { name: 'Notes' })
+      .getByText('Team', { exact: true }),
+  ).toHaveCount(0);
+});
+
+test('technical detail opens with the keyboard', async ({ page }) => {
+  await page.goto('/work/abcam-ecommerce-rebuild/');
+  const summary = page.getByText('Technical detail', { exact: true });
+  const details = page.locator('details');
+  await expect(details).not.toHaveAttribute('open', /.*/);
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(details).toHaveAttribute('open', '');
+  await expect(page.getByText('Sign-in and access control')).toBeVisible();
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+    .analyze();
+  expect(results.violations).toEqual([]);
+});
