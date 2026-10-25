@@ -417,3 +417,17 @@ test('the CV shows no download note until the PDF exists', async ({ page }) => {
   await page.goto('/cv/');
   await expect(page.locator('main')).not.toContainText('coming soon');
 });
+
+test('the privacy page is hidden until its copy is reviewed', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(
+    page.locator('footer').getByRole('link', { name: 'Privacy' }),
+  ).toHaveCount(0);
+  await page.goto('/privacy/');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    /noindex/,
+  );
+});
