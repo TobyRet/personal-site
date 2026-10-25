@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0f1111"/><rect x="6" y="22" width="20" height="4" fill="#ffd60a"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><!-- TR monogram. Colours match the ink-accent and paper tokens in src/styles/tokens.css. --><rect width="32" height="32" rx="6" fill="#1d3a6b"/><path d="M4.5 9.5h10M9.5 9.5V24M18.5 24V9.5h4a3.75 3.75 0 0 1 0 7.5h-4M22.5 17l4.5 7" fill="none" stroke="#fcfbf8" stroke-width="3"/></svg>
