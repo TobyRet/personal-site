@@ -28,6 +28,8 @@ const work = defineCollection({
     client: z.string(),
     /** True when the client may be named publicly. */
     clientNamed: z.boolean(),
+    /** The client's website. The Client note links to it, in a new tab. Only for named clients. */
+    clientHref: z.string().url().optional(),
     sector: z.string(),
     role: z.string(),
     /** The consultancy or agency the work came through, if any. */
