@@ -1,7 +1,7 @@
 ---
 title: CV
 subtitle: Technical lead and senior full-stack engineer.
-description: The CV of Toby Retallick, technical lead and senior full-stack engineer, with a PDF download.
+description: The CV of Toby Retallick, technical lead and senior full-stack engineer.
 ---
 
 I am a technical lead and senior full-stack engineer with 12 years of consulting and contract experience in the UK and Australia. My clients include government, financial services, aviation, global e-commerce and startups.

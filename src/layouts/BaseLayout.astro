@@ -5,6 +5,7 @@
  */
 import '@/styles/global.css';
 import { site } from '@/site.config';
+import { type JsonLdNode, siteGraph, toJsonLd } from '@/lib/structuredData';
 import { THEME_KEY } from '@/lib/theme';
 
 export interface Props {
@@ -13,10 +14,22 @@ export interface Props {
   description: string;
   /** Keep the page out of search results. */
   noindex?: boolean;
+  /** Extra JSON-LD for this page. Every page already describes the site and the person. */
+  structuredData?: JsonLdNode[];
 }
 
-const { title, description, noindex = false } = Astro.props;
-const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
+const {
+  title,
+  description,
+  noindex = false,
+  structuredData = [],
+} = Astro.props;
+// The home page leads with the name and role. Other pages end with the name.
+const fullTitle =
+  title === site.name
+    ? `${site.name} | ${site.jobTitle}`
+    : `${title} | ${site.name}`;
+const jsonLd = toJsonLd([...siteGraph(site), ...structuredData]);
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 // Made by `bun run og-image` from the /og-card/ page.
 const shareImage = new URL('/og-default.png', Astro.site ?? site.url).href;
@@ -46,6 +59,7 @@ const shareImage = new URL('/og-default.png', Astro.site ?? site.url).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={shareImage} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <script type="application/ld+json" set:html={jsonLd} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!--
       Applies a saved light or dark choice before the page paints, so there

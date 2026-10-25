@@ -61,3 +61,14 @@ Readers can switch between light and dark. With no choice saved, the site follow
 - A tiny inline script in `<head>` applies a saved choice before the page paints, so there is no flash.
 - Without JavaScript the button stays hidden, and the site follows the device's dark mode.
 - React is still installed for the contact form, which is the only island.
+
+## Search and AI visibility
+
+The site is built to be read by people first, and by search engines and AI tools second. Everything is generated from the content and `site.config.ts`, so it stays current when copy changes.
+
+- **Addresses:** `url` in `site.config.ts` sets canonical URLs, Open Graph tags, the sitemap, `robots.txt` and `llms.txt`.
+- **Sitemap:** `@astrojs/sitemap`. Internal and hidden pages (styleguide, share card, privacy) are left out and marked `noindex`.
+- **robots.txt:** allows every crawler, AI crawlers included, because being found and summarised by AI tools helps the site's goal.
+- **llms.txt:** a plain Markdown summary for AI tools (https://llmstxt.org): who, availability, good fit, every case study with its summary, and links.
+- **Structured data:** JSON-LD on every page describes the site and a Person (with LinkedIn and GitHub as `sameAs`). Case studies add a CreativeWork credited to the Person, and a BreadcrumbList.
+- **Share image:** one 1200 by 630 card for every page, made with `bun run og-image`.
