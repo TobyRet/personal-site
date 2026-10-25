@@ -87,10 +87,24 @@ const typeRoles = [
   },
 ];
 
-const spacing = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32].map((key) => ({
+// Literal class names, so Tailwind can find them when it scans this file.
+const spacingClasses = {
+  1: 'w-1',
+  2: 'w-2',
+  3: 'w-3',
+  4: 'w-4',
+  6: 'w-6',
+  8: 'w-8',
+  12: 'w-12',
+  16: 'w-16',
+  24: 'w-24',
+  32: 'w-32',
+} as const;
+
+const spacing = Object.entries(spacingClasses).map(([key, className]) => ({
   key,
-  className: `w-${key}`,
-  size: `${key * 4}px`,
+  className,
+  size: `${Number(key) * 4}px`,
 }));
 
 const sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
