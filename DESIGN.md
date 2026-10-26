@@ -173,7 +173,7 @@ Headings use balanced wrapping. Paragraphs, list items and quotes use pretty wra
 
 The page container is 72rem wide, centred, with a side gutter of 1rem on phones and 2rem from 48rem.
 
-The signature is the handout grid. From 64rem it has two tracks: a reading column of up to 34em, then a 16rem margin, with a 3rem gap. The title starts the reading column, and the margin notes start level with the title. When a page has a lead section, it sits between the title and the body, and the margin spans all three rows. Below 64rem the grid is one column: the title, the lead, then the notes (after a hairline rule), then the body.
+The signature is the handout grid. From 64rem it has two tracks: a reading column of up to 34em, then a 16rem margin, with at least a 3rem gap. The margin sits flush with the page's right edge, in line with the header's theme switch. The title starts the reading column, and the margin notes start level with the title. When a page has a lead section, it sits between the title and the body, and the margin spans all three rows. Below 64rem the grid is one column: the title, the lead, then the notes (after a hairline rule), then the body. A page with a byline hides its notes below 64rem instead, and shows the byline above the title.
 
 Vertical rhythm uses a 4px base (keys 1 to 32). Typical gaps: 0.5rem inside a group, 1.5rem between groups, 3rem between sections, and 3rem to 4rem above and below the page body.
 
@@ -234,6 +234,10 @@ The components are plain and printed. Controls look set in type, not built as wi
 ### Margin Note (signature component)
 
 A short semibold label in Press Black and its content in Pencil Grey, both in the Label role. Notes stack in the margin with 1rem between them. Typical notes: availability, based in, how to get in touch, and a case study's client, role, team and stack.
+
+### Byline
+
+On phones and tablets only, the home page opens with a byline above the H1: a small square headshot (4.5rem) beside the name in Atkinson semibold and the one-line availability in Blue-Black Ink. It replaces the margin notes below 64rem, so the visitor sees who this is and when they are free on the first screen.
 
 ### Pull Quote
 

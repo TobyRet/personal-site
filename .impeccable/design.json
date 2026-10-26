@@ -334,8 +334,9 @@
       "notes": "16rem",
       "narrow": "28rem",
       "handoutGrid": "minmax(0, 34em) 16rem",
-      "handoutGap": "3rem",
-      "gutter": "1rem, 2rem from 48rem"
+      "handoutGap": "at least 3rem; the margin sits flush with the right edge",
+      "gutter": "1rem, 2rem from 48rem",
+      "bylinePhoto": "4.5rem"
     },
     "focus": {
       "width": "3px",

@@ -215,10 +215,15 @@ test('work cards show the stack as plain text in the detail line', async ({
   await expect(card.getByRole('list')).toHaveCount(0);
 });
 
-test('get in touch goes straight to LinkedIn', async ({ page }) => {
-  for (const path of ['/', '/work/amador/']) {
+test('contact buttons go straight to LinkedIn', async ({ page }) => {
+  const buttons: [string, string][] = [
+    ['/', 'Message me on LinkedIn'],
+    ['/work/amador/', 'Get in touch'],
+  ];
+  for (const [path, name] of buttons) {
     await page.goto(path);
-    const links = page.getByRole('link', { name: 'Get in touch' });
+    const links = page.getByRole('link', { name });
+    await expect(links.first()).toBeVisible();
     for (const link of await links.all()) {
       await expect(link).toHaveAttribute(
         'href',
@@ -270,21 +275,25 @@ test('home leads with the headline, intro and good fit list', async ({
   );
 });
 
-test('get in touch is in the first screen at 1280x800', async ({ page }) => {
+test('the contact button is in the first screen at 1280x800', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
   await expect(
-    page.getByRole('link', { name: 'Get in touch' }).first(),
+    page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
   ).toBeInViewport({ ratio: 1 });
 });
 
-test('on phones, get in touch comes straight after the good fit list', async ({
+test('on phones, the contact button comes straight after the good fit list', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const list = page.getByRole('list', { name: 'I’m a good fit if you need:' });
-  const button = page.getByRole('link', { name: 'Get in touch' }).first();
+  const button = page
+    .getByRole('link', { name: 'Message me on LinkedIn' })
+    .first();
   const listBox = await list.boundingBox();
   const listBottom = (listBox?.y ?? Number.NaN) + (listBox?.height ?? 0);
   expect(await topOf(button)).toBeGreaterThan(listBottom);
@@ -293,7 +302,7 @@ test('on phones, get in touch comes straight after the good fit list', async ({
   );
 });
 
-test('the Equal Experts quote shows by the hero, credited and linked', async ({
+test('the Equal Experts quote sits in the reading column, credited and linked', async ({
   page,
 }) => {
   await page.goto('/');
@@ -310,25 +319,54 @@ test('the Equal Experts quote shows by the hero, credited and linked', async ({
     'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
   );
   await expect(figure.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+  await expect(
+    page.getByRole('complementary', { name: 'Notes' }).locator('figure'),
+  ).toHaveCount(0);
   expect(await topOf(figure)).toBeLessThan(
     await topOf(page.getByText('Clients include')),
   );
 });
 
-test('the home page notes show the headshot, then the quote', async ({
+test('on desktop, the home notes show the headshot, availability and location', async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
   const notes = page.getByRole('complementary', { name: 'Notes' });
+  await expect(notes).toBeVisible();
   const headshot = notes.getByRole('img', {
     name: 'Toby Retallick, outdoors in a cap and a green jacket',
   });
-  const quote = notes
-    .locator('figure')
-    .filter({ hasText: 'What sets him apart is the combination' });
-  await expect(headshot).toHaveCount(1);
-  await expect(quote).toHaveCount(1);
-  expect(await topOf(headshot)).toBeLessThan(await topOf(quote));
+  const order = [
+    headshot,
+    notes.getByText('Availability', { exact: true }),
+    notes.getByText('Based in', { exact: true }),
+  ];
+  const tops = await Promise.all(order.map((part) => topOf(part)));
+  expect(tops).toEqual([...tops].sort((a, b) => a - b));
+  await expect(page.getByTestId('byline')).toBeHidden();
+});
+
+test('on phones, home shows a byline before the title instead of notes', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  await expect(page.getByRole('complementary', { name: 'Notes' })).toBeHidden();
+  const byline = page.getByTestId('byline');
+  await expect(byline).toBeInViewport();
+  await expect(
+    byline.getByRole('img', {
+      name: 'Toby Retallick, outdoors in a cap and a green jacket',
+    }),
+  ).toBeVisible();
+  await expect(byline).toContainText('Toby Retallick');
+  await expect(byline).toContainText(
+    'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
+  );
+  expect(await topOf(byline)).toBeLessThan(
+    await topOf(page.getByRole('heading', { level: 1 })),
+  );
 });
 
 test('the About page links to Youth Music and two case studies', async ({
@@ -365,7 +403,9 @@ test('good fit sits in the hero, before the button, and only once', async ({
   await expect(list.getByRole('listitem')).toHaveCount(4);
   await expect(page.getByText('I’m a good fit if you need:')).toHaveCount(1);
   expect(await topOf(list)).toBeLessThan(
-    await topOf(page.getByRole('link', { name: 'Get in touch' }).first()),
+    await topOf(
+      page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+    ),
   );
   await expect(page.locator('main')).toContainText('Clients include');
 });
@@ -452,8 +492,9 @@ test('case study pagination links have clear names', async ({ page }) => {
 test('availability shows on home, contact and case studies only', async ({
   page,
 }) => {
-  const shows = ['/contact/', '/work/amador/'];
-  const hides = ['/', '/work/', '/about/', '/how-i-work/', '/cv/'];
+  await page.setViewportSize({ width: 1280, height: 800 });
+  const shows = ['/', '/contact/', '/work/amador/'];
+  const hides = ['/work/', '/about/', '/how-i-work/', '/cv/'];
   for (const path of [...shows, ...hides]) {
     await page.goto(path);
     const note = page
@@ -467,19 +508,15 @@ test('home has one call to action in the hero and one at the end', async ({
   page,
 }) => {
   await page.goto('/');
-  await expect(page.getByRole('link', { name: 'Get in touch' })).toHaveCount(2);
   await expect(
-    page.getByText(
-      'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
-    ),
-  ).toBeVisible();
+    page.getByRole('link', { name: 'Message me on LinkedIn' }),
+  ).toHaveCount(2);
+  await expect(page.getByRole('link', { name: 'Get in touch' })).toHaveCount(0);
   const closing = page.getByRole('region', { name: 'Work with me' });
   await expect(closing).toContainText(
     'Contract preferred. Open to fixed-term or permanent roles.',
   );
-  await expect(closing).toContainText(
-    'Greater Brisbane Area, Queensland. Remote across Australia, happy to travel.',
-  );
+  await expect(closing).not.toContainText('Greater Brisbane Area');
 });
 
 test('pages share an Open Graph image that exists', async ({
@@ -496,20 +533,19 @@ test('pages share an Open Graph image that exists', async ({
   expect(response.headers()['content-type']).toContain('image/png');
 });
 
-test('on phones, availability comes straight after the hero', async ({
+test('on phones, who, availability and contact fit the first two screens', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await page.goto('/');
-  const button = await topOf(
-    page.getByRole('link', { name: 'Get in touch' }).first(),
-  );
-  const availability = await topOf(
+  await expect(
     page.getByText(/^Available from .* for contract work/),
+  ).toBeInViewport();
+  const button = await topOf(
+    page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
   );
-  const clients = await topOf(page.getByText('Clients include'));
-  expect(availability).toBeGreaterThan(button);
-  expect(availability).toBeLessThan(clients);
+  expect(button).toBeLessThan(780 * 2);
+  expect(button).toBeLessThan(await topOf(page.getByText('Clients include')));
 });
 
 test('the CV shows no download note until the PDF exists', async ({ page }) => {

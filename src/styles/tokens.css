@@ -52,6 +52,8 @@
   --size-logo-mark-tall: 2rem;
   /* Icons beside link text, such as LinkedIn and GitHub. Scales with the text. */
   --size-icon: 1.1em;
+  /* The small headshot in the phone byline, beside the name. */
+  --size-byline-photo: 4.5rem;
   /* The share card for social previews, captured at 2x to give 1200 by 630. */
   --size-share-width: 600px;
   --size-share-height: 315px;

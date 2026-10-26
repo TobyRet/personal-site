@@ -1,17 +1,35 @@
 ---
 /**
- * The headshot for the handout margin, on the home and About pages.
+ * The headshot. `margin` for the handout margin on the home and About pages.
+ * `byline` for the small photo beside the name on phones.
  */
 import { Image } from 'astro:assets';
+import { cx } from '@/lib/cx';
 import { site } from '@/site.config';
 import headshot from '@/assets/images/headshot.jpg';
+
+interface Props {
+  size?: 'margin' | 'byline';
+}
+
+const { size = 'margin' } = Astro.props;
+
+const sizes = {
+  margin: { widths: [128, 256], sizes: '128px', class: 'w-32' },
+  byline: {
+    widths: [72, 144, 216],
+    sizes: 'var(--size-byline-photo)',
+    class: 'w-(--size-byline-photo)',
+  },
+} as const;
+const chosen = sizes[size];
 ---
 
 <Image
   src={headshot}
   alt={`${site.name}, outdoors in a cap and a green jacket`}
-  widths={[128, 256]}
-  sizes="128px"
-  class="h-auto w-32"
+  widths={[...chosen.widths]}
+  sizes={chosen.sizes}
+  class={cx('h-auto', chosen.class)}
   loading="eager"
 />

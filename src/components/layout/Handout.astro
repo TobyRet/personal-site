@@ -7,23 +7,29 @@
  * Phones: the notes fold in under the title, before the body.
  *
  * Slots: `title` (heading and subtitle), `notes` (MarginNote items),
- * `lead` (optional), default (body).
+ * `lead` (optional), `byline` (optional), default (body).
  *
  * With a `lead`, phones show the title, the lead, the notes, then the body.
  * On desktop the lead sits in the reading column between the title and the
  * body, and the notes stay in the margin beside all three.
+ *
+ * A `byline` shows above the title on phones only. Pair it with
+ * `notesFrom="lg"` when it repeats the notes, so phones show one or the other.
  */
 import { cx } from '@/lib/cx';
 
 interface Props {
   /** Less space above, for pages that show breadcrumbs first. */
   tight?: boolean;
+  /** `lg` hides the notes on phones and tablets. */
+  notesFrom?: 'always' | 'lg';
   class?: string | undefined;
 }
 
-const { tight = false, class: className } = Astro.props;
+const { tight = false, notesFrom = 'always', class: className } = Astro.props;
 const hasNotes = Astro.slots.has('notes');
 const hasLead = Astro.slots.has('lead');
+const hasByline = Astro.slots.has('byline');
 const placed = hasNotes && hasLead;
 ---
 
@@ -31,7 +37,8 @@ const placed = hasNotes && hasLead;
   class={cx(
     'grid grid-cols-1 gap-x-12 gap-y-8 pb-12 md:pb-16',
     tight ? 'pt-4 md:pt-6' : 'pt-12 md:pt-16',
-    hasNotes && 'lg:grid-cols-(--layout-handout)',
+    // The margin sits flush with the page's right edge, like the header.
+    hasNotes && 'lg:grid-cols-(--layout-handout) lg:justify-between',
     hasNotes &&
       (hasLead
         ? 'lg:grid-rows-(--layout-handout-rows-lead)'
@@ -40,6 +47,11 @@ const placed = hasNotes && hasLead;
   )}
 >
   <div class={cx('max-w-reading', placed && 'lg:col-start-1')}>
+    {hasByline && (
+      <div class="mb-6 lg:hidden">
+        <slot name="byline" />
+      </div>
+    )}
     <slot name="title" />
   </div>
   {hasLead && (
@@ -51,7 +63,8 @@ const placed = hasNotes && hasLead;
     <aside
       aria-label="Notes"
       class={cx(
-        'flex flex-col gap-4 border-t border-rule pt-4 lg:border-t-0 lg:pt-2',
+        'flex-col gap-4 border-t border-rule pt-4 lg:border-t-0 lg:pt-2',
+        notesFrom === 'lg' ? 'hidden lg:flex' : 'flex',
         placed
           ? 'lg:col-start-2 lg:row-span-3 lg:row-start-1'
           : 'lg:row-span-2',
