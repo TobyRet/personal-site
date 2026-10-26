@@ -39,12 +39,13 @@ Visitors scan and compare. They read a case study to check fit with their own si
 - Pages: Home, Work index plus one page per case study, How I work, About, CV (HTML plus PDF download), Contact, Privacy, 404, an internal noindex styleguide.
 - Case studies are typed content collection entries. Each body has: At a glance, The situation, What I did, The result, Technical detail (optional, collapsed), Stack.
 - Initial case studies: Amador (startup marketplace), legacy platform stabilisation (global student housing platform), member portal cover (super fund), Abcam e-commerce rebuild, airline flight scheduling front end.
-- Contact form: name, email, company (optional), message. Turnstile, server-side Zod validation, honeypot, rate limiting, email to the owner. The destination address is a Cloudflare secret, never in the repo or in `wrangler.jsonc`.
+- Contact: every "Get in touch" goes to LinkedIn (`contactHref` in `src/site.config.ts`). Open decision: whether to build a contact form. If built, it has name, email, company (optional) and message, with Turnstile, server-side Zod validation, a honeypot, rate limiting and email to the owner. The destination address is a Cloudflare secret, never in the repo or in `wrangler.jsonc`.
 - Cloudflare Web Analytics by default; GA4 possible later behind cookie consent.
-- Open decision: whether clients can be named. Until decided, keep the brief's split (Amador and Abcam named; the student housing platform, super fund and airline described by sector).
+- Client naming (decided): Amador and Abcam are named. The student housing platform, super fund and airline are described by sector. Each case study's `clientNamed` field records this. The home page's "Clients include" line names only clients that are already public.
 - Identity (from the CV): Toby Retallick, Technical Lead and Senior Full-Stack Engineer. Based in the Greater Brisbane Area, Queensland. Works remotely across Australia and is happy to travel. Contracts through Byte Size Australia Pty Ltd. Available from November 2026.
 - Looking for hands-on tech lead or senior engineer roles in product engineering, on any web stack. Prefers contract work, and is open to fixed-term or permanent roles for the right organisation.
-- Phone number and email address: not published on the site or in the repo. Visitors use the contact form or LinkedIn. The repo is public.
+- Phone number and email address: not published on the site or in the repo. Visitors use LinkedIn. The repo is public.
+- Nationality and right-to-work status: never published on the site or in the repo, including in About copy. `bun run check:pii` enforces this. Decided on 26 October 2026.
 
 ## Brand Commitments
 
@@ -61,8 +62,9 @@ Visitors scan and compare. They read a case study to check fit with their own si
 - Government background: GDS (data.gov.uk), Department for Education, Ministry of Justice. The GOV.UK influence is earned, not borrowed. It is still not a licence to use government branding.
 - Marketing background: marketing, communications and digital product roles from 2004 to 2014, a Bachelor of Commerce in Marketing, and the Makers software engineering course in 2014.
 - Open source: Code Review AI Assistant (github.com/TobyRet/code-review-assistant).
-- Headshot photo: exists, not yet in the repo.
-- Testimonials: a LinkedIn post from a former Equal Experts colleague, kept in `private/sources/` (gitignored) until they agree to be quoted. Others exist and are not yet in the repo.
+- Headshot photo: `src/assets/images/headshot.jpg`, shown in the margin on Home and About through the `Headshot` component.
+- Testimonials: one quote on the home page, from a LinkedIn post, credited to Equal Experts Australia with their agreement (`testimonial` in `src/site.config.ts`). Other testimonials stay in `private/sources/` (gitignored) until each author agrees to be quoted.
+- Consultancy logos: Equal Experts and Terem, in `src/assets/logos/`, shown in the home page's "Through" list and the quote credit.
 - Absent: client logos. Do not invent results, numbers, client names or quotes beyond the CV.
 
 ## Product Principles
