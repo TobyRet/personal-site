@@ -26,7 +26,7 @@ const { goodFit = [] } = page.data;
 ---
 
 <Page title={site.name} description={page.data.description}>
-  <Handout notesFrom="lg">
+  <Handout notesFrom="lg" stickyNotes>
     <Byline slot="byline" />
     <PageTitle
       slot="title"
@@ -83,7 +83,9 @@ const { goodFit = [] } = page.data;
           Tell me about your project and when you need someone. I take on
           hands-on lead, senior engineer and cover roles.
         </Text>
-        {site.availability.note && <Text>{site.availability.note}</Text>}
+        {site.availability.note && (
+          <Text class="lg:hidden">{site.availability.note}</Text>
+        )}
         <div>
           <Button href={site.contactHref}>Message me on LinkedIn</Button>
         </div>

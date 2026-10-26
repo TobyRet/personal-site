@@ -1,6 +1,7 @@
 ---
 import MarginNote from '@/components/ui/MarginNote.astro';
 import { availabilityMessage } from '@/lib/availability';
+import { keepHyphenatedWords } from '@/lib/text';
 import { site } from '@/site.config';
 
 interface Props {
@@ -14,5 +15,7 @@ const message = availabilityMessage(availability);
 
 <MarginNote label="Availability" tone="accent" class={className}>
   <p class="font-semibold">{message}</p>
-  {availability.note && <p class="text-text-secondary">{availability.note}</p>}
+  {availability.note && (
+    <p class="text-text-secondary">{keepHyphenatedWords(availability.note)}</p>
+  )}
 </MarginNote>

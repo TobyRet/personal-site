@@ -23,10 +23,17 @@ interface Props {
   tight?: boolean;
   /** `lg` hides the notes on phones and tablets. */
   notesFrom?: 'always' | 'lg';
+  /** Keeps the notes in view as the reader scrolls, on wide screens. */
+  stickyNotes?: boolean;
   class?: string | undefined;
 }
 
-const { tight = false, notesFrom = 'always', class: className } = Astro.props;
+const {
+  tight = false,
+  notesFrom = 'always',
+  stickyNotes = false,
+  class: className,
+} = Astro.props;
 const hasNotes = Astro.slots.has('notes');
 const hasLead = Astro.slots.has('lead');
 const hasByline = Astro.slots.has('byline');
@@ -70,7 +77,13 @@ const placed = hasNotes && hasLead;
           : 'lg:row-span-2',
       )}
     >
-      <slot name="notes" />
+      {stickyNotes ? (
+        <div class="flex flex-col gap-4 lg:sticky lg:top-12">
+          <slot name="notes" />
+        </div>
+      ) : (
+        <slot name="notes" />
+      )}
     </aside>
   )}
   <div class={cx('max-w-reading', placed && 'lg:col-start-1')}>

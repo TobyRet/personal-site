@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { metaLine, separatorBefore } from '@/lib/text';
+import { keepHyphenatedWords, metaLine, separatorBefore } from '@/lib/text';
 
 /** Builds the sentence the way a component does, one separator per item. */
 const join = (items: string[]) =>
@@ -40,6 +40,20 @@ describe('metaLine', () => {
   it('skips empty parts', () => {
     expect(metaLine(['Aviation', '', 'Lead engineer'])).toBe(
       'Aviation · Lead engineer',
+    );
+  });
+});
+
+describe('keepHyphenatedWords', () => {
+  it('joins the parts of a hyphenated word so the line cannot break there', () => {
+    expect(keepHyphenatedWords('Open to fixed-term roles.')).toBe(
+      'Open to fixed-\u2060term roles.',
+    );
+  });
+
+  it('leaves dashes between numbers and spaced dashes alone', () => {
+    expect(keepHyphenatedWords('2022-2024 and a - b')).toBe(
+      '2022-2024 and a - b',
     );
   });
 });
