@@ -1,5 +1,5 @@
 ---
-title: Rebuilding Abcam's global e-commerce platform
+title: Rebuilding Abcam’s global e-commerce platform
 subtitle: Sign-in, customer accounts and order tracking for a launch in four regions
 client: Abcam
 clientNamed: true
@@ -10,7 +10,7 @@ start: 2022-01
 end: 2024-10
 stack: [React, Next.js, TypeScript, GraphQL, AWS, Kafka]
 relevantIf: A senior engineer for sign-in, customer data and a multi-region launch.
-summary: I helped build sign-in, customer accounts and order tracking for Abcam's new e-commerce platform. It launched in the US, Europe, China and Japan.
+summary: I helped build sign-in, customer accounts and order tracking for Abcam’s new e-commerce platform. It launched in the US, Europe, China and Japan.
 featured: true
 order: 4
 ---
@@ -44,7 +44,7 @@ The new platform went live in the US, Europe, China and Japan. Customers in each
 - Cognito triggers create each new user in Mulesoft after they register.
 - Login, logout and token refresh run on the server. Tokens are stored in httpOnly cookies, so browser scripts cannot read them.
 - The user pool has a custom password policy and short-lived tokens. Error messages do not show which email addresses have accounts.
-- Role-based checks in the GraphQL API stop a user from reading another user's data.
+- Role-based checks in the GraphQL API stop a user from reading another user’s data.
 - The second version of sign-in, in 2024, added a new registration flow, email confirmation and a migration flow for existing users.
 
 **Customer data and services**

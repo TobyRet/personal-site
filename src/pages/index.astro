@@ -2,6 +2,8 @@
 import Handout from '@/components/layout/Handout.astro';
 import Page from '@/components/layout/Page.astro';
 import Stack from '@/components/layout/Stack.astro';
+import AvailabilityNote from '@/components/sections/AvailabilityNote.astro';
+import Byline from '@/components/sections/Byline.astro';
 import CaseStudyCard from '@/components/sections/CaseStudyCard.astro';
 import ClientList from '@/components/sections/ClientList.astro';
 import GoodFitList from '@/components/sections/GoodFitList.astro';
@@ -12,6 +14,7 @@ import ThroughList from '@/components/sections/ThroughList.astro';
 import Button from '@/components/ui/Button.astro';
 import Heading from '@/components/ui/Heading.astro';
 import Link from '@/components/ui/Link.astro';
+import MarginNote from '@/components/ui/MarginNote.astro';
 import Text from '@/components/ui/Text.astro';
 import { caseStudyHref, getFeaturedCaseStudies, getPage } from '@/lib/content';
 import { formatYears } from '@/lib/dates';
@@ -23,7 +26,8 @@ const { goodFit = [] } = page.data;
 ---
 
 <Page title={site.name} description={page.data.description}>
-  <Handout>
+  <Handout notesFrom="lg">
+    <Byline slot="byline" />
     <PageTitle
       slot="title"
       title={page.data.title}
@@ -31,21 +35,21 @@ const { goodFit = [] } = page.data;
     />
     <Stack slot="lead" gap={6}>
       <GoodFitList items={goodFit} />
-      <Stack gap={2}>
-        <div>
-          <Button href={site.contactHref}>Get in touch</Button>
-        </div>
-        <Text size="ui" tone="secondary">
-          {site.availabilityLine}
-        </Text>
-      </Stack>
+      <div>
+        <Button href={site.contactHref}>Message me on LinkedIn</Button>
+      </div>
     </Stack>
     <Fragment slot="notes">
       <Headshot />
-      {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
+      <AvailabilityNote />
+      <MarginNote label="Based in">
+        <p>{site.location}</p>
+        <p>{site.workingPattern}</p>
+      </MarginNote>
     </Fragment>
 
     <Stack gap={12}>
+      {site.testimonial.show && <Testimonial testimonial={site.testimonial} />}
       <Stack gap={6}>
         <ClientList clients={site.clients} />
         <ThroughList consultancies={site.through} />
@@ -80,11 +84,8 @@ const { goodFit = [] } = page.data;
           hands-on lead, senior engineer and cover roles.
         </Text>
         {site.availability.note && <Text>{site.availability.note}</Text>}
-        <Text>
-          {site.location}. {site.workingPattern}.
-        </Text>
         <div>
-          <Button href={site.contactHref}>Get in touch</Button>
+          <Button href={site.contactHref}>Message me on LinkedIn</Button>
         </div>
       </section>
     </Stack>

@@ -51,7 +51,7 @@ export interface SiteConfig {
   location: string;
   workingPattern: string;
   linkedIn: string;
-  /** Where the "Get in touch" buttons go. LinkedIn until the contact form exists, then /contact/. */
+  /** Where the home page buttons go. Their label says "Message me on LinkedIn", so change it too if this stops being LinkedIn. */
   contactHref: string;
   github: string;
   company: string;
@@ -63,7 +63,7 @@ export interface SiteConfig {
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
-  /** The one-line availability and location shown under the home page button. When it changes, update `availability` too: the contact page and case studies read that. */
+  /** The one-line availability and location shown in the home page's phone byline. When it changes, update `availability` too: the contact page and case studies read that. */
   availabilityLine: string;
   nav: NavItem[];
   analytics: {
@@ -105,7 +105,7 @@ export const site: SiteConfig = {
   testimonial: {
     show: true,
     quote:
-      "What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don't find that in a single lead often.",
+      'What sets him apart is the combination … Proven, high quality engineering paired with genuine consulting skills … an ability to read the room, earn trust with stakeholders and bring the team along, you don’t find that in a single lead often.',
     name: '',
     role: '',
     organisation: 'Equal Experts Australia',
