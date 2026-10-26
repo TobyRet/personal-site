@@ -336,7 +336,8 @@
       "handoutGrid": "minmax(0, 34em) 16rem",
       "handoutGap": "at least 3rem; the margin sits flush with the right edge",
       "gutter": "1rem, 2rem from 48rem",
-      "bylinePhoto": "4.5rem"
+      "bylinePhoto": "4.5rem",
+      "stickyNotes": "Home only, from 64rem, 3rem from the top"
     },
     "focus": {
       "width": "3px",
@@ -427,7 +428,7 @@
     "rules": [
       {
         "name": "The One Ink Rule",
-        "body": "Blue-black ink is the only accent. If an element is not a link, a focus ring, a current-page marker or a pull-quote rule, it is not blue.",
+        "body": "Blue-black ink is the only accent. If an element is not a link, a focus ring, a current-page marker, an availability note or a pull-quote rule, it is not blue.",
         "section": "colors"
       },
       {
