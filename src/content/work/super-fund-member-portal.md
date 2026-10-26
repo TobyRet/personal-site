@@ -1,5 +1,5 @@
 ---
-title: Covering a super fund's member portal
+title: Covering a super fund’s member portal
 subtitle: One month of cover became five
 client: An APRA-regulated superannuation fund
 clientNamed: false
@@ -10,18 +10,18 @@ start: 2026-04
 end: 2026-09
 stack: [React, TypeScript, Sass, Azure DevOps, Figma]
 relevantIf: Cover for a key front-end role in a regulated environment.
-summary: I joined the fund's member portal team for one month of cover. The fund extended the contract each month, to five months in total.
+summary: I joined the fund’s member portal team for one month of cover. The fund extended the contract each month, to five months in total.
 featured: false
 order: 3
 ---
 
 ## At a glance
 
-A superannuation fund's member portal team needed front-end cover. I joined for one month, and the fund extended the contract each month to five. I released two member journeys and built the platform's first automated deployment pipeline.
+A superannuation fund’s member portal team needed front-end cover. I joined for one month, and the fund extended the contract each month to five. I released two member journeys and built the platform’s first automated deployment pipeline.
 
 ## The situation
 
-The fund's member portal team needed front-end cover. I joined for one month.
+The fund’s member portal team needed front-end cover. I joined for one month.
 
 The fund extended the contract each month, to five months in total. For part of that time I also covered the Innovation Manager role.
 

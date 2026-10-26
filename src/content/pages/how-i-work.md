@@ -14,7 +14,7 @@ I join an existing team as a senior full-stack engineer. I pick up the work quic
 
 ## Stepping in to cover or steady a project
 
-Sometimes a project loses a key person, or a platform becomes unstable. I step in, keep things running, and leave the team in a better state. On a super fund's member portal, one month of cover became five.
+Sometimes a project loses a key person, or a platform becomes unstable. I step in, keep things running, and leave the team in a better state. On a super fund’s member portal, one month of cover became five.
 
 ## AI-assisted delivery
 

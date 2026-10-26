@@ -17,11 +17,11 @@ order: 5
 
 ## At a glance
 
-The airline's planners needed to check a full season of flights for rule breaches. The first version of their tool was slow and showed only one week at a time. I led the front end at Terem, and we rebuilt the main chart. Planners can now scroll and zoom the whole season in one smooth view.
+The airline’s planners needed to check a full season of flights for rule breaches. The first version of their tool was slow and showed only one week at a time. I led the front end at Terem, and we rebuilt the main chart. Planners can now scroll and zoom the whole season in one smooth view.
 
 ## The situation
 
-The airline built a new internal tool for its operations planners. Planners upload a season's flight schedule. The tool checks it against rules such as curfews, turn times and crew limits.
+The airline built a new internal tool for its operations planners. Planners upload a season’s flight schedule. The tool checks it against rules such as curfews, turn times and crew limits.
 
 The main screen is a chart with a row for each aircraft and a block for each flight. A season holds thousands of flights across 173 ports. The first version slowed down as the data grew.
 

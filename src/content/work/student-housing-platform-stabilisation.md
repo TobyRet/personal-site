@@ -24,7 +24,7 @@ A global student housing platform bought an unstable legacy rental platform with
 
 The client runs a global student housing platform with 3 million residents in 25 countries. It had bought an unstable legacy rental platform. The platform had no automated tests and no monitoring, so any change to the legacy core was a risk.
 
-US rental fee transparency rules had a fixed deadline, with regulatory penalties if it was missed. The team was spread across several countries and time zones. The work started as modernisation. When the client's priorities changed, it moved to stability and team improvement.
+US rental fee transparency rules had a fixed deadline, with regulatory penalties if it was missed. The team was spread across several countries and time zones. The work started as modernisation. When the client’s priorities changed, it moved to stability and team improvement.
 
 ## What I did
 
