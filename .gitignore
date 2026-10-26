@@ -36,3 +36,6 @@ screenshots/
 
 # Subagent-driven development scratch space
 .superpowers/
+
+# Impeccable critique snapshots hold local file paths.
+.impeccable/critique/
