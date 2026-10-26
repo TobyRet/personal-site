@@ -117,7 +117,7 @@ Ink on warm paper, with one blue-black ink for anything the reader can act on.
 
 ### Primary
 
-- **Blue-Black Ink** (`blue-black-ink`; `night-blue-ink` at night): the only accent. It marks links in text, the focus ring, the current nav item's underline, text selection, the left rule of a pull quote and the hover state of the primary button. It reads as fountain-pen ink, not as an interface blue.
+- **Blue-Black Ink** (`blue-black-ink`; `night-blue-ink` at night): the only accent. It marks links in text, the focus ring, the current nav item's underline, text selection, availability notes, the left rule of a pull quote and the hover state of the primary button. It reads as fountain-pen ink, not as an interface blue.
 
 ### Neutral
 
@@ -135,7 +135,7 @@ Ink on warm paper, with one blue-black ink for anything the reader can act on.
 
 ### Named Rules
 
-**The One Ink Rule.** Blue-black ink is the only accent. If an element is not a link, a focus ring, a current-page marker or a pull-quote rule, it is not blue.
+**The One Ink Rule.** Blue-black ink is the only accent. If an element is not a link, a focus ring, a current-page marker, an availability note or a pull-quote rule, it is not blue.
 
 **The Paper Is the Surface Rule.** Every block sits on the page paper. Separate parts with a hairline rule or space, never with a tinted box.
 
@@ -173,7 +173,7 @@ Headings use balanced wrapping. Paragraphs, list items and quotes use pretty wra
 
 The page container is 72rem wide, centred, with a side gutter of 1rem on phones and 2rem from 48rem.
 
-The signature is the handout grid. From 64rem it has two tracks: a reading column of up to 34em, then a 16rem margin, with at least a 3rem gap. The margin sits flush with the page's right edge, in line with the header's theme switch. The title starts the reading column, and the margin notes start level with the title. When a page has a lead section, it sits between the title and the body, and the margin spans all three rows. Below 64rem the grid is one column: the title, the lead, then the notes (after a hairline rule), then the body. A page with a byline hides its notes below 64rem instead, and shows the byline above the title.
+The signature is the handout grid. From 64rem it has two tracks: a reading column of up to 34em, then a 16rem margin, with at least a 3rem gap. The margin sits flush with the page's right edge, in line with the header's theme switch. The title starts the reading column, and the margin notes start level with the title. When a page has a lead section, it sits between the title and the body, and the margin spans all three rows. Below 64rem the grid is one column: the title, the lead, then the notes (after a hairline rule), then the body. A page with a byline hides its notes below 64rem instead, and shows the byline above the title. On Home the notes are sticky from 64rem: they stay in view, 3rem from the top, as the reader scrolls.
 
 Vertical rhythm uses a 4px base (keys 1 to 32). Typical gaps: 0.5rem inside a group, 1.5rem between groups, 3rem between sections, and 3rem to 4rem above and below the page body.
 
@@ -237,7 +237,7 @@ A short semibold label in Press Black and its content in Pencil Grey, both in th
 
 ### Byline
 
-On phones and tablets only, the home page opens with a byline above the H1: a small square headshot (4.5rem) beside the name in Atkinson semibold and the one-line availability in Blue-Black Ink. It replaces the margin notes below 64rem, so the visitor sees who this is and when they are free on the first screen.
+On phones and tablets only, the home page opens with a byline above the H1: a small square headshot (4.5rem) beside the name in Atkinson semibold, the availability as a link to LinkedIn, and the location in Pencil Grey. It replaces the margin notes below 64rem, so the visitor sees who this is, when they are free and how to act on the first screen.
 
 ### Pull Quote
 

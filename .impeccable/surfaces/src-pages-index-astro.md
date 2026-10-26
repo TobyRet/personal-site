@@ -21,7 +21,7 @@ OWN-WORLD: White paper and near-black ink. One accent, blue-black ink, for links
 
 STORY: The visitor reads one sentence on who this is, sees availability in the margin, and reads three case studies whose facts sit beside them. Contact is always one link away.
 
-FIRST VIEWPORT: A plain top line: the name on the left, nav and Aa on the right. A large serif title states the positioning, with an italic subtitle under it. A reading column of about 34em sits on the left. The right margin holds the notes: available from November 2026, based in Brisbane, works remotely, how to contact. On phones the notes fold into the column under the title.
+FIRST VIEWPORT: A plain top line: the name on the left, nav and the theme switch on the right. A large serif title states the positioning, with an italic subtitle under it. A reading column of about 34em sits on the left. The right margin holds the notes: the headshot, available from November 2026, based in Brisbane, works remotely. On wide screens the notes stay in view as the reader scrolls. Contact is the button under the lead, so the margin holds no second contact link (owner's decision, 26 October 2026). On phones a byline above the title carries the photo, name, availability (linked to LinkedIn) and location instead of the notes.
 
 FORM: Margin-note handout (scholarly handout with sidenotes), number 1 on the ordered list. The user chose it over the rolled assignment after hearing about the roll. seed:e7a23a47b5d8a593
 

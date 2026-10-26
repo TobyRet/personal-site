@@ -222,7 +222,7 @@ test('contact buttons go straight to LinkedIn', async ({ page }) => {
   ];
   for (const [path, name] of buttons) {
     await page.goto(path);
-    const links = page.getByRole('link', { name });
+    const links = page.getByRole('link', { name, exact: true });
     await expect(links.first()).toBeVisible();
     for (const link of await links.all()) {
       await expect(link).toHaveAttribute(
@@ -259,8 +259,8 @@ test('home leads with the headline, intro and good fit list', async ({
     'I’ve owned the product, built the software and led the team.',
   );
   const main = page.locator('main');
-  await expect(main).toContainText(
-    'I came to engineering after seven years leading digital products',
+  await expect(page.locator('main h1 + p')).toHaveText(
+    'Technical lead and senior full-stack engineer with 12 years of consulting and contract work in the UK and Australia.',
   );
   await expect(main).not.toContainText('I lead the team and I write the code.');
   const description =
@@ -281,7 +281,9 @@ test('the contact button is in the first screen at 1280x800', async ({
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
   await expect(
-    page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+    page
+      .getByRole('link', { name: 'Message me on LinkedIn', exact: true })
+      .first(),
   ).toBeInViewport({ ratio: 1 });
 });
 
@@ -292,7 +294,7 @@ test('on phones, the contact button comes straight after the good fit list', asy
   await page.goto('/');
   const list = page.getByRole('list', { name: 'I’m a good fit if you need:' });
   const button = page
-    .getByRole('link', { name: 'Message me on LinkedIn' })
+    .getByRole('link', { name: 'Message me on LinkedIn', exact: true })
     .first();
   const listBox = await list.boundingBox();
   const listBottom = (listBox?.y ?? Number.NaN) + (listBox?.height ?? 0);
@@ -318,7 +320,7 @@ test('the Equal Experts quote sits in the reading column, credited and linked', 
     'href',
     'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
   );
-  await expect(figure.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+  await expect(figure.locator('svg')).toHaveCount(0);
   await expect(
     page.getByRole('complementary', { name: 'Notes' }).locator('figure'),
   ).toHaveCount(0);
@@ -347,6 +349,20 @@ test('on desktop, the home notes show the headshot, availability and location', 
   await expect(page.getByTestId('byline')).toBeHidden();
 });
 
+test('on desktop, the home notes stay in view while reading', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await page
+    .getByRole('heading', { name: 'Work with me' })
+    .scrollIntoViewIfNeeded();
+  const notes = page.getByRole('complementary', { name: 'Notes' });
+  await expect(
+    notes.getByText('Availability', { exact: true }),
+  ).toBeInViewport();
+});
+
 test('on phones, home shows a byline before the title instead of notes', async ({
   page,
 }) => {
@@ -361,8 +377,14 @@ test('on phones, home shows a byline before the title instead of notes', async (
     }),
   ).toBeVisible();
   await expect(byline).toContainText('Toby Retallick');
-  await expect(byline).toContainText(
-    'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
+  await expect(byline).toContainText('Greater Brisbane Area, Queensland');
+  const availability = byline.getByRole('link', {
+    name: 'Available for contract work from November 2026. Message me on LinkedIn.',
+  });
+  await expect(availability).toBeInViewport();
+  await expect(availability).toHaveAttribute(
+    'href',
+    'https://www.linkedin.com/in/tobyret',
   );
   expect(await topOf(byline)).toBeLessThan(
     await topOf(page.getByRole('heading', { level: 1 })),
@@ -404,7 +426,9 @@ test('good fit sits in the hero, before the button, and only once', async ({
   await expect(page.getByText('I’m a good fit if you need:')).toHaveCount(1);
   expect(await topOf(list)).toBeLessThan(
     await topOf(
-      page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+      page
+        .getByRole('link', { name: 'Message me on LinkedIn', exact: true })
+        .first(),
     ),
   );
   await expect(page.locator('main')).toContainText('Clients include');
@@ -452,7 +476,9 @@ test('contact offers LinkedIn, with no "not ready" message', async ({
   const main = page.locator('main');
   await expect(main).not.toContainText('not ready');
   await expect(
-    main.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+    main
+      .getByRole('link', { name: 'Message me on LinkedIn', exact: true })
+      .first(),
   ).toHaveAttribute('href', /linkedin\.com/);
 });
 
@@ -465,7 +491,7 @@ test('placeholder sections are not published', async ({ page }) => {
 
 test('the consultancies show as linked logos', async ({ page }) => {
   await page.goto('/');
-  const through = page.getByRole('list', { name: 'Through' });
+  const through = page.getByRole('list', { name: 'Contracted through' });
   const consultancies: [string, string][] = [
     ['Equal Experts', 'https://www.equalexperts.com/'],
     ['Terem', 'https://terem.tech/'],
@@ -509,7 +535,7 @@ test('home has one call to action in the hero and one at the end', async ({
 }) => {
   await page.goto('/');
   await expect(
-    page.getByRole('link', { name: 'Message me on LinkedIn' }),
+    page.getByRole('link', { name: 'Message me on LinkedIn', exact: true }),
   ).toHaveCount(2);
   await expect(page.getByRole('link', { name: 'Get in touch' })).toHaveCount(0);
   const closing = page.getByRole('region', { name: 'Work with me' });
@@ -539,10 +565,14 @@ test('on phones, who, availability and contact fit the first two screens', async
   await page.setViewportSize({ width: 360, height: 780 });
   await page.goto('/');
   await expect(
-    page.getByText(/^Available from .* for contract work/),
+    page
+      .getByTestId('byline')
+      .getByRole('link', { name: /^Available for contract work from / }),
   ).toBeInViewport();
   const button = await topOf(
-    page.getByRole('link', { name: 'Message me on LinkedIn' }).first(),
+    page
+      .getByRole('link', { name: 'Message me on LinkedIn', exact: true })
+      .first(),
   );
   expect(button).toBeLessThan(780 * 2);
   expect(button).toBeLessThan(await topOf(page.getByText('Clients include')));

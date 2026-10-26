@@ -57,14 +57,12 @@ export interface SiteConfig {
   company: string;
   /** Client names for the home page's "Clients include" line, as plain text. Only names already public. */
   clients: string[];
-  /** Consultancies for the home page's "Through" logos. */
+  /** Consultancies for the home page's "Contracted through" logos. */
   through: Consultancy[];
   testimonial: Testimonial;
   /** Path to the public CV PDF in public/, without a phone number. Empty hides the link. */
   cvPdf: string;
   availability: Availability;
-  /** The one-line availability and location shown in the home page's phone byline. When it changes, update `availability` too: the contact page and case studies read that. */
-  availabilityLine: string;
   nav: NavItem[];
   analytics: {
     /** Cloudflare Web Analytics beacon token. Empty turns it off. */
@@ -110,7 +108,6 @@ export const site: SiteConfig = {
     role: '',
     organisation: 'Equal Experts Australia',
     link: 'https://www.linkedin.com/feed/update/urn:li:activity:7518490572039294976/',
-    logo: 'equal-experts',
   },
   cvPdf: '',
   availability: {
@@ -118,8 +115,6 @@ export const site: SiteConfig = {
     from: 'November 2026',
     note: 'Contract preferred. Open to fixed-term or permanent roles.',
   },
-  availabilityLine:
-    'Available from November 2026 for contract work · Greater Brisbane, remote across Australia',
   nav: [
     { label: 'Work', href: '/work/' },
     { label: 'How I work', href: '/how-i-work/' },

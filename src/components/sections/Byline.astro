@@ -1,16 +1,27 @@
 ---
 /**
- * The phone byline: a small headshot beside the name and availability,
- * so phones show who this is and when they are free before the title.
+ * The phone byline: a small headshot beside the name, availability and
+ * location, so phones show who this is and when they are free before the
+ * title. Availability links to LinkedIn, so phones can act on the first screen.
  */
 import Headshot from '@/components/sections/Headshot.astro';
+import Link from '@/components/ui/Link.astro';
+import { availabilityMessage } from '@/lib/availability';
 import { site } from '@/site.config';
+
+const message = availabilityMessage(site.availability);
 ---
 
 <div class="flex items-center gap-4 font-ui text-ui" data-testid="byline">
   <Headshot size="byline" />
   <div class="flex flex-col gap-1">
     <p class="font-semibold text-text">{site.name}</p>
-    <p class="text-accent">{site.availabilityLine}</p>
+    <p>
+      <Link href={site.contactHref}>
+        {message}
+        <span class="sr-only"> Message me on LinkedIn.</span>
+      </Link>
+    </p>
+    <p class="text-text-secondary">{site.location}</p>
   </div>
 </div>
