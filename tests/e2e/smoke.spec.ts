@@ -508,9 +508,21 @@ test('the consultancies show as linked logos', async ({ page }) => {
 
 test('case study pagination links have clear names', async ({ page }) => {
   await page.goto('/work/amador/');
+  const next = page.getByRole('link', {
+    name: 'Next case study: Steadying a global student housing platform',
+    exact: true,
+  });
+  await expect(next).toBeVisible();
+  // The plain text reads the same, for reader views and copied text.
+  await expect(next).toHaveText(
+    'Next case study: Steadying a global student housing platform',
+  );
+
+  await page.goto('/work/student-housing-platform-stabilisation/');
   await expect(
     page.getByRole('link', {
-      name: 'Next case study Steadying a global student housing platform',
+      name: 'Previous case study: Amador, from prototype to live marketplace',
+      exact: true,
     }),
   ).toBeVisible();
 });

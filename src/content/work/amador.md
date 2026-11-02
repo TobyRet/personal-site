@@ -36,7 +36,23 @@ I work with the founder on technical direction and product.
 ### In the product
 
 - I built an onboarding flow that uses the OpenAI API to write a brand identity and community kit.
+- I built an AI campaign creator. It helps brands set up campaigns that encourage their ambassadors to share authentic content, such as photos, videos and reviews. The brand describes what it wants, the AI drafts the campaign, and the brand reviews and edits it before it goes live.
 - Each brand has a token balance that meters its AI use.
+
+### In testing: an AI-assisted engagement chat
+
+Customers answer a few short questions from a brand and earn points. The chat flow is ordinary code. AI does only narrow jobs:
+
+- It screens each answer and can ask one follow-up question.
+- It grades the effort in an answer, not whether the answer is positive.
+- It suggests questions to the brand and writes a summary each night.
+
+The important decisions stay in code:
+
+- The model never decides points and never sees who the customer is.
+- Every AI reply must match a fixed format, or a code fallback runs.
+- Each AI job has its own kill switch.
+- I test the prompts with recorded and real-model evaluations, including attempts to break them.
 
 ### In my engineering work
 
@@ -46,6 +62,7 @@ I work with the founder on technical direction and product.
 
 ### Keeping it safe
 
+- In the product, the AI drafts and a person or code decides. AI use is metered, and every AI feature can be switched off.
 - Each agent has a written scope and read-only access to production.
 - Nothing pushes to main. A person approves every merge.
 
@@ -75,4 +92,4 @@ I work with the founder on technical direction and product.
 
 ## Stack
 
-Next.js, React and TypeScript on Vercel. Supabase for Postgres and authentication. Stripe for payments and subscriptions. Cloudflare for the edge Worker. OpenAI for the onboarding flow.
+Next.js, React and TypeScript on Vercel. Supabase for Postgres and authentication. Stripe for payments and subscriptions. Cloudflare for the edge Worker. OpenAI for the onboarding flow, the campaign creator and the engagement chat.
