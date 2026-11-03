@@ -28,12 +28,12 @@ describe('metaLine', () => {
   it('joins card details with a middle dot and nothing else', () => {
     expect(
       metaLine([
-        'Startup, AI customer evidence',
+        'Startup, customer content',
         'Technical lead (part-time)',
         '2025 to present',
       ]),
     ).toBe(
-      'Startup, AI customer evidence · Technical lead (part-time) · 2025 to present',
+      'Startup, customer content · Technical lead (part-time) · 2025 to present',
     );
   });
 
