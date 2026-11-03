@@ -24,7 +24,7 @@ describe('caseStudyGraph', () => {
     path: '/work/amador/',
     title: 'Amador, from prototype to live product',
     summary: 'A summary.',
-    sector: 'Startup, customer content',
+    sector: 'Startup, brand trust and identity',
     stack: ['Next.js', 'TypeScript'],
     start: '2025-04',
   });

@@ -4,7 +4,7 @@ subtitle: Sole lead engineer for a startup
 client: Amador
 clientNamed: true
 clientHref: https://www.amador.life
-sector: Startup, customer content
+sector: Startup, brand trust and identity
 role: Technical lead (part-time)
 start: 2025-04
 stack: [Next.js, TypeScript, Supabase, Stripe, Cloudflare, Vercel]
@@ -17,7 +17,7 @@ order: 1
 
 ## At a glance
 
-Amador is building the trust layer for word of mouth. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
+Amador is building trust and identity infrastructure for brands. AI agents capture verified word of mouth from real customers. They use it to answer prospects on brand websites, and turn it into customer evidence that AI discovery can rely on. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
 
 ## The situation
 
