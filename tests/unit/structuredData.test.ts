@@ -22,9 +22,9 @@ describe('siteGraph', () => {
 describe('caseStudyGraph', () => {
   const nodes = caseStudyGraph(site, {
     path: '/work/amador/',
-    title: 'Amador, from prototype to live marketplace',
+    title: 'Amador, from prototype to live product',
     summary: 'A summary.',
-    sector: 'Startup, creator marketplace',
+    sector: 'Startup, AI customer evidence',
     stack: ['Next.js', 'TypeScript'],
     start: '2025-04',
   });
@@ -33,7 +33,7 @@ describe('caseStudyGraph', () => {
     expect(nodes[0]).toMatchObject({
       '@type': 'CreativeWork',
       url: 'https://tobyretallick.com/work/amador/',
-      name: 'Amador, from prototype to live marketplace',
+      name: 'Amador, from prototype to live product',
       author: { '@id': 'https://tobyretallick.com/#person' },
       keywords: 'Next.js, TypeScript',
       temporalCoverage: '2025-04/..',
@@ -48,7 +48,7 @@ describe('caseStudyGraph', () => {
     expect(names).toEqual([
       'Home',
       'Work',
-      'Amador, from prototype to live marketplace',
+      'Amador, from prototype to live product',
     ]);
   });
 });

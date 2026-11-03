@@ -1,10 +1,10 @@
 ---
-title: Amador, from prototype to live marketplace
-subtitle: Sole lead engineer for a startup marketplace
+title: Amador, from prototype to live product
+subtitle: Sole lead engineer for a startup
 client: Amador
 clientNamed: true
 clientHref: https://www.amador.life
-sector: Startup, creator marketplace
+sector: Startup, AI customer evidence
 role: Technical lead (part-time)
 start: 2025-04
 stack: [Next.js, TypeScript, Supabase, Stripe, Cloudflare, Vercel]
@@ -17,7 +17,7 @@ order: 1
 
 ## At a glance
 
-Amador is a two-sided marketplace where brands find creators for user-generated content. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
+Amador is building the trust layer for word of mouth: AI agents capture real customer experiences, use them to answer prospects on brand websites, and structure them into customer evidence that AI discovery can rely on. I joined as sole lead engineer when the product was an inherited prototype, and I took it live in about four months.
 
 ## The situation
 

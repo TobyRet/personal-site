@@ -29,4 +29,4 @@ I moved my family to Australia in 2025. Since then I have:
 - led the front-end build of a schedule-checking system for a major Australian airline, through Terem
 - led an Equal Experts team in Australia and India to [steady a global student housing platform](/work/student-housing-platform-stabilisation/)
 - covered two roles at an APRA-regulated super fund, and helped build its first automated deployment pipeline
-- [taken Amador](/work/amador/), a creator marketplace, from an inherited prototype to a live product as its lead engineer
+- [taken Amador](/work/amador/), a trust layer for word of mouth, from an inherited prototype to a live product as its lead engineer
